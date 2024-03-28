@@ -1,14 +1,17 @@
 package com.tcna.primeraweb.project_progra;
 
 import com.tcna.primeraweb.project_progra.data.ClienteRepository;
+import com.tcna.primeraweb.project_progra.data.ProductoRepository;
 import com.tcna.primeraweb.project_progra.data.ProveedorRepository;
 import com.tcna.primeraweb.project_progra.logic.ClienteEntity;
+import com.tcna.primeraweb.project_progra.logic.ProductoEntity;
 import com.tcna.primeraweb.project_progra.logic.ProveedorEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @SpringBootApplication
@@ -19,6 +22,9 @@ public class ProjectPrograApplication implements CommandLineRunner {
     private ProveedorRepository proveedorRepository;
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+
 
     public static void main(String[] args) {
         SpringApplication.run(ProjectPrograApplication.class, args);
@@ -33,16 +39,18 @@ public class ProjectPrograApplication implements CommandLineRunner {
 
         clienteRepository.save(new ClienteEntity("801100977","Cesar","san jose","fisico","prueba"));
 
-
+        productoRepository.save(new ProductoEntity(213,"apple","tasty",2000.00));
 
         System.out.println("Numero total de la tabla : " +proveedorRepository.count());
 
 
         List<ProveedorEntity> Proveedor=proveedorRepository.findAll();
         List<ClienteEntity> persona2=clienteRepository.findAll();
+        List<ProductoEntity> producto=productoRepository.findAll();
 
-        Proveedor.forEach(p-> System.out.println("Nombre de proveedor "+p.getNombre()));
-        persona2.forEach(p-> System.out.println("Nombre de proveedor "+p.getNombre()));
+        Proveedor.forEach(p-> System.out.println("Nombre de proveedor "+p.toString()));
+        persona2.forEach(p-> System.out.println("Nombre de Cliente "+p.toString()));
+        producto.forEach(p-> System.out.println("Nombre de Producto "+p.toString()));
     }
 }
 

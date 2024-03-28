@@ -1,11 +1,13 @@
 package com.tcna.primeraweb.project_progra.logic;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "producto", schema = "proyecto_1")
+@Data
+@NoArgsConstructor
 public class ProductoEntity {
 
     @Id
@@ -19,7 +21,15 @@ public class ProductoEntity {
     private String descripcion;
     @Basic
     @Column(name = "precio")
-    private BigDecimal precio;
+    private Double precio;
+
+
+    public ProductoEntity(int productoId, String nombre, String descripcion, Double precio) {
+        this.productoId = productoId;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
 
     public int getProductoId() {
         return productoId;
@@ -45,11 +55,11 @@ public class ProductoEntity {
         this.descripcion = descripcion;
     }
 
-    public BigDecimal getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
