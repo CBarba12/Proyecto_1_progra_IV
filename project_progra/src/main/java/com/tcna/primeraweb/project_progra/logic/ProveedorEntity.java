@@ -2,10 +2,17 @@ package com.tcna.primeraweb.project_progra.logic;
 
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "proveedor", schema = "proyecto_1")
+
 public class ProveedorEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_Proveedor")
     private String idProveedor;
