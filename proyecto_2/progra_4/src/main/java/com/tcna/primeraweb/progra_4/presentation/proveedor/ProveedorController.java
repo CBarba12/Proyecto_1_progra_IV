@@ -18,11 +18,13 @@ import java.util.List;
 @RequestMapping("/Proveedor_controller")
 public class ProveedorController {
 
+
     @Autowired
     private ProveedorService proveedorService;
-  
+
 
     @GetMapping("/listar") // Añade esta línea para mapear el método a la URL
+
     public String listarPeronas(Model model){
 
         List<ProveedorEntity> provedores=proveedorService.ObtenerProveedores();
