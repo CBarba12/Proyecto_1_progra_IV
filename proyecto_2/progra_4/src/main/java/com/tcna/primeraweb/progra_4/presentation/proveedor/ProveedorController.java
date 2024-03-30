@@ -20,13 +20,12 @@ public class ProveedorController {
 
     @Autowired
     private ProveedorService proveedorService;
-    @Autowired
-    private ProveedorRepository proveedorRepository;
+  
 
     @GetMapping("/listar") // Añade esta línea para mapear el método a la URL
     public String listarPeronas(Model model){
 
-        List<ProveedorEntity> provedores=proveedorRepository.findAll();
+        List<ProveedorEntity> provedores=proveedorService.ObtenerProveedores();
 
         model.addAttribute("listaProveedor", provedores);
 
