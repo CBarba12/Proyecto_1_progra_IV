@@ -75,6 +75,8 @@
     <h1>Formulario de proveedor</h1>
 
     <form th:object="${proveedor}" th:action="${accion}" method="post">
+        <input type="hidden" th:field="*{idProveedor}">
+
         <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
         <label>Nombre: <input type="text" th:field="*{nombre}"></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>

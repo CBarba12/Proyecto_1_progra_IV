@@ -83,6 +83,28 @@ public class ProveedorService {
     }
 
 
+    public ProveedorEntity actualizarProveedro(String id, ProveedorEntity provedor) {
+
+        ProveedorEntity prove=proveedorRepository.findById(id).orElse(null);
+
+        if(provedor !=null ){
+            assert prove != null;
+            prove.setNombre(provedor.getNombre());
+            prove.setCorreoElectronico(provedor.getCorreoElectronico());
+            prove.setTelefono(provedor.getTelefono());
+            prove.setDireccion(provedor.getDireccion());
+            prove.setDireccion(provedor.getTipoProveedor());
+
+            return proveedorRepository.save(prove);
+        }
 
 
+  return null;
+    }
+
+    public void eliminarProveedor(String id) {
+
+         proveedorRepository.deleteById(id);
+
+    }
 }

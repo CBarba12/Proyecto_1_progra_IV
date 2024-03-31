@@ -4,12 +4,10 @@ import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,22 +46,39 @@ public class ProveedorController {
 
 
 
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor,Model model){
 
+        model.addAttribute("proveedor",proveedor);
+        model.addAttribute("accion","/ProveedorController/editar"+id);
 
-
-
-
-
-
-
-
-
-
-    @PostMapping("/nueva")
-    public String guardarNuevaPersona(@ModelAttribute ProveedorEntity persona){
-        proveedorService.crearProveedores(persona);
-        return "redirect:/personas";
+        return "formulario";
     }
+
+
+
+    @PostMapping("/editar/{id}")
+    public String actualizarProveedores(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor){
+     proveedorService.actualizarProveedro(id,proveedor);
+
+     return "redirect:/ProveedorController/Listadeproveedores";
+    }
+
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProveedor(@PathVariable String id, Model model){
+        try {
+            proveedorService.eliminarProveedor(id);
+            return "redirect:/ProveedorController/Listadeproveedores";
+        } catch (DataIntegrityViolationException e) {
+            // Captura la excepción y agrega un mensaje de error al modelo
+            model.addAttribute("error", "No se puede eliminar este proveedor porque hay clientes asociados a él.");
+            return "redirect:/ProveedorController/Listadeproveedores";
+        }
+    }
+
+
+
 
 
 }

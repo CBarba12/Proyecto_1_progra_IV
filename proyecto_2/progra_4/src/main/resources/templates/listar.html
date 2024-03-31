@@ -24,12 +24,14 @@
         h1 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             border: 1px solid #ddd;
+            margin-bottom: 20px;
         }
 
         th, td {
@@ -49,6 +51,36 @@
         td {
             color: #666;
         }
+
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            text-align: center;
+        }
+
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .add-link:hover {
+            background-color: #0056b3;
+        }
     </style>
 
 </head>
@@ -57,6 +89,11 @@
 <div class="container">
     <h1>Listado de Proveedores</h1>
 
+    <!-- Agrega el bloque para mostrar el mensaje de error -->
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
     <table>
         <thead>
         <tr>
@@ -64,6 +101,7 @@
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Correo</th>
+            <th>Acciones</th>
         </tr>
         </thead>
 
@@ -74,20 +112,15 @@
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.correoElectronico}"></td>
             <td>
-
-                <a>Editar</a>
-                <a>Eliminar</a>
+                <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" style="margin-right: 10px;">Editar</a>
+                <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.getIdProveedor()})}">Eliminar</a>
             </td>
-
-
-
         </tr>
         </tbody>
     </table>
+
+    <a href="/ProveedorController/nuevo" class="add-link">Nuevo proveedor</a>
 </div>
-
-
-<a href="/ProveedorController/nuevo">nuevo proveedor</a>
 
 </body>
 </html>
