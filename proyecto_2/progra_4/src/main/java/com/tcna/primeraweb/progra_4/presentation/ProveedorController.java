@@ -2,6 +2,7 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
+import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,6 +19,8 @@ public class ProveedorController {
 
     @Autowired
     private ProveedorService proveedorService;
+    @Autowired
+    private ClienteService clienteService;
 
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
@@ -78,6 +81,37 @@ public class ProveedorController {
     }
 
 
+
+
+    @PostMapping("/crear-cliente")
+    public String crearCliente(@RequestParam("nombre") String nombre,
+                               @RequestParam("direccion") String direccion,
+                               @RequestParam("correoElectronico") String correoElectronico,
+                               @RequestParam("proveedorId") String proveedorId) {
+
+        // Obtener el proveedor asociado al ID proporcionado
+        ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(proveedorId);
+
+        // Verificar si el proveedor existe
+        if (proveedor != null) {
+            // Crear una nueva instancia de ClienteEntity
+            ClienteEntity nuevoCliente = new ClienteEntity();
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setDireccion(direccion);
+            nuevoCliente.setCorreo_electronico(correoElectronico);
+            // Establecer la relación con el proveedor
+            nuevoCliente.setProveedor_id(proveedor.getIdProveedor());
+
+            // Guardar el cliente en la base de datos
+            clienteService.crearCliente(nuevoCliente);
+
+            // Redireccionar a la página de éxito o a donde desees
+            return "redirect:/cliente-creado";
+        } else {
+            // Manejar el caso en el que el proveedor no exista
+            return "redirect:/error-crear-cliente";
+        }
+    }
 
 
 

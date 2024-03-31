@@ -121,4 +121,8 @@ public class ProveedorService {
 
         return proveedorRepository.findById(numeroIdentificacion).orElse(null);
     }
+
+    public ProveedorEntity obtenerProveedorPorId(String proveedorId) {
+        return proveedorRepository.findById(proveedorId).orElse(null);
+    }
 }

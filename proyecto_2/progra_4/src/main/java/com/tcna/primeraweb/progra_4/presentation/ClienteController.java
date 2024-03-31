@@ -1,6 +1,7 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
+import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
@@ -9,8 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Controller
@@ -49,6 +49,27 @@ public class ClienteController {
         model.addAttribute("clientes", cliente);
         return "listarClientes";
     }
+
+
+
+    //-------------------------------------
+    @GetMapping("/nuevocliente")
+    public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion,Model model){
+        ClienteEntity cle=new ClienteEntity();
+        cle.setProveedor_id(numeroIdentificacion);
+
+        model.addAttribute("cliente",cle);
+        model.addAttribute("accion2","/ClienteController/nuevo");
+        return "formulariocliente";
+    }
+    @PostMapping("/nuevo")
+    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
+
+        proveedorService.crearProveedores(proveedor);
+
+        return "redirect:/ProveedorController/Listadeproveedores";
+    }
+
 
 
 
