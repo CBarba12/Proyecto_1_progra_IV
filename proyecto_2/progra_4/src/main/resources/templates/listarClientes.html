@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Proveedores</title>
+    <title>Listado de Clientes</title>
 
     <style>
         body {
@@ -13,27 +13,27 @@
         }
 
         .container {
-            max-width: 800px;
+            width: 80%;
             margin: 20px auto;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
 
         h1 {
             text-align: center;
+            margin-bottom: 20px;
             color: #333;
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
-            border: 1px solid #ddd;
+            width: 100%;
         }
 
         th, td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
@@ -41,53 +41,33 @@
         tr:hover {
             background-color: #f2f2f2;
         }
-
-        th {
-            background-color: #f7f7f7;
-        }
-
-        td {
-            color: #666;
-        }
     </style>
-
 </head>
 <body>
 
 <div class="container">
-    <h1>Listado de Proveedores</h1>
+    <h1>Listado de Clientes</h1>
 
     <table>
         <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Teléfono</th>
+            <th>Dirección</th>
             <th>Correo</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="proveedor : ${listaProveedor}">
-            <td th:text="${proveedor.getIdProveedor()}"></td>
-            <td th:text="${proveedor.nombre}"></td>
-            <td th:text="${proveedor.telefono}"></td>
-            <td th:text="${proveedor.correoElectronico}"></td>
-            <td>
-
-                <a>Editar</a>
-                <a>Eliminar</a>
-            </td>
-
-
-
+        <tr th:each="cliente : ${PRUEBA}">
+            <td th:text="${cliente.getCliente_id()}"></td>
+            <td th:text="${cliente.getNombre()}"></td>
+            <td th:text="${cliente.getDireccion()}"></td>
+            <td th:text="${cliente.getCorreo_electronico()}"></td>
         </tr>
         </tbody>
     </table>
 </div>
-
-
-<a href="/ProveedorController/nuevo">nuevo proveedor</a>
 
 </body>
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de proveedor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Formulario de proveedor</h1>
+
+    <form th:object="${proveedor}" th:action="${accion}" method="post">
+        <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
+        <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
+        <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
+        <label>Activo: <input type="text" th:field="*{activo}"></label>
+        <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
+        <label>Dirección: <input type="text" th:field="*{direccion}"></label>
+        <label>Tipo (Físico/Jurídico): <input type="text" th:field="*{tipoProveedor}"></label>
+
+        <button type="submit">Guardar</button>
+
+        <a href="/ProveedorController/Listadeproveedores">Volver al listado de proveedores</a>
+    </form>
+</div>
+
+</body>
+</html>
