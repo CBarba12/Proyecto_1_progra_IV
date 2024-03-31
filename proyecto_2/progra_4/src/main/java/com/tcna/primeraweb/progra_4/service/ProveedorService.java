@@ -5,14 +5,10 @@ import com.tcna.primeraweb.progra_4.data.FacturaRepository;
 import com.tcna.primeraweb.progra_4.data.ProductoRepository;
 import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Collections;
 import java.util.List;
@@ -106,5 +102,18 @@ public class ProveedorService {
 
          proveedorRepository.deleteById(id);
 
+    }
+
+    public boolean verificarEmailPaswor(String numeroIdentificacion, String contrasena) {
+
+        ProveedorEntity prove=proveedorRepository.findById(numeroIdentificacion).orElse(null);
+
+        if(prove !=null ){
+
+            if (prove.getContrasena().equals(contrasena)){
+                return true;
+            }
+        }
+        return false;
     }
 }
