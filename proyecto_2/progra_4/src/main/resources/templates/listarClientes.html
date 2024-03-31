@@ -59,7 +59,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="cliente : ${PRUEBA}">
+        <tr th:each="cliente : ${clientesProveedor}">
             <td th:text="${cliente.getCliente_id()}"></td>
             <td th:text="${cliente.getNombre()}"></td>
             <td th:text="${cliente.getDireccion()}"></td>

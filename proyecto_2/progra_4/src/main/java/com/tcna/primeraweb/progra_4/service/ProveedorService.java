@@ -116,4 +116,9 @@ public class ProveedorService {
         }
         return false;
     }
+
+    public ProveedorEntity obtenerPorNumeroIdentificacion(String numeroIdentificacion) {
+
+        return proveedorRepository.findById(numeroIdentificacion).orElse(null);
+    }
 }

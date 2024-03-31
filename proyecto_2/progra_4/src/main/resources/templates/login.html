@@ -1,5 +1,5 @@
-ml>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +10,25 @@ ml>
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
             color: #333;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         label {
@@ -68,29 +73,21 @@ ml>
             outline: none;
         }
 
-        .signup-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            display: inline-block;
+        .link {
+            display: block;
+            text-align: center;
             margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
         }
 
-        .signup-button:hover {
-            background-color: #0056b3;
+        .link:hover {
+            text-decoration: underline;
         }
     </style>
-
-
-    <html>
-    <head>
-        <title>Iniciar sesión</title>
-    </head>
-    <body>
+</head>
+<body>
+<div class="container">
     <h1>Iniciar sesión</h1>
     <form action="/LoginController/login" method="post">
         <label for="numero_identificacion">Número de Identificación:</label>
@@ -104,8 +101,9 @@ ml>
         <p th:if="${error}" style="color: red;">${error}</p>
     </form>
 
-    <a href="/ProveedorController/nuevo" class="signup-button">Registrarse</a>
+    <a th:href="@{/}" class="link">Ir a la página de inicio</a>
+</div>
+</body>
+</html>
 
 
-    </body>
-    </html>

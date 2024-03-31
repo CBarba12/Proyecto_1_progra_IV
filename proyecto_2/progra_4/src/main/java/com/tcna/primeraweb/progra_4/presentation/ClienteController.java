@@ -5,6 +5,7 @@ import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,11 +28,28 @@ public class ClienteController {
 
 
     @GetMapping("/Listadeclientes") // Añade esta línea para mapear el método a la URL
-    public String listarClientes(Model model){
+    public String listarClientes(Model model, HttpSession session) {
+        // Verificar si hay clientes asociados al proveedor en la sesión
+        List<ClienteEntity> clientesProveedor = (List<ClienteEntity>) session.getAttribute("clientes");
+        if (clientesProveedor != null) {
+            // Si hay clientes asociados al proveedor en la sesión, agregarlos al modelo
+            model.addAttribute("clientesProveedor", clientesProveedor);
+        }
+        // Obtener todos los clientes y agregarlos al modelo
+        List<ClienteEntity> todosClientes = clienteService.ObtenerCliente();
+        model.addAttribute("todosClientes", todosClientes);
+        return "listarClientes"; // Suponiendo que el nombre de la vista es listarClientes.html
+    }
+
+    @GetMapping("/Clientes") // Añade esta línea para mapear el método a la URL
+    public String vectorClientes(Model model){
 
         List<ClienteEntity> cliente=clienteService.ObtenerCliente();
-        model.addAttribute("PRUEBA", cliente);
+
+        model.addAttribute("clientes", cliente);
         return "listarClientes";
     }
+
+
 
 }
