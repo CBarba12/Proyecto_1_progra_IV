@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,94 +11,44 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        h1 {
+        .button-container {
             text-align: center;
-            color: #333;
         }
 
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
+        .button {
+            padding: 10px 20px;
             font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
         }
 
-        input[type="submit"] {
+        .login-button {
             background-color: #4CAF50;
             color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        input[type="submit"]:active {
-            background-color: #3e8e41;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            border: 2px solid #4CAF50;
-        }
-
-        input[type="submit"]:focus {
-            outline: none;
         }
 
         .signup-button {
             background-color: #007bff;
             color: white;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            display: inline-block;
-            margin-top: 20px;
         }
 
-        .signup-button:hover {
-            background-color: #0056b3;
+        .button:hover {
+            opacity: 0.8;
         }
     </style>
-
 </head>
 <body>
-<h1>Iniciar sesión</h1>
-<form th:action="@{/login}" method="post">
-    <label for="numero_identificacion">Número de Identificación:</label>
-    <input type="text" id="numero_identificacion" name="numero_identificacion" required><br>
-
-    <label for="contrasena">Contraseña:</label>
-    <input type="password" id="contrasena" name="contrasena" required><br>
-
-    <input type="submit" value="Iniciar sesión">
-</form>
-
-<a href="/registro" class="signup-button">Registrarse</a>
+<div class="button-container">
+    <button class="button login-button" onclick="window.location.href='/LoginController/inicio'">Ingresar</button>
+    <button class="button signup-button" onclick="window.location.href='/ProveedorController/nuevo'">Registrarse</button>
+</div>
 </body>
 </html>

@@ -5,28 +5,27 @@ import com.tcna.primeraweb.progra_4.data.FacturaRepository;
 import com.tcna.primeraweb.progra_4.data.ProductoRepository;
 import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collections;
 import java.util.List;
 @org.springframework.stereotype.Service
 public class ProveedorService {
 
 
+    @Getter
     @Autowired
     private ProveedorRepository proveedorRepository;
     @Autowired
     private ProductoRepository productoRepository;
+
     @Autowired
     private FacturaRepository facturaRepository;
     @Autowired
     private ClienteRepository clienteRepository;
-
-
-
-
 
 
     //-------------------------------------listar-------------------------------------------------------------
@@ -35,19 +34,20 @@ public class ProveedorService {
     }
 
 
-    public List<ProductoEntity> ObtenerProductos() {
-        return productoRepository.findAll();
-    }
-
-    public List<FacturaEntity> ObtenerFacturas() {
-        return facturaRepository.findAll();
-    }
-
-    public List<ClienteEntity> ObtenerCliente() {
-        return clienteRepository.findAll();
-    }
 
 
+    public List<ClienteEntity> clienteproveedor(){
+
+        ProveedorEntity proveedor = proveedorRepository.findById("PROV2").orElse(null);
+        if (proveedor == null) {
+            // El proveedor no existe, puedes manejar este caso según sea necesario
+            return Collections.emptyList();
+        }
+
+        return clienteRepository.findByProveedorId("PROV2");
+
+       }
+       
 
     // ----------------------crear entidades --------------------------------------------------
 
@@ -55,40 +55,74 @@ public class ProveedorService {
 
         return proveedorRepository.save(persona);
     }
-    public ProductoEntity crearProductos(ProductoEntity producto) {
-        return productoRepository.save(producto);
-    }
+    
 
-    public FacturaEntity crearFactura(FacturaEntity factura) {
-        return facturaRepository.save(factura);
-    }
-
-    public ClienteEntity crearCliente(ClienteEntity cliente) {
-        return clienteRepository.save(cliente);
-    }
+  
 
 //------------------------------------------------- contar numero de entidades
 
     public Long ContarProveedores() {
         return proveedorRepository.count();
     }
-    public Long ContarProductos() {
-        return productoRepository.count();
+  
+   
+   
+
+
+
+
+
+    public List<ProductoEntity> cliente_de_proveedor() {
+
+
+        return productoRepository.findAll();
     }
-    public Long ContarFactura() {
-        return facturaRepository.count();
+
+
+    public ProveedorEntity actualizarProveedro(String id, ProveedorEntity provedor) {
+
+        ProveedorEntity prove=proveedorRepository.findById(id).orElse(null);
+
+        if(provedor !=null ){
+            assert prove != null;
+            prove.setNombre(provedor.getNombre());
+            prove.setCorreoElectronico(provedor.getCorreoElectronico());
+            prove.setTelefono(provedor.getTelefono());
+            prove.setDireccion(provedor.getDireccion());
+            prove.setDireccion(provedor.getTipoProveedor());
+
+            return proveedorRepository.save(prove);
+        }
+
+
+  return null;
     }
-    public Long ContarClientes() {
-        return clienteRepository.count();
+
+    public void eliminarProveedor(String id) {
+
+         proveedorRepository.deleteById(id);
+
     }
 
+    public boolean verificarEmailPaswor(String numeroIdentificacion, String contrasena) {
 
+        ProveedorEntity prove=proveedorRepository.findById(numeroIdentificacion).orElse(null);
 
+        if(prove !=null ){
 
+            if (prove.getContrasena().equals(contrasena)){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public ProveedorEntity obtenerPorNumeroIdentificacion(String numeroIdentificacion) {
 
+        return proveedorRepository.findById(numeroIdentificacion).orElse(null);
+    }
 
-
-
-
+    public ProveedorEntity obtenerProveedorPorId(String proveedorId) {
+        return proveedorRepository.findById(proveedorId).orElse(null);
+    }
 }
