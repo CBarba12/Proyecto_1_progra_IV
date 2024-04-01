@@ -89,11 +89,11 @@
 <body>
 <h1>Iniciar sesión</h1>
 <form th:action="@{/login}" method="post">
-    <label for="numero_identificacion">Número de Identificación:</label>
-    <input type="text" id="numero_identificacion" name="numero_identificacion" required><br>
+    <label for="nombre">Usuario:</label>
+    <input type="text" id="usuario" placeholder="Usuario" name="usuario" required><br>
 
     <label for="contrasena">Contraseña:</label>
-    <input type="password" id="contrasena" name="contrasena" required><br>
+    <input type="password" id="contrasena"placeholder="Contraseña" name="contrasena" required><br>
 
     <input type="submit" value="Iniciar sesión">
 </form>

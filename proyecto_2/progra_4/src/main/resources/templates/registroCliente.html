@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Clientes</title>
+    <style>
+        body {
+            font-family: "Arial Narrow", sans-serif; /* Specify fallback font */
+            margin: 2rem;
+            background-color: lightskyblue;
+        }
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            width: 500px;
+            display: flex;
+            margin: auto;
+            margin-bottom: 0rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1rem;
+            background-color: #fff;
+            font-family: Candara;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .form-row {  /* New class for label and input containers */
+            display: flex; /* Make labels and inputs sit next to each other */
+            margin-bottom: 1rem; /* Add space between rows */
+            align-items: center; /* Vertically align labels and inputs */
+        }
+
+        .form-row label {
+            width: 110px; /* Consistent label width for alignment */
+            text-align: center ; /* Right-align labels for better spacing */
+        }
+
+        .form-row input[type="text"],
+        .form-row input[type="email"] {
+            flex: 1; /* Make inputs flexible to fill remaining space */
+            padding: 5px; /* Add some padding for better user interaction */
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green button color */
+            color: white; /* White text for contrast */
+            padding: 10px 20px; /* Increase button size for better click target */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Add rounded corners */
+            cursor: pointer; /* Indicate clickable behavior */
+            margin: 0 auto;
+        }
+        input[type="submit"]:hover {
+            background-color: aquamarine;
+            color: black;
+            margin: 0 auto;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>Registro de Clientes</h1>
+<form action="/registrar" method="post">
+    <div class="form-group">
+        <div class="form-row" style="display: inline;">
+            <label for="nombre"><span style="color: red;">*</span>Nombre:</label>
+            <input type="text" id="nombre" placeholder="Nombre" name="nombre" required><br><br>
+            <label for="primerApellido"><span style="color: red;">*</span>Primer apellido:</label>
+            <input type="text" id="primerApellido" placeholder="Primer apellido" name="primerApellido" required><br><br>
+            <label for="segundoApellido"><span style="color: red;">*</span>Segundo apellido:</label>
+            <input type="text" id="segundoApellido" placeholder="Segundo apellido" name="segundoApellido" required><br><br>
+            <label for="tipoCedula"><span style="color: red;">*</span>Tipo de Cédula:</label>
+            <select id="tipoCedula" onchange="">
+                <option value="ninguna">Tipo de cédula</option>
+                <option value="juridica">Cédula Jurídica</option>
+                <option value="fisica">Cédula Física</option>
+            </select><br><br>
+            <label for="cedula"><span style="color: red;">*</span>Cédula:</label>
+            <input type="text" id="cedula" placeholder="Cédula" name="cedula" required [disabled]="tipoCedula.value === 'ninguna'"><br>
+            <label for="email"><span style="color: red;">*</span>Correo Electrónico:</label>
+            <input type="email" id="email" placeholder="Correo electrónico" name="email" required><br><br>
+        </div>
+    </div>
+    <input type="submit" value="Registrar">
+</form>
+
+</body>
+</html>
