@@ -1,35 +1,12 @@
 package com.tcna.primeraweb.progra_4;
 
-import com.tcna.primeraweb.progra_4.data.ClienteRepository;
-import com.tcna.primeraweb.progra_4.data.FacturaRepository;
-import com.tcna.primeraweb.progra_4.data.ProductoRepository;
-import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
-import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
-import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Date;
-import java.time.LocalDate;
-
-import java.util.List;
 
 @SpringBootApplication
 public class Progra4Application  {
 
 
-    @Autowired
-    private ProveedorRepository proveedorRepository;
-    @Autowired
-    private ClienteRepository clienteRepository;
-    @Autowired
-    private ProductoRepository productoRepository;
-    @Autowired
-    private FacturaRepository facturaRepository;
 
 
 

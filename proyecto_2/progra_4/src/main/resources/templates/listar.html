@@ -2,38 +2,125 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Prueba plantilla</title>
+    <title>Listado de Proveedores</title>
 
     <style>
-        table{border-collapse: collapse;width: 100%}
-        th,td{ padding: 8px;text-alig:left;border-bottom: 1px solid gray;}
-        tr:hover{background-color: brown}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #f7f7f7;
+        }
+
+        td {
+            color: #666;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            text-align: center;
+        }
+
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .add-link:hover {
+            background-color: #0056b3;
+        }
     </style>
 
 </head>
 <body>
 
-<h1>Listado de Proveedores</h1>
+<div class="container">
+    <h1>Listado de Proveedores</h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Correo</th>
-    </tr>
-    </thead>
+    <!-- Agrega el bloque para mostrar el mensaje de error -->
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
 
-    <tbody>
-    <tr th:each="proveedor : ${listaProveedor}">
-        <td th:text="${proveedor.idProveedor}"></td>
-        <td th:text="${proveedor.nombre}"></td>
-        <td th:text="${proveedor.telefono}"></td>
-        <td th:text="${proveedor.correoElectronico}"></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="proveedor : ${listaProveedor}">
+            <td th:text="${proveedor.getIdProveedor()}"></td>
+            <td th:text="${proveedor.nombre}"></td>
+            <td th:text="${proveedor.telefono}"></td>
+            <td th:text="${proveedor.correoElectronico}"></td>
+            <td>
+                <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" style="margin-right: 10px;">Editar</a>
+                <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.getIdProveedor()})}">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/ProveedorController/nuevo" class="add-link">Nuevo proveedor</a>
+</div>
 
 </body>
 </html>
