@@ -1,7 +1,6 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
@@ -39,7 +38,7 @@ public class ProductoController {
 
         model.addAttribute("listaProducto", proveedores);
 
-        return "listar";
+        return "listarproveedor";
     }
 
 

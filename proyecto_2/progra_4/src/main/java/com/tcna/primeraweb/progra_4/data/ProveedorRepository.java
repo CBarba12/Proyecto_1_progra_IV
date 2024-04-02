@@ -15,7 +15,11 @@ import java.util.List;
 public interface ProveedorRepository extends JpaRepository<ProveedorEntity,String> {
 
 
+    ProveedorEntity findByIdProveedorAndContrasena(String ID, String contrasena);
+    List<ProveedorEntity> findByActivoTrue();
+    List<ProveedorEntity> findByActivoFalse();
 
+    ProveedorEntity findByIdProveedorAndActivo(String idProveedor, boolean activo);
 
 
 }
