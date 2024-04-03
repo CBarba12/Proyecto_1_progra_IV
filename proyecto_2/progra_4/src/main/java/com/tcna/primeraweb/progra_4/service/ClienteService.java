@@ -38,16 +38,9 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Long ContarClientes() {
-        return clienteRepository.count();
-    }
 
-    public List<ClienteEntity> obtenerClientesPorProveedor(ProveedorEntity proveedor) {
+    public List<ClienteEntity> obtenerClientesPorProveedor(String contrasena) {
 
-        List<ClienteEntity> todosLosClientes = this.ObtenerCliente();
-
-        List<ClienteEntity> clientesPorProveedor = todosLosClientes.stream().filter(cliente -> cliente.getProveedor_id().equals(proveedor.getIdProveedor())).collect(Collectors.toList());
-
-        return clientesPorProveedor;
+        return  clienteRepository.findByProveedorId(contrasena);
     }
 }
