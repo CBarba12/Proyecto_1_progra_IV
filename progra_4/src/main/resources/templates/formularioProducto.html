@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Nuevo Producto</h1>
+    <form action="#" th:action="${accion}" th:object="${producto}" method="post">
+
+        <label>Producto ID: <input type="text" th:field="*{producto_id}"></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
+        <label>Descripcion: <input type="text" th:field="*{descripcion}"></label>
+        <label>Precio: <input type="number" th:field="*{precio}"></label>
+        <label>Tipo de producto: <input type="text" th:field="*{tipo_producto}"></label>
+        <label>Proveedor ID: <input type="text"  th:field="*{proveedor_id}" th:value="${clientesProveedor.getFirst().getProveedor_id()}"></label>
+
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+</body>
+</html>

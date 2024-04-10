@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    <div class="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo de producto</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+            <tr th:if="${clientesProveedor.getFirst().getProveedor_id() == producto.getProveedor_id()}" th:each="producto : ${productos}">
+                <td th:text="${producto.getProducto_id()}"></td>
+                <td th:text="${producto.getNombre()}"></td>
+                <td th:text="${producto.getTipo_producto()}"></td>
+                <td th:text="${producto.getDescripcion()}"></td>
+                <td th:text="${producto.getPrecio()}"></td>
+                <td th:text="${producto.getProveedor_id()}"></td>
+<!--                <td>-->
+<!--                    <a th:href="@{'/editarProducto/' + ${producto.id}}" class="button edit-button">Editar</a>-->
+<!--                    <a th:href="@{'/eliminarProducto/' + ${producto.id}}" class="button delete-button">Eliminar</a>-->
+<!--                </td>-->
+            </tr>
+            <th:block th:if="${clientesProveedor.size() > 0}">
+                <form action="/ProductoController/NuevoProducto" method="get">
+                    <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getProveedor_id()}" />
+                    <button type="submit" class="button">Nuevo Producto</button>
+                </form>
+
+            </th:block>
+        </table>
+    </div>
+
+</body>
+</html>
