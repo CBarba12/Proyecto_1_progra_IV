@@ -56,18 +56,20 @@ public class ClienteController {
     @GetMapping("/nuevocliente")
     public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion,Model model){
         ClienteEntity cle=new ClienteEntity();
+
         cle.setProveedor_id(numeroIdentificacion);
 
         model.addAttribute("cliente",cle);
         model.addAttribute("accion2","/ClienteController/nuevo");
+
         return "formulariocliente";
     }
     @PostMapping("/nuevo")
-    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
+    public String guardarNuevoCliente(@ModelAttribute ClienteEntity cliente){
 
-        proveedorService.crearProveedores(proveedor);
+        clienteService.crearCliente(cliente);
 
-        return "redirect:/ProveedorController/Listadeproveedores";
+        return "listarClientes";
     }
 
 

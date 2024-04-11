@@ -81,10 +81,15 @@
         <label>Nombre: <input type="text" th:field="*{nombre}"></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
-        <label>Activo: <input type="text" th:field="*{activo}"></label>
+        <input type="hidden" th:field="*{activo}" value=true>
         <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
         <label>Dirección: <input type="text" th:field="*{direccion}"></label>
-        <label>Tipo (Físico/Jurídico): <input type="text" th:field="*{tipoProveedor}"></label>
+        <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
+        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
+            <option value="Físico">Físico</option>
+            <option value="Jurídico">Jurídico</option>
+        </select>
+
 
         <button type="submit">Guardar</button>
 

@@ -25,37 +25,43 @@ public class ProveedorController {
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
     public String listaProveedor(Model model){
+
         List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
    
         model.addAttribute("listaProveedor", proveedores);
-        return "listar";
+        return "listarproveedor";
     }
+
+
+
+
 
     @GetMapping("/nuevo")
    public String MostrarFormularioNuevoProveedor(Model model){
         model.addAttribute("proveedor",new ProveedorEntity());
         model.addAttribute("accion","/ProveedorController/nuevo");
-        return "formulario";
+        return "formularioproveedor";
    }
 
 
     @PostMapping("/nuevo")
    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
-
+        proveedor.setActivo(true);
         proveedorService.crearProveedores(proveedor);
 
         return "redirect:/ProveedorController/Listadeproveedores";
    }
 
 
-
+//----------------------------------------------------------------------------------------
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor,Model model){
-
+        proveedor.setIdProveedor(id);
         model.addAttribute("proveedor",proveedor);
-        model.addAttribute("accion","/ProveedorController/editar"+id);
 
-        return "formulario";
+        model.addAttribute("editar_PROVEDOR","/ProveedorController/editar"+id);
+
+        return "FormularioEditarProveedor";
     }
 
 
@@ -68,8 +74,17 @@ public class ProveedorController {
     }
 
 
+    //---------------------------------------------------------------
+
+
+
+
+
+
     @GetMapping("/eliminar/{id}")
     public String eliminarProveedor(@PathVariable String id, Model model){
+
+
         try {
             proveedorService.eliminarProveedor(id);
             return "redirect:/ProveedorController/Listadeproveedores";

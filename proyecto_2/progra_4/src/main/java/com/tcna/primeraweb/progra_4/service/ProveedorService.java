@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 @org.springframework.stereotype.Service
 public class ProveedorService {
 
@@ -30,26 +32,12 @@ public class ProveedorService {
 
     //-------------------------------------listar-------------------------------------------------------------
     public List<ProveedorEntity> ObtenerProveedores() {
-        return proveedorRepository.findAll();
+
+
+        return proveedorRepository.findByActivoTrue();
     }
 
 
-
-
-    public List<ClienteEntity> clienteproveedor(){
-
-        ProveedorEntity proveedor = proveedorRepository.findById("PROV2").orElse(null);
-        if (proveedor == null) {
-            // El proveedor no existe, puedes manejar este caso según sea necesario
-            return Collections.emptyList();
-        }
-
-        return clienteRepository.findByProveedorId("PROV2");
-
-       }
-       
-
-    // ----------------------crear entidades --------------------------------------------------
 
     public ProveedorEntity crearProveedores(ProveedorEntity persona) {
 
@@ -64,20 +52,12 @@ public class ProveedorService {
     public Long ContarProveedores() {
         return proveedorRepository.count();
     }
-  
-   
-   
-
-
-
 
 
     public List<ProductoEntity> cliente_de_proveedor() {
 
-
         return productoRepository.findAll();
     }
-
 
     public ProveedorEntity actualizarProveedro(String id, ProveedorEntity provedor) {
 
@@ -99,30 +79,30 @@ public class ProveedorService {
     }
 
     public void eliminarProveedor(String id) {
-
-         proveedorRepository.deleteById(id);
-
+        Optional<ProveedorEntity> proveedorOptional = proveedorRepository.findById(id);
+        if (((Optional<?>) proveedorOptional).isPresent()) {
+            ProveedorEntity proveedor = proveedorOptional.get();
+            proveedor.setActivo(false);
+            proveedorRepository.save(proveedor); // Guardar los cambios en la base de datos
+        } else {
+            throw new IllegalArgumentException("No se encontró ningún proveedor con el ID dado: " + id);
+        }
     }
+
+
+
 
     public boolean verificarEmailPaswor(String numeroIdentificacion, String contrasena) {
 
-        ProveedorEntity prove=proveedorRepository.findById(numeroIdentificacion).orElse(null);
-
-        if(prove !=null ){
-
-            if (prove.getContrasena().equals(contrasena)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public ProveedorEntity obtenerPorNumeroIdentificacion(String numeroIdentificacion) {
-
-        return proveedorRepository.findById(numeroIdentificacion).orElse(null);
+        ProveedorEntity p=proveedorRepository.findByIdProveedorAndContrasena(numeroIdentificacion,contrasena);
+          return p != null;
     }
 
     public ProveedorEntity obtenerProveedorPorId(String proveedorId) {
         return proveedorRepository.findById(proveedorId).orElse(null);
     }
+
+
+
 }
+

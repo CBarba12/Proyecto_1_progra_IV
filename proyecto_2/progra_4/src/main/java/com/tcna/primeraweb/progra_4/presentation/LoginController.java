@@ -29,13 +29,19 @@ public class LoginController {
                         @RequestParam("contrasena") String contrasena,
                         HttpSession session) {
         // Verificar las credenciales del proveedor
+
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
+
             // Si las credenciales son válidas, obtener el proveedor autenticado
-            ProveedorEntity proveedor = proveedorService.obtenerPorNumeroIdentificacion(numeroIdentificacion);
+            ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(numeroIdentificacion);
+
             if (proveedor != null) {
+
                 // Obtener los clientes asociados al proveedor autenticado
-                List<ClienteEntity> clientes = clienteService.obtenerClientesPorProveedor(proveedor);
+                List<ClienteEntity> clientes = clienteService.obtenerClientesPorProveedor(numeroIdentificacion);
+
                 // Guardar los clientes en la sesión para usarlos en la siguiente solicitud
+                
                 session.setAttribute("clientes", clientes);
                 // Redirigir a la página de lista de clientes
                 return "redirect:/ClienteController/Listadeclientes";
