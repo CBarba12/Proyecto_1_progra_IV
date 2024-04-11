@@ -75,11 +75,12 @@
 <div class="container">
     <h1>Formulario de Cliente</h1>
 
-    <form th:object="${cliente}" th:action="${accion2}" method="post">
+    <form th:object="${cliente}" th:action="@{/ClienteController/nuevo}" method="post">
 
 
-        <label>Identificacion:</label>
-        <input type="text" th:field="*{cliente_id}">
+
+    <label>Identificacion:</label>
+        <input type="text" th:field="*{clienteId}">
 
         <label>Nombre:</label>
         <input type="text" th:field="*{nombre}">
@@ -88,13 +89,13 @@
         <input type="text" th:field="*{direccion}">
 
         <label>Tipo de Cliente:</label>
-        <input type="text" th:field="*{tipo_cliente}">
+        <input type="text" th:field="*{tipoCliente}">
 
         <label>Correo Electrónico:</label>
-        <input type="text" th:field="*{correo_electronico}">
+        <input type="text" th:field="*{correoElectronico}">
 
         <!-- Campo oculto para el ID del proveedor -->
-        <input type="hidden" th:field="*{proveedor_id}">
+        <input type="hidden" th:field="*{proveedorId}">
 
         <button type="submit">Guardar</button>
 
