@@ -1,47 +1,53 @@
 package com.tcna.primeraweb.progra_4.logic;
 
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+
 
 @Entity
-@Table(name = "Cliente", schema = "proyecto_1")
-
-@Data
-
-public class ClienteEntity
-{
+@Table(name = "cliente", schema = "proyecto_1")
+public class ClienteEntity {
 
     @Id
-    String cliente_id ;
-    String nombre ;
-    String direccion ;
-    String tipo_cliente;
-    String correo_electronico ;
-    String proveedor_id ;
+    @Column(name = "cliente_id")
+    private String clienteId;
+    @Basic
+    @Column(name = "nombre")
+    private String nombre;
+    @Basic
+    @Column(name = "direccion")
+    private String direccion;
+    @Basic
+    @Column(name = "tipo_cliente")
+    private String tipoCliente;
+    @Basic
+    @Column(name = "correo_electronico")
+    private String correoElectronico;
+    @Basic
+    @Column(name = "proveedor_id")
+    private String proveedorId;
 
-    public ClienteEntity(String cliente_id, String nombre, String direccion, String tipo_cliente, String correo_electronico, String proveedor_id) {
-        this.cliente_id = cliente_id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.tipo_cliente = tipo_cliente;
-        this.correo_electronico = correo_electronico;
-        this.proveedor_id = proveedor_id;
-    }
 
     public ClienteEntity() {
     }
-
-    public String getCliente_id() {
-        return cliente_id;
+    public ClienteEntity(String clienteId, String nombre, String direccion, String tipoCliente, String correoElectronico, String proveedorId) {
+        this.clienteId = clienteId;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.tipoCliente = tipoCliente;
+        this.correoElectronico = correoElectronico;
+        this.proveedorId = proveedorId;
     }
 
-    public void setCliente_id(String cliente_id) {
-        this.cliente_id = cliente_id;
+
+
+    public String getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
 
     public String getNombre() {
@@ -60,27 +66,31 @@ public class ClienteEntity
         this.direccion = direccion;
     }
 
-    public String getTipo_cliente() {
-        return tipo_cliente;
+    public String getTipoCliente() {
+        return tipoCliente;
     }
 
-    public void setTipo_cliente(String tipo_cliente) {
-        this.tipo_cliente = tipo_cliente;
+    public void setTipoCliente(String tipoCliente) {
+        this.tipoCliente = tipoCliente;
     }
 
-    public String getCorreo_electronico() {
-        return correo_electronico;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public void setCorreo_electronico(String correo_electronico) {
-        this.correo_electronico = correo_electronico;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
-    public String getProveedor_id() {
-        return proveedor_id;
+    public String getProveedorId() {
+        return proveedorId;
     }
 
-    public void setProveedor_id(String proveedor_id) {
-        this.proveedor_id = proveedor_id;
+    public void setProveedorId(String proveedorId) {
+        this.proveedorId = proveedorId;
     }
+
+
+
+
 }

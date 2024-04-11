@@ -77,7 +77,7 @@
 
 <div class="container">
     <h1>Listado de Clientes</h1>
-    <td th:if="${clientesProveedor.size()>0}" th:text="${clientesProveedor.getFirst().getProveedor_id()}"></td>
+    <td th:text="${session.id_proveedor}"></td>
 
     <table>
         <thead>
@@ -92,10 +92,10 @@
 
         <tbody>
         <tr th:each="cliente : ${clientesProveedor}">
-            <td th:text="${cliente.getCliente_id()}"></td>
+            <td th:text="${cliente.clienteId}"></td>
             <td th:text="${cliente.getNombre()}"></td>
             <td th:text="${cliente.getDireccion()}"></td>
-            <td th:text="${cliente.getCorreo_electronico()}"></td>
+            <td th:text="${cliente.correoElectronico}"></td>
             <td>
                 <!-- Botón para editar -->
                 <a class="button edit-button">Editar</a>
@@ -109,11 +109,10 @@
         <th:block th:if="${clientesProveedor.size() > 0}">
             <form action="/ClienteController/nuevocliente" method="get">
                 <!-- Campo oculto para el ID del proveedor -->
-                <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getProveedor_id()}" />
+                <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getClienteId()}" />
                 <button type="submit" class="button">Agregar Cliente</button>
             </form>
 
-            <a href="/ClienteController/nuevo" class="add-link">Agregar Cliente</a>
         </th:block>
 
 
