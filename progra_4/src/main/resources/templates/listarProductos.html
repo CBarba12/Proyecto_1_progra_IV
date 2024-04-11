@@ -82,18 +82,17 @@
                 <th>Tipo de producto</th>
                 <th>Descripcion</th>
                 <th>Precio</th>
-                <th>Acciones</th>
+                <th>Proveedor</th>
             </tr>
+
             <tr th:if="${clientesProveedor.getFirst().getProveedor_id() == producto.getProveedor_id()}" th:each="producto : ${productos}">
                 <td th:text="${producto.getProducto_id()}"></td>
                 <td th:text="${producto.getNombre()}"></td>
                 <td th:text="${producto.getTipo_producto()}"></td>
                 <td th:text="${producto.getDescripcion()}"></td>
                 <td th:text="${producto.getPrecio()}"></td>
-<!--                <td>-->
-<!--                    <a th:href="@{'/editarProducto/' + ${producto.getProducto_id()}}" class="button edit-button">Editar</a>-->
-<!--                    <a th:href="@{'/eliminarProducto/' + ${producto.getProducto_id()}}" class="button delete-button">Eliminar</a>-->
-<!--                </td>-->
+                <td th:text="${producto.getProveedor_id()}"></td>
+
             </tr>
             <th:block th:if="${clientesProveedor.size() > 0}">
                 <form action="/ProductoController/NuevoProducto" method="get">

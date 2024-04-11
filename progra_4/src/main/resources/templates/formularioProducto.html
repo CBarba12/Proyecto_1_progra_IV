@@ -74,12 +74,18 @@
     <h1>Nuevo Producto</h1>
     <form action="#" th:action="${accion}" th:object="${producto}" method="post">
 
-        <label>Producto ID: <input type="text" th:field="*{producto_id}"></label>
+
         <label>Nombre: <input type="text" th:field="*{nombre}"></label>
         <label>Descripcion: <input type="text" th:field="*{descripcion}"></label>
         <label>Precio: <input type="number" th:field="*{precio}"></label>
-        <label>Tipo de producto: <input type="text" th:field="*{tipo_producto}"></label>
-        <label>Proveedor ID: <input type="text"  th:field="*{proveedor_id}" th:value="${clientesProveedor.get(0).getProveedor_id()}" readonly></label>
+        <label>Tipo de producto:
+            <select th:field="*{tipo_producto}">
+                <option value="Servicio">Servicio</option>
+                <option value="Consumibles">Consumibles</option>
+                <option value="Infraestructura">Infraestructura</option>
+                <option value="Bienes">Bienes</option>
+            </select>
+        </label>
 
         <button type="submit">Guardar</button>
     </form>
