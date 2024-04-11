@@ -90,10 +90,9 @@
                 <td th:text="${producto.getTipo_producto()}"></td>
                 <td th:text="${producto.getDescripcion()}"></td>
                 <td th:text="${producto.getPrecio()}"></td>
-                <td th:text="${producto.getProveedor_id()}"></td>
 <!--                <td>-->
-<!--                    <a th:href="@{'/editarProducto/' + ${producto.id}}" class="button edit-button">Editar</a>-->
-<!--                    <a th:href="@{'/eliminarProducto/' + ${producto.id}}" class="button delete-button">Eliminar</a>-->
+<!--                    <a th:href="@{'/editarProducto/' + ${producto.getProducto_id()}}" class="button edit-button">Editar</a>-->
+<!--                    <a th:href="@{'/eliminarProducto/' + ${producto.getProducto_id()}}" class="button delete-button">Eliminar</a>-->
 <!--                </td>-->
             </tr>
             <th:block th:if="${clientesProveedor.size() > 0}">
