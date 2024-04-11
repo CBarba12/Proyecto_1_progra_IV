@@ -38,7 +38,7 @@ public class LoginController {
                 // Guardar los clientes en la sesión para usarlos en la siguiente solicitud
                 session.setAttribute("clientes", clientes);
                 // Redirigir a la página de lista de clientes
-                return "redirect:/ClienteController/Listadeclientes";
+                return "redirect:/homecontroler/home";
             }
         }
         // Si las credenciales son inválidas, redirigir de vuelta al formulario de inicio de sesión

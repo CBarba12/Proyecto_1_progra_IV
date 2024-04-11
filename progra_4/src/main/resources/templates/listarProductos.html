@@ -75,6 +75,7 @@
 <body>
     <h1>Listado de Productos</h1>
     <div class="container">
+        <td th:if="${clientesProveedor.size()>0}" th:text="${clientesProveedor.getFirst().getProveedor_id()}"></td>
         <table>
             <tr>
                 <th>ID</th>

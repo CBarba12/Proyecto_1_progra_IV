@@ -113,12 +113,9 @@
                 <button type="submit" class="button">Agregar Cliente</button>
             </form>
 
-            <a href="/ClienteController/nuevo" class="add-link">Agregar Cliente</a>
+<!--            <a href="/ClienteController/nuevo" class="add-link">Agregar Cliente</a>-->
 
-            <form action="/ProductoController/Listadeproductos" method="get">
-                <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getProveedor_id()}" />
-                <button type="submit" class="button">Productos</button>
-            </form>
+
 
 
         </th:block>
