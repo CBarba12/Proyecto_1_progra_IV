@@ -81,8 +81,7 @@
             <th>Factura ID</th>
             <th>Fecha</th>
             <th>Total</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
+            <th>Cliente</th>
             <th>Proveedor</th>
         </tr>
 
@@ -91,6 +90,7 @@
             <td th:text="${factura.getFecha()}"></td>
             <td th:text="${factura.getTotal()}"></td>
             <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${clientesProveedor.get(0).getProveedor_id()}"></td>
         </tr>
         <th:block th:if="${clientesProveedor.size() > 0}">
             <form action="/FacturaController/NuevaFactura" method="get">
