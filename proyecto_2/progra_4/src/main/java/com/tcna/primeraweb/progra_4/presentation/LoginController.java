@@ -32,7 +32,7 @@ public class LoginController {
 
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
-                return "redirect:/ClienteController/Listadeclientes";
+                return "redirect:/homecontroler/ProveedorAcciones";
         }
 
 

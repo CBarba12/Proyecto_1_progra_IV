@@ -78,7 +78,8 @@
 <div class="container">
     <h1>Listado de Clientes</h1>
     <td th:text="${session.id_proveedor}"></td>
-
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/ClienteController/nuevocliente\''">Nuevo Producto</button></td>
     <table>
         <thead>
         <tr>
@@ -104,16 +105,6 @@
             </td>
         </tr>
 
-
-
-        <th:block th:if="${clientesProveedor.size() > 0}">
-            <form action="/ClienteController/nuevocliente" method="get">
-                <!-- Campo oculto para el ID del proveedor -->
-                <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getClienteId()}" />
-                <button type="submit" class="button">Agregar Cliente</button>
-            </form>
-
-        </th:block>
 
         </tbody>
     </table>

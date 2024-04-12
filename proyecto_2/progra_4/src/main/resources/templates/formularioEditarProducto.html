@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Nuevo Producto</title>
+    <title>Editar Producto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,7 +57,7 @@
             background-color: #45a049;
         }
 
-       .submit-button {
+        .submit-button {
             padding: 10px 20px;
             margin: 5px 10px;
             background-color: #2b312d;
@@ -87,16 +87,17 @@
 </head>
 <body>
 <div class="container">
-    <h1>Nuevo Producto</h1>
-    <form th:object="${producto}" th:action="@{/ProductoController/nuevo}" method="post">
+    <h1>Editar Producto</h1>
+    <form th:object="${producto}" th:action="@{/ProductoController/edit}" method="post">
 
-
-        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
-        <label>Descripcion: <input type="text" th:field="*{descripcion}"></label>
-        <label>Precio: <input type="number" th:field="*{precio}"></label>
+        <label>Nombre: <input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
+        <label>Descripcion: <input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}"></label>
+        <label>Precio: <input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
+        <label>Nombre: <input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly></label>
         <label>Tipo de producto:
             <select th:field="*{tipoProducto}">
-                <option th:each="tipo : ${actividad}" th:value="${actividad}" th:text="${actividad}"></option>
+                <option th:each="tipo : ${producto.tipoProducto}" th:value="${tipo}" th:text="${tipo}"></option>
             </select>
         </label>
 

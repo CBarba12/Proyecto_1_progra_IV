@@ -2,6 +2,8 @@ package com.tcna.primeraweb.progra_4.logic;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "producto", schema = "proyecto_1")
 public class ProductoEntity {
@@ -89,4 +91,15 @@ public class ProductoEntity {
         this.proveedorId = proveedorId;
     }
 
+    @Override
+    public String toString() {
+        return "ProductoEntity{" +
+                "productoId=" + productoId +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", tipoProducto='" + tipoProducto + '\'' +
+                ", proveedorId='" + proveedorId + '\'' +
+                '}';
+    }
 }

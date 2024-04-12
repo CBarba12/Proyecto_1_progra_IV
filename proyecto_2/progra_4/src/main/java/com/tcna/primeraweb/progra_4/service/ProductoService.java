@@ -37,4 +37,15 @@ public class ProductoService {
     public List<ProductoEntity> obtenerProductoPorProveedor(String id) {
         return  productoRepository.findByProveedorId(id);
     }
+
+
+
+    public void actualizarProducto(ProductoEntity producto) {
+        productoRepository.save(producto);
+    }
+
+
+    public void eliminarProducto(int id) {
+        productoRepository.deleteById(id);
+    }
 }
