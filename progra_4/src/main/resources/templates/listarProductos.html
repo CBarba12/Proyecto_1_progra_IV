@@ -76,6 +76,7 @@
     <h1>Listado de Productos</h1>
     <div class="container">
         <td th:if="${clientesProveedor.size()>0}" th:text="${clientesProveedor.getFirst().getProveedor_id()}"></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/home\''">Volver</button></td>
         <table>
             <tr>
                 <th>ID</th>
@@ -100,7 +101,6 @@
                     <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getProveedor_id()}" />
                     <button type="submit" class="button">Nuevo Producto</button>
                 </form>
-
             </th:block>
         </table>
     </div>

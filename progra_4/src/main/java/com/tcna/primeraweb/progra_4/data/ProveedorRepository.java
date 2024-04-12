@@ -14,8 +14,4 @@ import java.util.List;
 @Transactional
 public interface ProveedorRepository extends JpaRepository<ProveedorEntity,String> {
 
-
-
-
-
 }
