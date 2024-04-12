@@ -1,7 +1,5 @@
 package com.tcna.primeraweb.progra_4.presentation.proveedor;
 
-import com.tcna.primeraweb.progra_4.data.ProductoRepository;
-import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
