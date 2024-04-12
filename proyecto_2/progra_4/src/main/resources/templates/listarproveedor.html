@@ -107,13 +107,13 @@
 
         <tbody>
         <tr th:each="proveedor : ${listaProveedor}">
-            <td th:text="${proveedor.idProveedor()}"></td>
+            <td th:text="${proveedor.idProveedor}"></td>
             <td th:text="${proveedor.nombre}"></td>
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.correoElectronico}"></td>
             <td>
-                <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" style="margin-right: 10px;">Editar</a>
-                <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.getIdProveedor()})}">Eliminar</a>
+                <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.idProveedor})}" style="margin-right: 10px;">Editar</a>
+                <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.idProveedor})}">Eliminar</a>
             </td>
         </tr>
         </tbody>

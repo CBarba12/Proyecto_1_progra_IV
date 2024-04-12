@@ -36,7 +36,10 @@ public class LoginController {
 
             if (p.getAdmin() != null && p.getAdmin() == 1) {
 
-                System.out.println("pone aqui la clase que dirige a los proveedores");
+                List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
+
+                model.addAttribute("listaProveedor",prob);
+                return "listarproveedor";
 
             } else {
                 session.setAttribute("id_proveedor",numeroIdentificacion);

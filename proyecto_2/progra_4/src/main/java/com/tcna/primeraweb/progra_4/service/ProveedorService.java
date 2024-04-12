@@ -9,6 +9,7 @@ import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +30,26 @@ public class ProveedorService {
 
 
     //-------------------------------------listar-------------------------------------------------------------
-    public List<ProveedorEntity> ObtenerProveedores() {
-        return proveedorRepository.findAll();
+    public List<ProveedorEntity> ObtenerProveedores()
+    {
+        List<ProveedorEntity> proveedores = proveedorRepository.findAll();
+
+        List<ProveedorEntity> noAdminProveedores = new ArrayList<>();
+
+        for (ProveedorEntity proveedor : proveedores) {
+
+            if (proveedor.getAdmin() == 1) {
+
+            }else {
+                noAdminProveedores.add(proveedor);
+            }
+        }
+
+        return noAdminProveedores;
     }
 
     public ProveedorEntity crearProveedores(ProveedorEntity persona) {
+
         return proveedorRepository.save(persona);
     }
     
