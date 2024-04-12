@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Listado de Clientes</h1>
+    <td th:text="${session.id_proveedor}"></td>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID PRODUCTO</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Precio</th>
+            <th>tipo_producto</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="cliente : ${ProductoProveedor}">
+
+            <td th:text="${cliente.productoId}"></td>
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.precio}"></td>
+            <td th:text="${cliente.tipoProducto}"></td>
+
+            <td>
+                <!-- Botón para editar -->
+                <a class="button edit-button">Editar</a>
+                <!-- Botón para borrar -->
+                <a  class="button delete-button">Borrar</a>
+            </td>
+
+        </tr>
+
+
+
+
+                <button type="submit" class="button">Agregar producto</button>
+
+        </th:block>
+
+
+        </tbody>
+    </table>
+
+
+</div>
+
+
+</body>
+</html>
