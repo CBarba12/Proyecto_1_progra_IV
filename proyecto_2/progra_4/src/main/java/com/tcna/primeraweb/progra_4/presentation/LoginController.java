@@ -31,8 +31,18 @@ public class LoginController {
 
 
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
+
+            ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
+
+            if (p.getAdmin() != null && p.getAdmin() == 1) {
+
+                System.out.println("pone aqui la clase que dirige a los proveedores");
+
+            } else {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
                 return "redirect:/ClienteController/Listadeclientes";
+            }
+
         }
 
 
