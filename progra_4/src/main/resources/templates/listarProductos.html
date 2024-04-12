@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    <div class="container">
+        <td th:text="${session.id_proveedor}"></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/home\''">Volver</button></td>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo de producto</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Proveedor</th>
+            </tr>
+
+            <tr th:each="cliente : ${ProductoProveedor}">
+
+                <td th:text="${cliente.productoId}"></td>
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.precio}"></td>
+                <td th:text="${cliente.tipoProducto}"></td>
+
+                <td>
+                    <!-- Botón para editar -->
+                    <a class="button edit-button">Editar</a>
+                    <!-- Botón para borrar -->
+                    <a  class="button delete-button">Borrar</a>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+
+
+</body>
+</html>

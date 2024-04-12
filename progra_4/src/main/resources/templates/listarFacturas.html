@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Clientes</title>
-
+    <title>Facturas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,47 +73,34 @@
     </style>
 </head>
 <body>
-
+<h1>Listado de Productos</h1>
 <div class="container">
-    <h1>Listado de Clientes</h1>
-    <td th:text="${session.id_proveedor}"></td>
-
+    <td th:if="${clientesProveedor.size()>0}" th:text="${clientesProveedor.getFirst().getProveedor_id()}"></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/home\''">Volver</button></td>
     <table>
-        <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Correo</th>
-            <th>Acciones</th> <!-- Nueva columna para botones de acción -->
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="cliente : ${clientesProveedor}">
-            <td th:text="${cliente.clienteId}"></td>
-            <td th:text="${cliente.getNombre()}"></td>
-            <td th:text="${cliente.getDireccion()}"></td>
-            <td th:text="${cliente.correoElectronico}"></td>
-            <td>
-                <!-- Botón para editar -->
-                <a class="button edit-button">Editar</a>
-                <!-- Botón para borrar -->
-                <a  class="button delete-button">Borrar</a>
-            </td>
+            <th>Factura ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Cliente</th>
+            <th>Proveedor</th>
         </tr>
 
+        <tr th:each="factura : ${facturas}">
+            <td th:text="${factura.getFactura_id()}"></td>
+            <td th:text="${factura.getFecha()}"></td>
+            <td th:text="${factura.getTotal()}"></td>
+            <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${clientesProveedor.get(0).getProveedor_id()}"></td>
+        </tr>
+        <th:block th:if="${clientesProveedor.size() > 0}">
+            <form action="/FacturaController/NuevaFactura" method="get">
+                <input type="hidden" name="proveedorId" th:value="${clientesProveedor.getFirst().getProveedor_id()}" />
+                <button type="submit" class="button">Nueva Factura</button>
+            </form>
 
-
-                    <button type="submit" class="button">Agregar Cliente</button>
-     
         </th:block>
-
-
-        </tbody>
     </table>
-
-
 </div>
 
 </body>

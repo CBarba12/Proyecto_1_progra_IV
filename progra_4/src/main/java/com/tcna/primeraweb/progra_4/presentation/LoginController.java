@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("numero_identificacion") String numeroIdentificacion,
                         @RequestParam("contrasena") String contrasena,
-                        HttpSession session, Model model) {
+                      HttpSession session, Model model) {
 
 
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
