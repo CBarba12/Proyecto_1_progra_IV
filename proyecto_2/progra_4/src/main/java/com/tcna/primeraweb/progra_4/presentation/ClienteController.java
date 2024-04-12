@@ -45,9 +45,6 @@ public class ClienteController {
 
 
 
-
-
-
     //-------------------------------------
     @GetMapping("/nuevocliente")
     public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion,Model model){

@@ -14,4 +14,5 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity,Integer
 
     List<ProductoEntity> findByProveedorId(String nameproducto);
 
+
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class ProductoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment strategy
     @Column(name = "producto_id")
     private int productoId;
     @Basic
@@ -26,14 +27,13 @@ public class ProductoEntity {
     private String proveedorId;
 
 
-    public ProductoEntity(int productoId, String nombre, String descripcion, Double precio, String tipoProducto, String proveedorId) {
-        this.productoId = productoId;
+    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.tipoProducto = tipoProducto;
-        this.proveedorId = proveedorId;
     }
+
 
     public ProductoEntity() {
     }
