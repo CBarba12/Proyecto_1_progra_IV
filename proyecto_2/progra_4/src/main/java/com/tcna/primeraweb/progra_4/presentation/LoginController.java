@@ -43,7 +43,7 @@ public class LoginController {
 
             } else {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
-                return "redirect:/ClienteController/Listadeclientes";
+                return "proveedorAcciones";
             }
 
         }

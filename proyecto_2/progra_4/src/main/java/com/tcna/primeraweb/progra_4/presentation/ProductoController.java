@@ -1,6 +1,5 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
-import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
@@ -44,7 +43,7 @@ public class ProductoController {
         }
 
 
-        return "listarProductos";
+        return "ListadeProducto";
     }
 
 
@@ -78,7 +77,7 @@ public class ProductoController {
         }
 
 
-        return "listarProductos";
+        return "ListadeProducto";
     }
 
 
