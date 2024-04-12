@@ -20,6 +20,7 @@ public class ProductoService {
     private ClienteRepository clienteRepository;
 
 
+
     public List<ProductoEntity> ObtenerProductos() {
         return productoRepository.findAll();
     }
@@ -33,4 +34,7 @@ public class ProductoService {
         return productoRepository.count();
     }
 
+    public List<ProductoEntity> obtenerProductoPorProveedor(String id) {
+        return  productoRepository.findByProveedorId(id);
+    }
 }
