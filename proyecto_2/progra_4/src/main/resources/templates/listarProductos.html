@@ -41,8 +41,12 @@
 
 
 
-
+        <th:block th:if="${ProductoProveedor.size() > 0}">
+            <form action="/ClienteController/nuevocliente" method="get">
+                <!-- Campo oculto para el ID del proveedor -->
+                <input type="hidden" name="proveedorId" th:value="${ProductoProveedor.getFirst().getProveedorId()}" />
                 <button type="submit" class="button">Agregar producto</button>
+            </form>
 
         </th:block>
 
