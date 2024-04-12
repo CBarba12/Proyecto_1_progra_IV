@@ -66,14 +66,7 @@ public class ProductoController {
 
     @PostMapping("/guardarProducto") // Añade esta línea para mapear el método a la URL
     public String guardarProducto(@ModelAttribute ProductoEntity producto, HttpSession session){
-        String proveedorID = "";
-        List<ClienteEntity> clientesProveedor = (List<ClienteEntity>) session.getAttribute("clientes");
 
-        if (clientesProveedor != null && !clientesProveedor.isEmpty()) {
-            proveedorID = clientesProveedor.get(0).getProveedor_id();
-        }
-
-        producto.setProveedor_id(proveedorID);
 
         productoService.crearProductos(producto);
 
