@@ -51,10 +51,11 @@ public class ProductoController {
 
 
     @GetMapping("/nuevoProducto")
-    public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion, Model model){
+    public String MostrarFormularioNuevoCliente(HttpSession session, Model model){
 
         ProductoEntity cle=new ProductoEntity();
-        cle.setProveedorId(numeroIdentificacion);
+        String ID= (String) session.getAttribute("id_proveedor");
+        cle.setProveedorId(ID);
 
         model.addAttribute("producto",cle);
 

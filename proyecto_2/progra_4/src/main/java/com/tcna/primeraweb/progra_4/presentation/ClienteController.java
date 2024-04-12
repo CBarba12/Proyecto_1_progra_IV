@@ -47,10 +47,12 @@ public class ClienteController {
 
     //-------------------------------------
     @GetMapping("/nuevocliente")
-    public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion,Model model){
+    public String MostrarFormularioNuevoCliente(HttpSession session,Model model){
 
         ClienteEntity cle=new ClienteEntity();
-        cle.setProveedorId(numeroIdentificacion);
+        String ID= (String) session.getAttribute("id_proveedor");
+
+        cle.setProveedorId(ID);
 
         model.addAttribute("cliente",cle);
 
