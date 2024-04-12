@@ -67,6 +67,12 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* Inhabilita el campo hasta que se seleccione un tipo de proveedor */
+        #tipoProveedor:not(:checked) + label > input {
+            pointer-events: none;
+            background-color: #eee;
+        }
     </style>
 </head>
 <body>
@@ -75,9 +81,16 @@
     <h1>Formulario de proveedor</h1>
 
     <form th:object="${proveedor}" th:action="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" method="post">
-        <!--  <input type="hidden" th:field="*{idProveedor}">-->
-
-        <label>Identificación: <input type="hidden" th:field="*{idProveedor}"></label>
+        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
+            <option value="">Seleccionar</option>
+            <option value="Físico">Físico</option>
+            <option value="Jurídico">Jurídico</option>
+        </select>
+        <label>Identificación:
+            <input id="idProveedor" type="text" th:field="*{idProveedor}" th:disabled="${proveedor.tipoProveedor==null }" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" th:required="${proveedor.tipoProveedor != null}">
+            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Físico'}">Debe contener 9 dígitos.</span>
+            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Jurídico'}">Debe contener 10 dígitos.</span>
+        </label>
         <label>Nombre: <input type="text" th:field="*{nombre}"></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
@@ -85,21 +98,10 @@
         <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
         <label>Dirección: <input type="text" th:field="*{direccion}"></label>
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
-        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
-            <option value="Físico">Físico</option>
-            <option value="Jurídico">Jurídico</option>
-        </select>
-
-
-
         <button type="submit">Guardar</button>
-
-        <!-- <a href="/LoginController/inicio">VOLVER AL INICIO</a>-->
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
-
     </form>
 </div>
 
 </body>
 </html>
-
