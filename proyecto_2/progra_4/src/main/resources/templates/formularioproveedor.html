@@ -81,7 +81,7 @@
             <option value="Jurídico">Jurídico</option>
         </select>
         <label>Identificación:
-            <input id="idProveedor" type="text" th:field="*{idProveedor}" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" th:required="${proveedor.tipoProveedor != null}" required>
+            <input type="text" th:field="*{idProveedor}" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" required>
             <span class="error-message" th:if="${proveedor.tipoProveedor == 'Físico'}">Debe contener 9 dígitos.</span>
             <span class="error-message" th:if="${proveedor.tipoProveedor == 'Jurídico'}">Debe contener 10 dígitos.</span>
         </label>

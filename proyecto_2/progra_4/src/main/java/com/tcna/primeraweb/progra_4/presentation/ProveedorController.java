@@ -45,14 +45,34 @@ public class ProveedorController {
    }
 
 
-    @PostMapping("/nuevo")
-   public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
+    /*@PostMapping("/nuevo")
+   public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, Model model){
+        String idProveedor = proveedor.getIdProveedor();
+        String tipoProveedor = proveedor.getTipoProveedor();
+
+        if ("fisico".equalsIgnoreCase(tipoProveedor) && idProveedor.length() != 9) {
+            model.addAttribute("error", "El número de identificación de un proveedor físico debe tener 9 dígitos.");
+            return "formularioproveedor";
+        }
+
+        if ("juridico".equalsIgnoreCase(tipoProveedor) && idProveedor.length() != 10) {
+            model.addAttribute("error", "El número de identificación de un proveedor jurídico debe tener 10 dígitos.");
+            return "formularioproveedor";
+        }
+
         proveedor.setActivo(true);
         proveedorService.crearProveedores(proveedor);
 
         return "redirect:/ProveedorController/Listadeproveedores";
-   }
+   }*/
 
+    @PostMapping("/nuevo")
+    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
+        proveedor.setActivo(true);
+        proveedorService.crearProveedores(proveedor);
+
+        return "redirect:/ProveedorController/Listadeproveedores";
+    }
 
 //----------------------------------------------------------------------------------------
     @GetMapping("/editar/{id}")
