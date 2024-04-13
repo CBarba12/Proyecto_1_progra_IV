@@ -7,9 +7,11 @@ import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +44,19 @@ public class ClienteController {
 
         return "listarClientes";
     }
-
+    @GetMapping("/RegistroCliente")
+    public String showForm(Model model) {
+        ClienteEntity cliente = new ClienteEntity();
+        model.addAttribute("cliente", cliente);
+        return "registroCliente";
+    }
+    /*@PostMapping("/registrar")
+    public String submitForm(@Valid ClienteEntity cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "registroCliente";
+        }
+        return "redirect:/success";
+    }*/
 
 
     //-------------------------------------
@@ -57,7 +71,7 @@ public class ClienteController {
         model.addAttribute("cliente",cle);
 
 
-        return "formulariocliente";
+        return "registroCliente";
     }
 
     @PostMapping("/nuevo")
