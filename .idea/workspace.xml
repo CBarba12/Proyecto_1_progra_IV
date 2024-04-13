@@ -54,7 +54,7 @@
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates" />
@@ -80,9 +80,29 @@
       <workItem from="1712877008798" duration="23000" />
       <workItem from="1713040952621" duration="4445000" />
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Facturacion listo&#10;Falta el diseño y pdf y xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Facturacion listo&#10;Falta el diseño y pdf y xml" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/service/ProveedorService.java</url>
+          <line>32</line>
+          <properties class="com.tcna.primeraweb.progra_4.service.ProveedorService" method="ObtenerProveedores">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
