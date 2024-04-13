@@ -53,11 +53,10 @@ public class LoginController {
     }
 
 
-
     @GetMapping("/inicio")
     public String inicio( ) {
-          return "login";
-        }
+        return "login";
+    }
 
 
 
