@@ -12,7 +12,5 @@ public class HaciendaServiceStubProveedor {
         this.clientesRegistrados = new ArrayList<>();
     }
 
-    public boolean validarCliente(ClienteEntity cliente) {
-        return clientesRegistrados.stream().anyMatch(u -> u.getCliente_id().equals(cliente.getCliente_id()));
-    }
+
 }
