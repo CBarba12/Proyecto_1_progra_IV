@@ -11,7 +11,8 @@
 <div class="container">
     <h1>Listado de Clientes</h1>
     <td th:text="${session.id_proveedor}"></td>
-
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/ClienteController/nuevocliente\''">Nuevo Cliente</button></td>
     <table>
         <thead>
         <tr>
@@ -40,6 +41,7 @@
                 <button type="submit" class="button">Agregar Cliente</button>
             </form>
         <td><button class="button" th:onclick="'window.location.href=\'/ProveedorAcciones\''">Volver</button></td>
+
 
         </tbody>
     </table>

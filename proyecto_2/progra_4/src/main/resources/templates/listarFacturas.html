@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <title>Productos</title>
+    <title>Facturas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,50 +73,38 @@
     </style>
 </head>
 <body>
-<h1>Listado de Productos</h1>
+<h1>Listado de Facturas</h1>
 <div class="container">
     <td th:text="${session.id_proveedor}"></td>
     <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/ProductoController/nuevoProducto\''">Nuevo Producto</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''">Nueva Factura</button></td>
+
     <table>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Tipo de producto</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
+            <th>Factura ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Cliente</th>
             <th>Proveedor</th>
             <th>Acciones</th>
         </tr>
 
-        <tr th:each="producto : ${ProductoProveedor}">
-
-            <td th:text="${producto.productoId}"></td>
-            <td th:text="${producto.nombre}"></td>
-            <td th:text="${producto.tipoProducto}"></td>
-            <td th:text="${producto.descripcion}"></td>
-            <td th:text="${producto.precio}"></td>
-            <td th:text="${producto.proveedorId}"></td>
-
+        <tr th:each="factura : ${Facturas}">
+            <td th:text="${factura.getFacturaId()}"></td>
+            <td th:text="${factura.getFecha()}"></td>
+            <td th:text="${factura.getTotal()}"></td>
+            <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${factura.getProveedor()}"></td>
             <td>
                 <!-- Botón para editar -->
-                <a class="button edit-button" th:href="@{'/ProductoController/editarProducto/' + ${producto.productoId}}">Editar</a>
+                <a class="button edit-button" th:href="@{'/FacturaController/pdf'}">PDF</a>
                 <!-- Botón para borrar -->
-                <a  class="button delete-button" th:href="@{'/ProductoController/eliminarProducto/' + ${producto.productoId}}" >Borrar</a>
+                <a  class="button delete-button" th:href="@{'/FacturaController/xml'}">XML</a>
             </td>
-
         </tr>
-
-
-
-
-        <td><button class="button" th:onclick="'window.location.href=\'/ProveedorAcciones\''">Volver</button></td>
-
-        </tbody>
 
     </table>
 </div>
-
 
 </body>
 </html>

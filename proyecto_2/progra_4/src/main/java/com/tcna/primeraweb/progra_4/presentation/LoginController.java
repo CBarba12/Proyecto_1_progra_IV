@@ -43,9 +43,8 @@ public class LoginController {
 
             } else {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
-                return "proveedorAcciones";
-            }
 
+                return "redirect:/homecontroler/ProveedorAcciones";
         }
 
 
