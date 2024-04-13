@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title th:text="#{TituloTemplate}">Sistema de facturación electrónica simplificada</title>
@@ -11,12 +11,12 @@
         <img src="/Imagenes/Ministerio%20de%20hacienda.jpg" alt="Logo del ministerio" class="logo">
         <h2 class="title" th:text="#{Sistema}">Sistema de Facturación</h2>
         <div class="Idiomas">
-        <img src="/Imagenes/Idiomas.png" alt="Idiomas" class="IdiomasI">
+            <img src="/Imagenes/Idiomas.png" alt="Idiomas" class="IdiomasI">
             <select onchange="location = this.value;">
-                <option value="">Idiomas</option>
-                <option value="?lang=es"><img src="/Imagenes/España.jpg">Español</option>
-                <option value="?lang=en" data-image="/Imagenes/EstadosUnidos.jpg">Inglés</option>
-                <option value="?lang=fr" data-image="/Imagenes/Francia.jpg">Francés</option>
+                <option value="" th:text="#{Idiomas}">Idiomas (Languages)</option>
+                <option value="?lang=es" th:text="#{Español}">Español(Spanish)</option>
+                <option value="?lang=en" th:text="#{Ingles}">Inglés(English)</option>
+                <option value="?lang=fr" th:text="#{Frances}">Francés(French)</option>
             </select>
         </div>
     </div>
@@ -28,9 +28,8 @@
         <img src="/Imagenes/facebook.png" alt="Logo de Facebook" class="social-logo">
         <img src="/Imagenes/instagram.png" alt="Logo de Instagram" class="social-logo">
         <img src="/Imagenes/twitter.png" alt="Logo de Twitter" class="social-logo">
-        <p class="right-text">c2024</p>
+        <p class="right-text" th:text="#{Proyecto}">Proyecto I, 2024</p>
     </div>
-
 </footer>
 </body>
 </html>
