@@ -1,45 +1,52 @@
 package com.tcna.primeraweb.progra_4.logic;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Producto", schema = "proyecto_1")
-
-@Data
-
+@Table(name = "producto", schema = "proyecto_1")
 public class ProductoEntity {
+
     @Id
-    int producto_id ;
-    String nombre ;
-    String descripcion;
-    float precio ;
-    String tipo_producto ;
-    String proveedor_id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment strategy
+    @Column(name = "producto_id")
+    private int productoId;
+    @Basic
+    @Column(name = "nombre")
+    private String nombre;
+    @Basic
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Basic
+    @Column(name = "precio")
+    private Double precio;
+    @Basic
+    @Column(name = "tipo_producto")
+    private String tipoProducto;
+    @Basic
+    @Column(name = "proveedor_id")
+    private String proveedorId;
+
+
+    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.tipoProducto = tipoProducto;
+    }
+
 
     public ProductoEntity() {
     }
 
-    public ProductoEntity(int producto_id, String nombre, String descripcion, float precio, String tipo_producto, String proveedor_id) {
-        this.producto_id = producto_id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.tipo_producto = tipo_producto;
-        this.proveedor_id = proveedor_id;
+
+
+
+    public int getProductoId() {
+        return productoId;
     }
 
-    public int getProducto_id() {
-        return producto_id;
-    }
-
-    public void setProducto_id(int producto_id) {
-        this.producto_id = producto_id;
+    public void setProductoId(int productoId) {
+        this.productoId = productoId;
     }
 
     public String getNombre() {
@@ -58,27 +65,28 @@ public class ProductoEntity {
         this.descripcion = descripcion;
     }
 
-    public float getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
-    public String getTipo_producto() {
-        return tipo_producto;
+    public String getTipoProducto() {
+        return tipoProducto;
     }
 
-    public void setTipo_producto(String tipo_producto) {
-        this.tipo_producto = tipo_producto;
+    public void setTipoProducto(String tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
-    public String getProveedor_id() {
-        return proveedor_id;
+    public String getProveedorId() {
+        return proveedorId;
     }
 
-    public void setProveedor_id(String proveedor_id) {
-        this.proveedor_id = proveedor_id;
+    public void setProveedorId(String proveedorId) {
+        this.proveedorId = proveedorId;
     }
+
 }

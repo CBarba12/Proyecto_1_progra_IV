@@ -4,14 +4,13 @@ import com.tcna.primeraweb.progra_4.data.ClienteRepository;
 import com.tcna.primeraweb.progra_4.data.FacturaRepository;
 import com.tcna.primeraweb.progra_4.data.ProductoRepository;
 import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
-import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
+import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
 @org.springframework.stereotype.Service
-public class ClienteService {
+public class FacturaService {
 
     @Getter
     @Autowired
@@ -24,23 +23,18 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
 
-    public List<ClienteEntity> ObtenerCliente() {
-        return clienteRepository.findAll();
+
+    public List<FacturaEntity> ObtenerFacturas() {
+        return facturaRepository.findAll();
     }
 
-
-
-
-    //--------------------------------------------------------------------------
-
-    public ClienteEntity crearCliente(ClienteEntity cliente) {
-        return clienteRepository.save(cliente);
+    public FacturaEntity crearFactura(FacturaEntity factura) {
+        return facturaRepository.save(factura);
+    }
+    public Long ContarFactura() {
+        return facturaRepository.count();
     }
 
-
-    public List<ClienteEntity> obtenerClientesPorProveedor(String id_proveedor) {
-        return  clienteRepository.findByProveedorId(id_proveedor);
-    }
 
 
 }
