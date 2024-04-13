@@ -7,13 +7,7 @@ import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
 import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 
-import java.util.Collections;
 import java.util.List;
 @org.springframework.stereotype.Service
 public class FacturaService {
@@ -40,4 +34,7 @@ public class FacturaService {
     public Long ContarFactura() {
         return facturaRepository.count();
     }
+
+
+
 }

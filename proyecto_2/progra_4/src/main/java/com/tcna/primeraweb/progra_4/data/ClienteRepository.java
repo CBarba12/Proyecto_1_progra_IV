@@ -1,8 +1,6 @@
 package com.tcna.primeraweb.progra_4.data;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,8 +13,10 @@ import java.util.List;
 @Transactional
 public interface ClienteRepository extends JpaRepository<ClienteEntity,String> {
 
-    @Query("SELECT c FROM ClienteEntity c WHERE c.proveedor_id = :proveedorId")
-    List<ClienteEntity> findByProveedorId(@Param("proveedorId") String proveedorId);
+
+    List<ClienteEntity> findByProveedorId(String proveedorId);
+
+
 
 
 }

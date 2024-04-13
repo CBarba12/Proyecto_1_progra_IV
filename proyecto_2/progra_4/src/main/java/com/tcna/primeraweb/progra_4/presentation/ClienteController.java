@@ -1,15 +1,17 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,45 +31,62 @@ public class ClienteController {
 
     @GetMapping("/Listadeclientes") // Añade esta línea para mapear el método a la URL
     public String listarClientes(Model model, HttpSession session) {
-        // Verificar si hay clientes asociados al proveedor en la sesión
-        List<ClienteEntity> clientesProveedor = (List<ClienteEntity>) session.getAttribute("clientes");
+
+        String ID= (String) session.getAttribute("id_proveedor");
+
+        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(ID);
+
+
         if (clientesProveedor != null) {
-            // Si hay clientes asociados al proveedor en la sesión, agregarlos al modelo
             model.addAttribute("clientesProveedor", clientesProveedor);
         }
-        // Obtener todos los clientes y agregarlos al modelo
-        List<ClienteEntity> todosClientes = clienteService.ObtenerCliente();
-        model.addAttribute("todosClientes", todosClientes);
-        return "listarClientes"; // Suponiendo que el nombre de la vista es listarClientes.html
-    }
 
-    @GetMapping("/Clientes") // Añade esta línea para mapear el método a la URL
-    public String vectorClientes(Model model){
 
-        List<ClienteEntity> cliente=clienteService.ObtenerCliente();
-
-        model.addAttribute("clientes", cliente);
         return "listarClientes";
     }
-
+    @GetMapping("/RegistroCliente")
+    public String showForm(Model model) {
+        ClienteEntity cliente = new ClienteEntity();
+        model.addAttribute("cliente", cliente);
+        return "registroCliente";
+    }
+    /*@PostMapping("/registrar")
+    public String submitForm(@Valid ClienteEntity cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "registroCliente";
+        }
+        return "redirect:/success";
+    }*/
 
 
     //-------------------------------------
     @GetMapping("/nuevocliente")
-    public String MostrarFormularioNuevoCliente(@RequestParam("proveedorId") String numeroIdentificacion,Model model){
-        ClienteEntity cle=new ClienteEntity();
+    public String MostrarFormularioNuevoCliente(HttpSession session,Model model){
 
-        cle.setProveedor_id(numeroIdentificacion);
+        ClienteEntity cle=new ClienteEntity();
+        String ID= (String) session.getAttribute("id_proveedor");
+
+        cle.setProveedorId(ID);
 
         model.addAttribute("cliente",cle);
-        model.addAttribute("accion2","/ClienteController/nuevo");
 
-        return "formulariocliente";
+
+        return "registroCliente";
     }
-    @PostMapping("/nuevo")
-    public String guardarNuevoCliente(@ModelAttribute ClienteEntity cliente){
 
+    @PostMapping("/nuevo")
+    public String guardarNuevoCliente(@ModelAttribute ClienteEntity cliente,HttpSession session,Model model){
+
+        String Provedor= (String) session.getAttribute("id_proveedor");
+        cliente.setProveedorId(Provedor);
         clienteService.crearCliente(cliente);
+
+        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(Provedor);
+
+        if (clientesProveedor != null) {
+            model.addAttribute("clientesProveedor", clientesProveedor);
+        }
+
 
         return "listarClientes";
     }

@@ -74,25 +74,29 @@
 <div class="container">
     <h1>Formulario de proveedor</h1>
 
-    <form th:object="${proveedor}" th:action="${accion}" method="post">
-        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
-            <option value="" th:selected="${proveedor.tipoProveedor == null}">Seleccionar</option>
+    <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
+
+    <!--  <input type="hidden" th:field="*{idProveedor}">-->
+
+        <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
+        <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
+        <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
+        <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
+        <label>Dirección: <input type="text" th:field="*{direccion}"></label>
+
+        <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
+        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
             <option value="Físico">Físico</option>
             <option value="Jurídico">Jurídico</option>
         </select>
-        <label>Identificación:
-            <input type="text" th:field="*{idProveedor}" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" required>
-            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Físico'}">Debe contener 9 dígitos.</span>
-            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Jurídico'}">Debe contener 10 dígitos.</span>
-        </label>
-        <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
-        <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
-        <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
-        <input type="hidden" th:field="*{activo}" value=true>
-        <label>Teléfono: <input type="text" th:field="*{telefono}" required></label>
-        <label>Dirección: <input type="text" th:field="*{direccion}" required></label>
+
+
         <button type="submit">Guardar</button>
+
+
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
+
     </form>
 </div>
 
