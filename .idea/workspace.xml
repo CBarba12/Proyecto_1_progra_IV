@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ee7cb98-52a3-4713-bf6e-ec132125182e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/proveedorAcciones.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioProducto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarProductos.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarProductos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/data/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/data/ClienteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +37,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Joshua",
+    "Spring Boot.Progra4Application.executor": "Run",
+    "git-widget-placeholder": "valeria2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/joshua/Documents/Universidad/Ciclo_I_2024/Programacion IV/Proyectos/Proyecto 1/proyecto_2/Proyecto_1_progra_IV/proyecto_2/progra_4",
     "node.js.detected.package.eslint": "true",
@@ -54,6 +60,15 @@
       <recent name="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Progra4Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="progra_4" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tcna.primeraweb.progra_4.Progra4Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,6 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712877002557</updated>
       <workItem from="1712877008798" duration="23000" />
+      <workItem from="1713040952621" duration="4445000" />
     </task>
     <servers />
   </component>
