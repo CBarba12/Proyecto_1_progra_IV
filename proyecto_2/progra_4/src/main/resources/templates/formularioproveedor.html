@@ -78,18 +78,27 @@
 
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
 
-        <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
-        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
-        <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
-        <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
-        <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
-        <label>Dirección: <input type="text" th:field="*{direccion}"></label>
 
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
-        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
+        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
+            <option value="Registrar">Registrar</option>
             <option value="Físico">Físico</option>
             <option value="Jurídico">Jurídico</option>
         </select>
+        <label for="actividadComercial">Actividad Comercial:</label>
+        <select id="actividadComercial" name="actividadComercial" th:field="*{actividadComercial}" required>
+            <option value="Registrar">Registrar</option>
+            <option value="Servicios">Servicios</option>
+            <option value="Consumibles">Consumibles</option>
+            <option value="Infraestructura">Infraestructura</option>
+            <option value="Bienes">Bienes</option>
+        </select>
+        <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
+        <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
+        <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
+        <label>Teléfono: <input type="text" th:field="*{telefono}" required></label>
+        <label>Dirección: <input type="text" th:field="*{direccion}" required></label>
 
 
         <button type="submit">Guardar</button>
