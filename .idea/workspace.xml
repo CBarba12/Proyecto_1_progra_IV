@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ee7cb98-52a3-4713-bf6e-ec132125182e" name="Changes" comment="">
+    <list default="true" id="0ee7cb98-52a3-4713-bf6e-ec132125182e" name="Changes" comment="Facturacion listo&#10;Falta el diseño y pdf y xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioFactura.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioFactura.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarFacturas.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarFacturas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/registroCliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/registroCliente.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,12 +78,25 @@
       <option name="presentableId" value="Default" />
       <updated>1712877002557</updated>
       <workItem from="1712877008798" duration="23000" />
-      <workItem from="1712988780803" duration="10723000" />
+      <workItem from="1712988780803" duration="14447000" />
     </task>
+    <task id="LOCAL-00001" summary="Facturacion listo&#10;Falta el diseño y pdf y xml">
+      <option name="closed" value="true" />
+      <created>1713030362503</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713030362503</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Facturacion listo&#10;Falta el diseño y pdf y xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Facturacion listo&#10;Falta el diseño y pdf y xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -99,11 +109,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

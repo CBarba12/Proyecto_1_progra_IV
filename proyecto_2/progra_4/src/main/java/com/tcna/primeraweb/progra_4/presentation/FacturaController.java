@@ -1,5 +1,9 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
@@ -7,15 +11,14 @@ import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -114,11 +117,87 @@ public class FacturaController {
         return "redirect:/FacturaController/ListadeFacturas"; // Redirigir a la lista de facturas
     }
 
-    @GetMapping("/pdf")
-    public String pdf(Model model, HttpSession session) {
+    @GetMapping("/pdf/{id}")
+    public void pdf(@PathVariable("id") String facturaID, Model model, HttpSession session, HttpServletResponse response) {
         String ID= (String) session.getAttribute("id_proveedor");
         model.addAttribute("id_proveedor",ID);
-        return "redirect:/FacturaController/ListadeFacturas";
+        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
+        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
+        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
+
+
+        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
+                .filter(factura -> factura.getProveedor().equals(ID))
+                .collect(Collectors.toList());
+        FacturaEntity factura = filteredFacturas.stream()
+                .filter(f -> f.getFacturaId() == Integer.parseInt(facturaID))
+                .findFirst()
+                .orElse(null);
+
+
+
+        response.setContentType("application/pdf");
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+
+            document.add(new Paragraph("Factura ID: " + factura.getFacturaId()));
+            document.add(new Paragraph("Proveedor: " + factura.getProveedor()));
+            document.add(new Paragraph("Cliente: " + factura.getCliente() + "  Nombre: " +
+                    clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre() + "  Correo: " +
+                    clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico()));
+            document.add(new Paragraph("Producto ID: " + factura.getId_producto() + "  Nombre: " +
+                    productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre() + "  Precio: " +
+                    productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio()));
+            document.add(new Paragraph("Cantidad: " + factura.getCantidad()));
+            document.add(new Paragraph("Total: " + factura.getTotal()));
+            document.add(new Paragraph("Fecha: " + factura.getFecha()));
+            document.add(new Paragraph("\n\n"));
+
+            document.close();
+        } catch (DocumentException | IOException ex) {
+            throw new RuntimeException("Error al generar el PDF", ex);
+        }
+    }
+
+    @GetMapping("/pdf")
+    public void pdf(Model model, HttpSession session, HttpServletResponse response) {
+        String ID= (String) session.getAttribute("id_proveedor");
+        model.addAttribute("id_proveedor",ID);
+        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
+        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
+        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
+
+        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
+                .filter(factura -> factura.getProveedor().equals(ID))
+                .collect(Collectors.toList());
+
+        response.setContentType("application/pdf");
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+
+            for (FacturaEntity factura : filteredFacturas) {
+                document.add(new Paragraph("Factura ID: " + factura.getFacturaId()));
+                document.add(new Paragraph("Proveedor: " + factura.getProveedor()));
+                document.add(new Paragraph("Cliente: " + factura.getCliente() + "  Nombre: " +
+                        clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre() + "  Correo: " +
+                        clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico()));
+                document.add(new Paragraph("Producto ID: " + factura.getId_producto() + "  Nombre: " +
+                        productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre() + "  Precio: " +
+                        productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio()));
+                document.add(new Paragraph("Cantidad: " + factura.getCantidad()));
+                document.add(new Paragraph("Total: " + factura.getTotal()));
+                document.add(new Paragraph("Fecha: " + factura.getFecha()));
+                document.add(new Paragraph("\n\n"));
+            }
+
+            document.close();
+        } catch (DocumentException | IOException ex) {
+            throw new RuntimeException("Error al generar el PDF", ex);
+        }
     }
     @GetMapping("/xml")
     public String xml(Model model, HttpSession session) {

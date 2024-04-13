@@ -53,21 +53,21 @@
             cursor: pointer;
         }
 
-        .edit-button {
+        .pdf-button {
             background-color: #4CAF50;
             color: white;
         }
 
-        .edit-button:hover {
+        .pdf-button:hover {
             background-color: #45a049;
         }
 
-        .delete-button {
+        .xml-button {
             background-color: #f44336;
             color: white;
         }
 
-        .delete-button:hover {
+        .xml-button:hover {
             background-color: #d32f2f;
         }
     </style>
@@ -78,6 +78,7 @@
     <td th:text="${session.id_proveedor}"></td>
     <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
     <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''">Nueva Factura</button></td>
+    <td><button class="button pdf-button" th:onclick="'window.location.href=\'/FacturaController/pdf\''">Generar PDF de Facturas</button></td>
 
     <table>
         <tr>
@@ -103,9 +104,9 @@
             <td th:text="${factura.getTotal()}"></td>
             <td>
                 <!-- Botón para editar -->
-                <a class="button edit-button" th:href="@{'/FacturaController/pdf'}">PDF</a>
+                <a class="button pdf-button" th:href="@{'/FacturaController/pdf/' + ${factura.getFacturaId()}}">PDF</a>
                 <!-- Botón para borrar -->
-                <a  class="button delete-button" th:href="@{'/FacturaController/xml'}">XML</a>
+                <a class="button xml-button" th:href="@{'/FacturaController/xml/' + ${factura.getFacturaId()}}">XML</a>
             </td>
         </tr>
 
