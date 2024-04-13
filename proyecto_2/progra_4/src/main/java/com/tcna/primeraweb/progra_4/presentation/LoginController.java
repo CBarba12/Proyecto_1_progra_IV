@@ -31,14 +31,26 @@ public class LoginController {
 
 
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
-            session.setAttribute("id_proveedor",numeroIdentificacion);
-            return "redirect:/homecontroler/ProveedorAcciones";
+
+            ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
+
+            if (p.getAdmin() != null && p.getAdmin() == 1) {
+
+                List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
+
+                model.addAttribute("listaProveedor",prob);
+                return "listarproveedor";
+
+            } else {
+                session.setAttribute("id_proveedor",numeroIdentificacion);
+                return "proveedorAcciones";
+            }
+
         }
 
 
         return "redirect:/LoginController/inicio";
     }
-
 
 
     @GetMapping("/inicio")
