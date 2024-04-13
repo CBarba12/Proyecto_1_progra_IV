@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ee7cb98-52a3-4713-bf6e-ec132125182e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/proveedorAcciones.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioProducto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarProductos.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarProductos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioFactura.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioFactura.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarFacturas.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarFacturas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/registroCliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/registroCliente.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +40,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Progra4Application.executor": "Run",
     "git-widget-placeholder": "Joshua",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/joshua/Documents/Universidad/Ciclo_I_2024/Programacion IV/Proyectos/Proyecto 1/proyecto_2/Proyecto_1_progra_IV/proyecto_2/progra_4",
@@ -54,6 +63,15 @@
       <recent name="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Progra4Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="progra_4" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tcna.primeraweb.progra_4.Progra4Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,10 +81,31 @@
       <option name="presentableId" value="Default" />
       <updated>1712877002557</updated>
       <workItem from="1712877008798" duration="23000" />
+      <workItem from="1712988780803" duration="10723000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/service/ProveedorService.java</url>
+          <line>32</line>
+          <properties class="com.tcna.primeraweb.progra_4.service.ProveedorService" method="ObtenerProveedores">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -82,19 +82,25 @@
     <table>
         <tr>
             <th>Factura ID</th>
-            <th>Fecha</th>
-            <th>Total</th>
-            <th>Cliente</th>
             <th>Proveedor</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+            <th>Total</th>
             <th>Acciones</th>
         </tr>
 
         <tr th:each="factura : ${Facturas}">
             <td th:text="${factura.getFacturaId()}"></td>
-            <td th:text="${factura.getFecha()}"></td>
-            <td th:text="${factura.getTotal()}"></td>
-            <td th:text="${factura.getCliente()}"></td>
             <td th:text="${factura.getProveedor()}"></td>
+            <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${nombresProductos[factura.getId_producto().toString()]}"></td>
+            <td th:text="${preciosProductos[factura.getId_producto().toString()]}"></td>
+            <td th:text="${factura.getFecha()}"></td>
+            <td th:text="${factura.getCantidad()}"></td>
+            <td th:text="${factura.getTotal()}"></td>
             <td>
                 <!-- Botón para editar -->
                 <a class="button edit-button" th:href="@{'/FacturaController/pdf'}">PDF</a>
