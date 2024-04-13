@@ -31,20 +31,8 @@ public class LoginController {
 
 
         if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
-
-            ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
-
-            if (p.getAdmin() != null && p.getAdmin() == 1) {
-
-                List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
-
-                model.addAttribute("listaProveedor",prob);
-                return "listarproveedor";
-
-            } else {
-                session.setAttribute("id_proveedor",numeroIdentificacion);
-
-                return "redirect:/homecontroler/ProveedorAcciones";
+            session.setAttribute("id_proveedor",numeroIdentificacion);
+            return "redirect:/homecontroler/ProveedorAcciones";
         }
 
 
@@ -55,8 +43,8 @@ public class LoginController {
 
     @GetMapping("/inicio")
     public String inicio( ) {
-          return "login";
-        }
+        return "login";
+    }
 
 
 
