@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de proveedor</title>
+
+    <title>Editar Producto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,6 +57,21 @@
             background-color: #45a049;
         }
 
+        .submit-button {
+            padding: 10px 20px;
+            margin: 5px 10px;
+            background-color: #2b312d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #623625;
+        }
+
         a {
             display: block;
             margin-top: 10px;
@@ -70,29 +86,24 @@
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h1>Formulario de proveedor</h1>
+    <h1>Editar Producto</h1>
+    <form th:object="${producto}" th:action="@{/ProductoController/edit}" method="post">
 
-    <form th:object="${proveedor}" th:action="${accion}" method="post">
-      <!--  <input type="hidden" th:field="*{idProveedor}">-->
-
-        <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
-        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
-        <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
-        <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
-        <label>Activo: <input type="text" th:field="*{activo}"></label>
-        <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
-        <label>Dirección: <input type="text" th:field="*{direccion}"></label>
-        <label>Tipo (Físico/Jurídico): <input type="text" th:field="*{tipoProveedor}"></label>
+        <label>Nombre: <input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
+        <label>Descripcion: <input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}"></label>
+        <label>Precio: <input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
+        <label>Nombre: <input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly></label>
+        <label>Tipo de producto:
+            <select th:field="*{tipoProducto}">
+                <option th:each="tipo : ${producto.tipoProducto}" th:value="${tipo}" th:text="${tipo}"></option>
+            </select>
+        </label>
 
         <button type="submit">Guardar</button>
-
-       <!-- <a href="/LoginController/inicio">VOLVER AL INICIO</a>-->
-        <a th:href="@{/}" class="link">Ir a la página de inicio</a>
-
     </form>
+    <button class="submit-button" th:onclick="'window.location.href=\'/ProductoController/ListadeProducto\''">Volver</button>
 </div>
-
 </body>
 </html>

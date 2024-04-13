@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facturas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+<h1>Listado de Facturas</h1>
+<div class="container">
+    <td th:text="${session.id_proveedor}"></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''">Nueva Factura</button></td>
+
+    <table>
+        <tr>
+            <th>Factura ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Cliente</th>
+            <th>Proveedor</th>
+            <th>Acciones</th>
+        </tr>
+
+        <tr th:each="factura : ${Facturas}">
+            <td th:text="${factura.getFacturaId()}"></td>
+            <td th:text="${factura.getFecha()}"></td>
+            <td th:text="${factura.getTotal()}"></td>
+            <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${factura.getProveedor()}"></td>
+            <td>
+                <!-- Botón para editar -->
+                <a class="button edit-button" th:href="@{'/FacturaController/pdf'}">PDF</a>
+                <!-- Botón para borrar -->
+                <a  class="button delete-button" th:href="@{'/FacturaController/xml'}">XML</a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+</body>
+</html>
