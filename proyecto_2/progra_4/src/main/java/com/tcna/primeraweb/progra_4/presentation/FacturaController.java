@@ -49,17 +49,27 @@ public class FacturaController {
 
     @GetMapping("/NuevaFactura") // Añade esta línea para mapear el método a la URL
     public String nuevaFactura(Model model, HttpSession session) {
-        FacturaEntity factura = new FacturaEntity();
         String ID= (String) session.getAttribute("id_proveedor");
         model.addAttribute("id_proveedor",ID);
-        factura.setProveedor(ID);
-        model.addAttribute("factura", factura);
+
+        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
+
+
+        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
+
+
+        model.addAttribute("clientes", clientesProveedor);
+        model.addAttribute("productos", productos);
+
+
         return "formularioFactura";
     }
 
     @PostMapping("/guardarFactura") // Añade esta línea para mapear el método a la URL
     public String guardarFactura(FacturaEntity factura, HttpSession session) {
-        facturaService.crearFactura(factura);
+
+
+
         return "redirect:/FacturaController/ListadeFacturas"; // Redirigir a la lista de facturas
     }
 

@@ -2,9 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Factura</title>
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    .container-clientes {
+        float: left;
+        width: 39%;
+        margin-right: 1%;
+        margin-left: 1%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .container-clientes h1{
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .container-productos {
+        float: right;
+        width: 39%;
+        margin-right: 1%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .container-productos h1{
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .container-clientes, .container-productos {
+        display: inline-block;
+        vertical-align: top; /* Alinea las tablas en la parte superior si tienen alturas diferentes */
+        margin-right: 1%; /* Añade un pequeño margen entre las tablas */
+    }
+
+
+</style>
 </head>
 <body>
+    <h1>Factura</h1>
+    <div class="container">
+        <div class="container-clientes">
+            <h1>Clientes</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.clienteId}"></td>
+                    <td th:text="${cliente.getNombre()}"></td>
+                    <td th:text="${cliente.getCorreoElectronico()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container-productos">
+            <h1>Productos</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.getProductoId()}"></td>
+                    <td th:text="${producto.getNombre()}"></td>
+                    <td th:text="${producto.getDescripcion()}"></td>
+                    <td th:text="${producto.getPrecio()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-factura">
+            <form  th:action="@{/FacturaController/guardarFactura}" method="post">
+                <label>Identificacion:</label>
+            </form>
+        </div>
+    </div>
+
 
 </body>
 </html>
