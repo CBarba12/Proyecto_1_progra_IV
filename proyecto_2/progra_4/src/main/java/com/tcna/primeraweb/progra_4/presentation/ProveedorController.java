@@ -5,10 +5,12 @@ import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.tcna.primeraweb.progra_4.service.HaciendaStub;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class ProveedorController {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private HaciendaStub HaciendaStub;
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
     public String listaProveedor(Model model){
@@ -45,14 +49,36 @@ public class ProveedorController {
 
 
 
-
     @PostMapping("/nuevo_proveedor")
-   public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
-        proveedor.setEstado("En espera");
-        proveedorService.crearProveedores(proveedor);
+    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, RedirectAttributes redirectAttributes, Model model){
 
-        return "redirect:/ProveedorController/Listadeproveedores";
-   }
+        // Verificar si el tipo de proveedor es "Registrar"
+        if ("Registrar".equals(proveedor.getTipoProveedor())) {
+            // El tipo de proveedor es "Registrar", no permitir guardar el proveedor
+            redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");
+            model.addAttribute("proveedor", proveedor);
+            return "formularioproveedor";
+        }
+
+        // Verificar si la actividad comercial es "Registrar"
+        if ("Registrar".equals(proveedor.getActividadComercial())) {
+            // La actividad comercial es "Registrar", no permitir guardar el proveedor
+            redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");
+            model.addAttribute("proveedor", proveedor);
+            return "formularioproveedor";
+        }
+
+        if (HaciendaStub.validarRegistroProveedor(proveedor)) {
+            // El proveedor no está registrado, permitir el registro
+            proveedor.setEstado("En espera");
+            proveedorService.crearProveedores(proveedor);
+            return "redirect:/";
+        } else {
+            // El proveedor ya está registrado, mostrar un mensaje de error o redirigir a una página de error
+            return "redirect:/";
+        }
+    }
+
 
 
 
@@ -108,7 +134,6 @@ public class ProveedorController {
             return "index";
         }
     }
-
 
 
 }

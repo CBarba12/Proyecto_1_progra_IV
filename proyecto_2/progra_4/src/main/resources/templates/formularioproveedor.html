@@ -109,5 +109,14 @@
     </form>
 </div>
 
+
+<div th:if="${errorTipoProveedor}" class="alert alert-danger" role="alert">
+    <p th:text="${errorTipoProveedor}"></p>
+</div>
+
+<div th:if="${errorActividadComercial}" class="alert alert-danger" role="alert">
+    <p th:text="${errorActividadComercial}"></p>
+</div>
+
 </body>
 </html>

@@ -101,6 +101,7 @@
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Correo</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -111,6 +112,7 @@
             <td th:text="${proveedor.nombre}"></td>
             <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.correoElectronico}"></td>
+            <td th:text="${proveedor.estado}"></td> <!-- Nueva celda para el estado -->
             <td>
                 <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.idProveedor})}" style="margin-right: 10px;">Editar</a>
                 <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.idProveedor})}">Eliminar</a>

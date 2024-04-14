@@ -38,8 +38,8 @@ public class ProveedorService {
 
         for (ProveedorEntity proveedor : proveedores) {
 
-            if (proveedor.getAdmin() == 1) {
-
+            if (proveedor != null && proveedor.getAdmin() != null) {
+                byte adminValue = proveedor.getAdmin().byteValue();
             }else {
                 noAdminProveedores.add(proveedor);
             }
@@ -82,15 +82,28 @@ public class ProveedorService {
         return null;
     }
 
-    public boolean verificarEmailPaswor(String numeroIdentificacion, String contrasena) {
 
-        ProveedorEntity p=proveedorRepository.findByIdProveedorAndContrasena(numeroIdentificacion,contrasena);
-          return p != null;
+
+
+    public boolean verificarEmailPaswor(String numeroIdentificacion, String contrasena) {
+        ProveedorEntity p = proveedorRepository.findByIdProveedorAndContrasena(numeroIdentificacion, contrasena);
+        if (p != null) {
+            // Verificar si el estado del proveedor es "En espera"
+            if ("En espera".equals(p.getEstado())) {
+                // El proveedor está en espera, no permitir el inicio de sesión
+                return false;
+            }
+            // El proveedor no está en espera, permitir el inicio de sesión
+            return true;
+        }
+        // El proveedor no existe
+        return false;
     }
 
     public ProveedorEntity obtenerProveedorPorId(String proveedorId) {
         return proveedorRepository.findById(proveedorId).orElse(null);
     }
+
 
 
 
