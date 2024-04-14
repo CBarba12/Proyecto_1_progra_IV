@@ -7,8 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/RegistroCliente.css}">
     <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
-<body>
 <header th:replace="/template :: header"></header>
+<body>
 <form th:object="${cliente}" th:action="@{/ClienteController/nuevo}" method="post">
     <div class="form-group">
         <div class="form-row" style="display: inline;">
@@ -35,5 +35,6 @@
     </div>
 
 </form>
+</body>
 <footer th:replace="~{/template :: footerWithLogout}"></footer></body>
 </html>

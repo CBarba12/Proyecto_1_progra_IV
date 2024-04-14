@@ -1,0 +1,44 @@
+body {
+    background-color: lightskyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.botones {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    background: paleturquoise;
+    border: 1px solid #2b312d;
+}
+.form-row {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+.h1 {
+    text-align: center;
+    justify-content: center;
+}
+
+.form-group {
+    width: 490px;
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #fff;
+    font-family: Candara;
+    font-size: 17px;
+    font-weight: bold;
+}

@@ -74,8 +74,8 @@ public class ClienteController {
         String ID= (String) session.getAttribute("id_proveedor");
         model.addAttribute("id_proveedor",ID);
         cle.setProveedorId(ID);
-        cle.setTipoCliente("tipoCliente"); // establece el tipoCliente aquí
-        cle.setClienteId("clienteId"); // establece el clienteId aquí
+        cle.setTipoCliente("tipoCliente");
+        cle.setClienteId("clienteId");
         model.addAttribute("cliente",cle);
         return "registroCliente";
     }
@@ -102,7 +102,7 @@ public class ClienteController {
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
-       ClienteEntity p= clienteService.ObtenerClienteId(id);
+       ClienteEntity p= clienteService.obtenerClienteId(id);
 
         if (p != null) {
 

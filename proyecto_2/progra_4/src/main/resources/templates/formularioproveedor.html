@@ -1,104 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>Formulario de proveedor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 50%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        form {
-            display: grid;
-            gap: 10px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        a {
-            display: block;
-            margin-top: 10px;
-            text-align: center;
-            color: #4caf50;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/formularioProveedor.css}">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
-
-<div class="container">
+    <div class="card">
     <h1>Formulario de proveedor</h1>
-
+    <div class="container">
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
-
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
-
-        <label>Identificación: <input type="text" th:field="*{idProveedor}"></label>
-        <label>Nombre: <input type="text" th:field="*{nombre}"></label>
-        <label>Correo: <input type="text" th:field="*{correoElectronico}"></label>
-        <label>Contraseña: <input type="text" th:field="*{contrasena}"></label>
-        <label>Teléfono: <input type="text" th:field="*{telefono}"></label>
-        <label>Dirección: <input type="text" th:field="*{direccion}"></label>
-
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
-        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}">
+        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
+            <option value="Registrar">Registrar</option>
             <option value="Físico">Físico</option>
             <option value="Jurídico">Jurídico</option>
         </select>
-
-
+        <label for="actividadComercial">Actividad Comercial:</label>
+        <select id="actividadComercial" name="actividadComercial" th:field="*{actividadComercial}" required>
+            <option value="Registrar">Registrar</option>
+            <option value="Servicios">Servicios</option>
+            <option value="Consumibles">Consumibles</option>
+            <option value="Infraestructura">Infraestructura</option>
+            <option value="Bienes">Bienes</option>
+        </select>
+        <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
+        <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
+        <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
+        <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
+        <label>Teléfono: <input type="text" th:field="*{telefono}" required></label>
+        <label>Dirección: <input type="text" th:field="*{direccion}" required></label>
         <button type="submit">Guardar</button>
 
-
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
-
     </form>
-</div>
-
+    </div>
+    </div>
 </body>
+<footer th:replace="/template :: footer"></footer>
 </html>
