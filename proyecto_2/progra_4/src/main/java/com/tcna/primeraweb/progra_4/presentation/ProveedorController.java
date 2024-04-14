@@ -120,7 +120,10 @@ public class ProveedorController {
             return "formularioproveedor";
         }
 
+
+
         if (HaciendaStub.validarRegistroProveedor(proveedor)) {
+            proveedor.setAdmin((byte) 0);
             proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);
             return "redirect:/";
