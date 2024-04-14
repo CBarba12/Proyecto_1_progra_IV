@@ -54,6 +54,9 @@ tr:hover {
     background-color: #4CAF50;
     color: white;
 }
+.id-proveedor {
+    color: #637bff;
+}
 
 .edit-button:hover {
     background-color: #45a049;

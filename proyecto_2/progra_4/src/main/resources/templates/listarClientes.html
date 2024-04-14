@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Clientes</title>
     <link rel="stylesheet" th:href="@{/css/ListarClientes.css}">
     <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
-<body>
 <header th:replace="/template :: header"></header>
+<body>
 <div class="container">
     <h1>Listado de Clientes</h1>
-    <td th:text="${session.id_proveedor}"></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/ClienteController/nuevocliente\''">Nuevo Cliente</button></td>
+    <p class="id-proveedor"><b>Identificación del Provedor:</b> <span th:text="${id_proveedor}"></span></p>
+    <p th:if="${mensaje}" th:text="${mensaje}"></p>
     <table>
         <thead>
         <tr>
@@ -20,7 +19,6 @@
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Correo</th>
-            <th>Acciones</th> <!-- Nueva columna para botones de acción -->
         </tr>
         </thead>
 
@@ -31,22 +29,18 @@
             <td th:text="${cliente.getDireccion()}"></td>
             <td th:text="${cliente.correoElectronico}"></td>
             <td>
-                <!-- Botón para editar -->
-                <a class="button edit-button">Editar</a>
-                <!-- Botón para borrar -->
-                <a  class="button delete-button">Borrar</a>
+                    <button type="submit" class="button edit-button">Editar</button>
+                    <button type="submit" class="button delete-button">Borrar</button>
             </td>
         </tr>
             <form action="/ClienteController/nuevocliente" method="get">
                 <button type="submit" class="button">Agregar Cliente</button>
             </form>
 
-        <td><button class="button" th:onclick="'window.location.href=\'/ProveedorAcciones\''">Volver</button></td>
-
-
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
         </tbody>
     </table>
     </div>
-    <footer th:replace="/template :: footer"></footer>
 </body>
+<footer th:replace="/template :: footer"></footer>
 </html>
