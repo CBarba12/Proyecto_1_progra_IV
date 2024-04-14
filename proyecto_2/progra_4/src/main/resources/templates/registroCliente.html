@@ -30,7 +30,7 @@
             <label for="direccion"><span style="color: red;">*</span><span th:text="#{Direccion}">Dirección</span>:</label>
             <input type="direccion" id="direccion" placeholder="Dirección" name="direccion" required th:field="*{direccion}"><br><br>
             <input type="submit" th:value="#{Registrar}">
-            <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+            <td><button class="botones" th:onclick="'window.location.href=\'/ClienteController/Listadeclientes\''" th:text="#{Regresar}">Volver</button></td>
         </div>
 
     </div>

@@ -66,3 +66,16 @@ input[type="submit"]:hover {
     background-color: aquamarine;
     color: black;
 }
+.botones{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    background: paleturquoise;
+    border: 1px solid #2b312d;
+}

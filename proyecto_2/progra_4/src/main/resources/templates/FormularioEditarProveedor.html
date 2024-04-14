@@ -8,23 +8,26 @@
 </head>
 <header th:replace="/template :: header"></header>
 <body>
-<div class="container">
-    <h1>Formulario de proveedor</h1>
+<div class="form-group">
+    <div class="form-row" style="display: inline;">
+        <h1 th:text="#{FormularioP}">Formulario de proveedor</h1>
     <form th:object="${proveedor}" th:action="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" method="post">
-        <label th:text="#{ID}">Identificación: </label> <input type="hidden" th:field="*{idProveedor}" readonly><br>
-        <label th:text="#{Nombre}">Nombre:</label> <input type="text" th:field="*{nombre}"><br>
-        <label th:text="#{Correo}">Correo:</label> <input type="text" th:field="*{correoElectronico}"><br>
-        <label th:text="#{Contrasena}">Contraseña: </label><input type="text" th:field="*{contrasena}"><br>
-        <label th:text="#{Telefono}">Teléfono: </label><input type="text" th:field="*{telefono}"><br>
-        <label th:text="#{Direccion}">Dirección: </label><input type="text" th:field="*{direccion}"><br>
+        <label th:text="#{ID}">Identificación: </label>
+        <span th:text="${session.id_proveedor}" readonly></span><br><br>
+        <label th:text="#{Nombre}">Nombre:</label> <input type="text" th:field="*{nombre}"><br><br>
+        <label th:text="#{Correo}">Correo:</label> <input type="text" th:field="*{correoElectronico}"><br><br>
+        <label th:text="#{Contrasena}">Contraseña: </label><input type="text" th:field="*{contrasena}"><br><br>
+        <label th:text="#{Telefono}">Teléfono: </label><input type="text" th:field="*{telefono}"><br><br>
+        <label th:text="#{Direccion}">Dirección: </label><input type="text" th:field="*{direccion}"><br><br>
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
         <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" disabled>
             <option value="Físico">Físico</option>
             <option value="Jurídico">Jurídico</option>
         </select><br><br>
         <button type="submit" th:text="#{Guardar}">Guardar</button>
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/listarproveedor\''" th:text="#{Regresar}">Volver</button></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
     </form>
+</div>o
 </div>
 </body>
 <footer th:replace="/template :: footer"></footer>
