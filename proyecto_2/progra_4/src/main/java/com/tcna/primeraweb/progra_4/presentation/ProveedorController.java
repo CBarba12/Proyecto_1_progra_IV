@@ -27,9 +27,13 @@ public class ProveedorController {
 
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
-    public String listaProveedor(Model model){
+    public String listaProveedor(Model model, HttpSession session) {
         String estado[] = {"Aceptado","Rechazado"};
         List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
+
+        ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId((String) session.getAttribute("id_admin"));
+
+
 
         // Define el orden de los estados
         Map<String, Integer> estadoOrden = new HashMap<>();
@@ -47,8 +51,12 @@ public class ProveedorController {
         model.addAttribute("est",estado);
         model.addAttribute("listaProveedor", proveedores);
 
+      if (proveedor.getAdmin()==1) {
+          return "listarproveedor";
+        }else {
+            return "index";
+        }
 
-        return "listarproveedor";
     }
 
     @GetMapping("/estado/{id}/{estado}")
