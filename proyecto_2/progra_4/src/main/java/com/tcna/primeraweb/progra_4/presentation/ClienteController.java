@@ -2,8 +2,7 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import
-        com.tcna.primeraweb.progra_4.service.ClienteService;
+import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
@@ -103,7 +102,9 @@ public class ClienteController {
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
-        ClienteEntity p= clienteService.optenerClienteId(id);
+
+       ClienteEntity p= clienteService.obtenerClienteId(id);
+
 
         if (p != null) {
 

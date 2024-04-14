@@ -2,23 +2,25 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Clientes</title>
+    <title th:text="#{Listado}">Listado de Clientes</title>
     <link rel="stylesheet" th:href="@{/css/ListarClientes.css}">
     <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
 <header th:replace="/template :: header"></header>
 <body>
 <div class="container">
-    <h1>Listado de Clientes</h1>
-    <p class="id-proveedor"><b>Identificación del Provedor:</b> <span th:text="${id_proveedor}"></span></p>
+    <h1 th:text="#{Listado}">Listado de Clientes</h1>
+    <p class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </p>
+        <p><span th:text="${session.id_proveedor}"></span></p>
     <p th:if="${mensaje}" th:text="${mensaje}"></p>
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Correo</th>
+            <th th:text="#{Cedula}">ID</th>
+            <th th:text="#{Nombre}">Nombre</th>
+            <th th:text="#{Direccion}">Dirección</th>
+            <th th:text="#{Correo}">Correo</th>
+            <th th:text="#{TipoCedulaNinguna}">Tipo</th>
         </tr>
         </thead>
 
@@ -28,19 +30,17 @@
             <td th:text="${cliente.getNombre()}"></td>
             <td th:text="${cliente.getDireccion()}"></td>
             <td th:text="${cliente.correoElectronico}"></td>
-            <td th:text="${cliente.getTipoCliente()}"></td>
+            <td th:text="${cliente.tipoCliente}"></td>
             <td>
-
-                    <button type="submit" class="button edit-button">Editar</button>
-                    <button type="submit" class="button delete-button">Borrar</button>
+                <a th:href="@{/ClienteController/editar/{id}(id=${cliente.getClienteId()})}" style="margin-right: 10px;">Editar</a>
 
             </td>
         </tr>
             <form action="/ClienteController/nuevocliente" method="get">
-                <button type="submit" class="button">Agregar Cliente</button>
+                <button type="submit" class="button" th:text="#{Agregar}">Agregar Cliente</button>
             </form>
 
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
         </tbody>
     </table>
     </div>

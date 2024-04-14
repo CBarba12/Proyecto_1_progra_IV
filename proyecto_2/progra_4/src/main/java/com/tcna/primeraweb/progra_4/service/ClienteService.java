@@ -76,7 +76,9 @@ public class ClienteService {
     }
 
 
-    public ClienteEntity optenerClienteId(String id) {
+    public ClienteEntity obtenerClienteId(String id) {
         return clienteRepository.findById(id).orElse(null);
     }
+
+
 }
