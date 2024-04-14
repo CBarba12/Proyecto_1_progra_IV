@@ -14,7 +14,6 @@
 
     <div class="container">
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
-    <!--  <input type="hidden" th:field="*{idProveedor}">-->
 
         <label for="tipoProveedor" th:text="#{Tipo}">Tipo (Físico/Jurídico):</label>
         <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
