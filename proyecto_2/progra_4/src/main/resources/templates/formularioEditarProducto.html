@@ -11,11 +11,11 @@
 <div class="container">
     <h1 th:text="#{EditarProductos}">Editar Producto</h1>
     <form th:object="${producto}" th:action="@{/ProductoController/edit}" method="post">
-        <label th:text="#{Codigo}">Código: <input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly></label>
-        <label th:text="#{Nombre}">Nombre: <input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
-        <label th:text="#{Descripcion}">Descripción: <input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}"></label>
-        <label th:text="#{Precio}">Precio: <input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
-        <label th:text="#{Nombre}">Nombre: <input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly></label>
+        <label th:text="#{Codigo}">Código: </label><input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly>
+        <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
+        <label th:text="#{Descripcion}">Descripción: </label><input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}">
+        <label th:text="#{Precio}">Precio: </label><input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
+        <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly>
         <label th:text="#{TipoProducto}">Tipo de producto:
             <select th:field="*{tipoProducto}">
                 <option th:each="tipo : ${producto.tipoProducto}" th:value="${tipo}" th:text="${tipo}"></option>
