@@ -4,13 +4,16 @@ import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ProveedorController")
@@ -25,15 +28,44 @@ public class ProveedorController {
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
     public String listaProveedor(Model model){
-
+        String estado[] = {"Aceptado","Rechazado"};
         List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
+
+        // Define el orden de los estados
+        Map<String, Integer> estadoOrden = new HashMap<>();
+        estadoOrden.put("Aceptado", 2);
+        estadoOrden.put("Rechazado", 3);
+        estadoOrden.put("En espera", 1);
+
+        // Ordena la lista de proveedores según el estado
+        proveedores.sort((p1, p2) -> {
+            int orden1 = estadoOrden.getOrDefault(p1.getEstado(), 0);
+            int orden2 = estadoOrden.getOrDefault(p2.getEstado(), 0);
+            return Integer.compare(orden1, orden2);
+        });
+
+        model.addAttribute("est",estado);
         model.addAttribute("listaProveedor", proveedores);
 
 
         return "listarproveedor";
     }
 
+    @GetMapping("/estado/{id}/{estado}")
+    public String cambiarEstado(@PathVariable("id") String id, @PathVariable("estado") String estado, Model model, HttpSession session) {
+        String ID = (String) session.getAttribute("id_proveedor");
+        ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(id);
+        if(estado.equals("Aceptado")){
+            proveedor.setEstado("Aceptado");
+            proveedorService.actualizarProveedor(id,proveedor);
 
+        }else if(estado.equals("Rechazado")){
+            proveedor.setEstado("Rechazado");
+            proveedorService.actualizarProveedor(id,proveedor);
+        }
+
+        return "redirect:/ProveedorController/Listadeproveedores";
+    }
 
 
 
