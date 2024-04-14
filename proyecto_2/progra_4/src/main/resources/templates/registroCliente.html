@@ -7,34 +7,36 @@
     <link rel="stylesheet" th:href="@{/css/RegistroCliente.css}">
     <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
-<body>
 <header th:replace="/template :: header"></header>
-    <form action="#" th:action="@{/RegistroCliente}" method="post">
-        <div class="form-group">
-            <div class="form-row" style="display: inline;">
-                <h1 th:text="#{RegistroClientes}">Registro de Clientes</h1>
-                <img src="/Imagenes/login.png" alt="Descripción de la imagen" class="imagen-registro"><br><br>
-                <label for="tipo_cliente"><span style="color: red;">*</span><span th:text="#{TipoCedula}">Tipo de Cédula</span>:</label>
-                <select id="tipo_cliente" onchange="" th:field="*{cliente.tipoCliente}">
-                    <option value="ninguna" th:text="#{TipoCedulaNinguna}">Tipo de cédula</option>
-                    <option value="juridica" th:text="#{TipoCedulaJuridica}">Cédula Jurídica</option>
-                    <option value="fisica" th:text="#{TipoCedulaFisica}">Cédula Física</option>
-                </select><br><br>
-                <label for="cedula"><span style="color: red;">*</span><span th:text="#{Cedula}">Cédula</span>:</label>
-                <input type="text" id="cedula" placeholder="Cédula" name="cedula" required th:disabled="${cliente.tipoCliente == 'ninguna'}" th:field="*{cliente.tipoCliente}"><br><br>
-                <label for="nombre"><span style="color: red;">*</span><span th:text="#{Nombre}">Nombre</span>:</label>
-                <input type="text" id="nombre" placeholder="Nombre" name="nombre" required th:field="*{cliente.nombre}"><br><br>
-                <label for="email"><span style="color: red;">*</span><span th:text="#{Correo}">Correo Electrónico</span>:</label>
-                <input type="email" id="email" placeholder="Correo electrónico" name="email" required th:field="*{cliente.correoElectronico}"><br><br>
-                <label for="direccion"><span style="color: red;">*</span><span th:text="#{Direccion}">Dirección</span>:</label>
-                <input type="direccion" id="direccion" placeholder="Dirección" name="direccion" required th:field="*{cliente.direccion}"><br><br>
-                <input type="submit" th:value="#{Registrar}">
-            </div>
+<body>
+<form th:object="${cliente}" th:action="@{/ClienteController/nuevo}" method="post">
+    <div class="form-group">
+        <div class="form-row" style="display: inline;">
+            <h1 th:text="#{RegistroClientes}">Registro de Clientes</h1>
+            <img src="/Imagenes/login.png" alt="Descripción de la imagen" class="imagen-registro"><br><br>
+            <input type="hidden" th:field="*{proveedorId}">
+            <label for="tipo_cliente"><span style="color: red;">*</span><span th:text="#{TipoCedula}">Tipo de Cédula</span>:</label>
+            <select id="tipo_cliente" onchange="" th:field="*{tipoCliente}">
+                <option value="ninguna" th:text="#{TipoCedulaNinguna}">Tipo de cédula</option>
+                <option value="juridica" th:text="#{TipoCedulaJuridica}">Cédula Jurídica</option>
+                <option value="fisica" th:text="#{TipoCedulaFisica}">Cédula Física</option>
+            </select><br><br>
+            <label for="cedula"><span style="color: red;">*</span><span th:text="#{Cedula}">Cédula</span>:</label>
+            <input type="text" id="cedula" placeholder="Cédula" name="cedula" required th:field="*{clienteId}"><br><br>
+            <label for="nombre"><span style="color: red;">*</span><span th:text="#{Nombre}">Nombre</span>:</label>
+            <input type="text" id="nombre" placeholder="Nombre" name="nombre" required th:field="*{nombre}"><br><br>
+            <label for="email"><span style="color: red;">*</span><span th:text="#{Correo}">Correo Electrónico</span>:</label>
+            <input type="email" id="email" placeholder="Correo electrónico" name="email" required th:field="*{correoElectronico}"><br><br>
+            <label for="direccion"><span style="color: red;">*</span><span th:text="#{Direccion}">Dirección</span>:</label>
+            <input type="direccion" id="direccion" placeholder="Dirección" name="direccion" required th:field="*{direccion}"><br><br>
+            <input type="submit" th:value="#{Registrar}">
+            <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
         </div>
 
-    </form>
-    <footer th:replace="/template :: footer"></footer>
-    </body>
-</html>
+    </div>
 
+</form>
+</body>
+<footer th:replace="~{/template :: footerWithLogout}"></footer></body>
+</html>
 

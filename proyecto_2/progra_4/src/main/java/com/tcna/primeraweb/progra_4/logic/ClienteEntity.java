@@ -45,12 +45,7 @@ public class ClienteEntity {
         return clienteId;
     }
 
-    public void setCliente_id(String clienteId) {
-        if (this.tipoCliente.equals("fisico") && clienteId.length() != 9) {
-            throw new IllegalArgumentException("El ID del cliente debe tener 9 dígitos para clientes físicos");
-        } else if (this.tipoCliente.equals("juridico") && clienteId.length() != 10) {
-            throw new IllegalArgumentException("El ID del cliente debe tener 10 dígitos para clientes jurídicos");
-        }
+    public void setClienteId(String clienteId) {
         this.clienteId = clienteId;
     }
 

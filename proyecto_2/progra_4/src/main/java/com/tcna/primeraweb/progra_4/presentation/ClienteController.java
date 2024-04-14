@@ -1,6 +1,7 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
+import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
@@ -33,6 +34,7 @@ public class ClienteController {
     public String listarClientes(Model model, HttpSession session) {
 
         String ID= (String) session.getAttribute("id_proveedor");
+        model.addAttribute("id_proveedor", ID); // Añade esta línea
 
         List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(ID);
 
@@ -45,17 +47,22 @@ public class ClienteController {
         return "listarClientes";
     }
     @GetMapping("/RegistroCliente")
-    public String showForm(Model model) {
+    public String showForm(Model model, HttpSession session) {
         ClienteEntity cliente = new ClienteEntity();
+        String ID= (String) session.getAttribute("proveedorId");
+        cliente.setProveedorId(ID);
+        cliente.setClienteId("clienteId"); // establece el clienteId aquí
         model.addAttribute("cliente", cliente);
         return "registroCliente";
     }
     /*@PostMapping("/registrar")
-    public String submitForm(@Valid ClienteEntity cliente, BindingResult bindingResult, Model model) {
+    public String submitForm(@ModelAttribute("cliente") @Valid ClienteEntity cliente, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "registroCliente";
         }
-        return "redirect:/success";
+        clienteService.crearCliente(cliente);
+        model.addAttribute("mensaje", "Se registró exitosamente un cliente");
+        return "redirect:/ClienteController/Listadeclientes";
     }*/
 
 
@@ -65,20 +72,19 @@ public class ClienteController {
 
         ClienteEntity cle=new ClienteEntity();
         String ID= (String) session.getAttribute("id_proveedor");
-
+        model.addAttribute("id_proveedor",ID);
         cle.setProveedorId(ID);
-
+        cle.setTipoCliente("tipoCliente");
+        cle.setClienteId("clienteId");
         model.addAttribute("cliente",cle);
-
-
         return "registroCliente";
     }
-
     @PostMapping("/nuevo")
     public String guardarNuevoCliente(@ModelAttribute ClienteEntity cliente,HttpSession session,Model model){
 
         String Provedor= (String) session.getAttribute("id_proveedor");
         cliente.setProveedorId(Provedor);
+
         clienteService.crearCliente(cliente);
 
         List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(Provedor);
@@ -87,11 +93,36 @@ public class ClienteController {
             model.addAttribute("clientesProveedor", clientesProveedor);
         }
 
+        model.addAttribute("mensaje", "Se registró exitosamente un cliente");
 
         return "listarClientes";
     }
 
 
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
+
+       ClienteEntity p= clienteService.obtenerClienteId(id);
+
+
+        if (p != null) {
+
+            model.addAttribute("Cliente_editar", p);
+            model.addAttribute("editar_CLIENTE","/ClienteController/editar"+id);
+            return "FormularioEditarCliente";
+        }else {
+            return "redirect:/ClienteController/listarClientes";
+        }
+
+
+    }
+    @PostMapping("/editar/{id}")
+    public String actualizarProveedores(@PathVariable String id, @ModelAttribute  ClienteEntity cliente){
+
+        clienteService.actualizarCliente(id,cliente);
+
+        return "redirect:/ClienteController/Listadeclientes";
+    }
 
 }

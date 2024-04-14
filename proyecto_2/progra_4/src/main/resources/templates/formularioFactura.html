@@ -36,7 +36,7 @@
 
     .container-clientes {
         float: left;
-        width: 39%;
+        width: 45%;
         margin-right: 1%;
         margin-left: 1%;
         background-color: #fff;
@@ -52,7 +52,7 @@
     }
     .container-productos {
         float: right;
-        width: 39%;
+        width: 45%;
         margin-right: 1%;
         background-color: #fff;
         border-radius: 8px;
@@ -72,12 +72,37 @@
         margin-right: 1%; /* Añade un pequeño margen entre las tablas */
     }
 
+    .form-factura {
+        display: block;
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: auto;
+        text-align: center;
+    }
+
+    .form-factura h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-factura label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
 
 </style>
 </head>
 <body>
     <h1>Factura</h1>
     <div class="container">
+<!--        <td th:text="${session.id_proveedor}"></td>-->
+<!--        <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/ListadeFacturas\''">Volver</button></td>-->
         <div class="container-clientes">
             <h1>Clientes</h1>
             <table>
@@ -119,11 +144,20 @@
             </table>
         </div>
         <div class="form-factura">
+            <h1>Facturar</h1>
             <form  th:action="@{/FacturaController/guardarFactura}" method="post">
-                <label>Identificacion:</label>
+                <label for="clienteId">ID del cliente:</label>
+                <input type="text" id="clienteId" name="clienteId" required></br>
+                <label for="productoId">ID del producto:</label>
+                <input type="text" id="productoId" name="productoId" required></br>
+                <label for="cantidad">Cantidad a facturar:</label>
+                <input type="number" id="cantidad" name="cantidad" required></br></br>
+
+                <input type="submit" value="Facturar">
             </form>
         </div>
     </div>
+
 
 
 </body>
