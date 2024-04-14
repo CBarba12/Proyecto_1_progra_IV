@@ -51,6 +51,20 @@
         </div>
     </div>
 </div>
+<div class="card">
+    <div class="left-colum background3-left-colum">
+        <h6 th:text="#{PerfilP}">Configurar Perfil proveedor</h6>
+        <img src="/Imagenes/Perfil.png" alt="Descripción de la imagen" class="imagen-registro"><br><br>
+    </div>
+    <div class="right-colum">
+        <div>
+            <h4 th:text="#{PP}">Perfil proveedores</h4>
+        </div>
+        <h2 th:text="#{TarjetaP}">Configuración de perfil del proveedor</h2>
+        <p th:text="#{ParrafoP}">Esta tarjeta permite a los proveedores configurar sus datos, incluyendo los de hacienda.</p><br>
+        <button class="card-button" th:onclick="'window.location.href=\'/ProductoController/FormularioEditarProveedor\''" th:text="#{Proveedores}">Proveedores</button>
+    </div>
+</div>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>
