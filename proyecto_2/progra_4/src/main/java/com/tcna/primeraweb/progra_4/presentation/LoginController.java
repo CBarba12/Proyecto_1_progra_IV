@@ -52,6 +52,7 @@ public class LoginController {
 
 
         return "redirect:/LoginController/inicio";
+
     }
 
 
