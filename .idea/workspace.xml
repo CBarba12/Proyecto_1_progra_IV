@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre">
+    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se agrega validacion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/ProveedorEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/ProveedorEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formulariocliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formulariocliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/static/css/formularioProveedor.css" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/static/css/formularioProveedor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/listarproveedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,17 +28,18 @@
     </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "Spring Boot.Progra4Application.executor": "Run",
-    "git-widget-placeholder": "valeria2",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;Spring Boot.Progra4Application.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;valeria2&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="progra_4" />
@@ -83,7 +87,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713073505873</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se agrega validacion">
+      <option name="closed" value="true" />
+      <created>1713077764334</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713077764334</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -91,6 +103,7 @@
     <MESSAGE value="Se agregan ciertas validaciones y el STUB" />
     <MESSAGE value="Se trabajan validaciones" />
     <MESSAGE value="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre" />
+    <MESSAGE value="Se agrega validacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrega validacion" />
   </component>
 </project>

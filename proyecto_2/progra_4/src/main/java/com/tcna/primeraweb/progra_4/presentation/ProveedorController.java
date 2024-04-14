@@ -96,12 +96,14 @@ public class ProveedorController {
         if ("Registrar".equals(proveedor.getTipoProveedor())) {
             /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
             model.addAttribute("proveedor", proveedor);
+            model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
             return "formularioproveedor";
         }
 
         if ("Registrar".equals(proveedor.getActividadComercial())) {
            /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
             model.addAttribute("proveedor", proveedor);
+            model.addAttribute("alerta", "Seleccione una actividad comercial");
             return "formularioproveedor";
         }
 
@@ -111,7 +113,7 @@ public class ProveedorController {
         }
 
         if ("Juridico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
-            model.addAttribute("error", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
+            model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
             return "formularioproveedor";
         }
 
@@ -119,8 +121,6 @@ public class ProveedorController {
             model.addAttribute("error", "El nombre solo puede contener letras y espacios.");
             return "formularioproveedor";
         }
-
-
 
         if (HaciendaStub.validarRegistroProveedor(proveedor)) {
             proveedor.setAdmin((byte) 0);

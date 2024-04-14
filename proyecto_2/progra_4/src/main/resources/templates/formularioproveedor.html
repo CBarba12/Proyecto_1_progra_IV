@@ -12,15 +12,21 @@
     <div class="card">
     <h1>Formulario de proveedor</h1>
 
-    <div class="container">
+
+        <div th:if="${mensaje}" class="alert alert-danger" role="alert">
+            <p th:text="${mensaje}"></p>
+        </div>
+        <div th:if="${alerta}" class="alert alert-danger" role="alert">
+            <p th:text="${alerta}"></p>
+        </div>
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
 
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
         <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
             <option value="Registrar">Registrar</option>
-            <option value="Físico">Físico</option>
-            <option value="Jurídico">Jurídico</option>
+            <option value="Fisico">Físico</option>
+            <option value="Juridico">Jurídico</option>
         </select>
         <label for="actividadComercial">Actividad Comercial:</label>
         <select id="actividadComercial" name="actividadComercial" th:field="*{actividadComercial}" required>
@@ -31,6 +37,9 @@
             <option value="Bienes">Bienes</option>
         </select>
         <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+        <p th:if="${mensaj}" th:text="${mensaj}" style="color: red;"></p>
+
         <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}" pattern=".+@.+\..+" required></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
@@ -40,16 +49,10 @@
         <button type="submit">Guardar</button>
 
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
+
     </form>
-    <div th:if="${error}" class="alert alert-danger" role="alert">
-        <p th:text="${error}"></p>
-    </div>
-    <div th:if="${errorTipoProveedor}" class="alert alert-danger" role="alert">
-        <p th:text="${errorTipoProveedor}"></p>
-    </div>
-    <div th:if="${errorActividadComercial}" class="alert alert-danger" role="alert">
-        <p th:text="${errorActividadComercial}"></p>
-    </div>
+
+
     </div>
     </div>
 
