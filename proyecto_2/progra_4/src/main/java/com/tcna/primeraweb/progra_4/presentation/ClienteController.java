@@ -2,7 +2,8 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
+import
+        com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
@@ -74,8 +75,8 @@ public class ClienteController {
         String ID= (String) session.getAttribute("id_proveedor");
         model.addAttribute("id_proveedor",ID);
         cle.setProveedorId(ID);
-        cle.setTipoCliente("tipoCliente"); // establece el tipoCliente aquí
-        cle.setClienteId("clienteId"); // establece el clienteId aquí
+        cle.setTipoCliente("tipoCliente");
+        cle.setClienteId("clienteId");
         model.addAttribute("cliente",cle);
         return "registroCliente";
     }
@@ -97,20 +98,12 @@ public class ClienteController {
 
         return "listarClientes";
     }
-    @GetMapping("/editarCliente/{id}")
-    public String editarCliente(@PathVariable("id") String id, Model model, HttpSession session) {
-        List<ClienteEntity> clientes = clienteService.ObtenerCliente();
-
-        ClienteEntity cliente = clientes.stream().filter(c -> c.getClienteId() == id).findFirst().orElse(null);
-        String Provedor= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor",Provedor);
-        if (cliente != null) {
 
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
-       ClienteEntity p= clienteService.optenerClienteId(id);
+        ClienteEntity p= clienteService.optenerClienteId(id);
 
         if (p != null) {
 
@@ -129,6 +122,6 @@ public class ClienteController {
         clienteService.actualizarCliente(id,cliente);
 
         return "redirect:/ClienteController/Listadeclientes";
-   }
+    }
 
 }
