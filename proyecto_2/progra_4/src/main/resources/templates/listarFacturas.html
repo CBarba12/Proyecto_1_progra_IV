@@ -53,22 +53,22 @@
             cursor: pointer;
         }
 
-        .edit-button {
-            background-color: #4CAF50;
+        .pdf-button {
+            background-color: rgba(53, 117, 55, 0.87);
             color: white;
         }
 
-        .edit-button:hover {
-            background-color: #45a049;
+        .pdf-button:hover {
+            background-color: rgba(53, 117, 55, 0.87);
         }
 
-        .delete-button {
-            background-color: #f44336;
+        .xml-button {
+            background-color: #065b80;
             color: white;
         }
 
-        .delete-button:hover {
-            background-color: #d32f2f;
+        .xml-button:hover {
+            background-color: #065b80;
         }
     </style>
 </head>
@@ -78,28 +78,36 @@
     <td th:text="${session.id_proveedor}"></td>
     <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
     <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''">Nueva Factura</button></td>
+    <td><button class="button pdf-button" th:onclick="'window.location.href=\'/FacturaController/pdf\''">Generar PDF de Facturas</button></td>
+    <td><button class="button xml-button" th:onclick="'window.location.href=\'/FacturaController/xml\''">Generar XML de Facturas</button></td>
 
     <table>
         <tr>
             <th>Factura ID</th>
-            <th>Fecha</th>
-            <th>Total</th>
-            <th>Cliente</th>
             <th>Proveedor</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+            <th>Total</th>
             <th>Acciones</th>
         </tr>
 
         <tr th:each="factura : ${Facturas}">
             <td th:text="${factura.getFacturaId()}"></td>
-            <td th:text="${factura.getFecha()}"></td>
-            <td th:text="${factura.getTotal()}"></td>
-            <td th:text="${factura.getCliente()}"></td>
             <td th:text="${factura.getProveedor()}"></td>
+            <td th:text="${factura.getCliente()}"></td>
+            <td th:text="${nombresProductos[factura.getId_producto().toString()]}"></td>
+            <td th:text="${preciosProductos[factura.getId_producto().toString()]}"></td>
+            <td th:text="${factura.getFecha()}"></td>
+            <td th:text="${factura.getCantidad()}"></td>
+            <td th:text="${factura.getTotal()}"></td>
             <td>
                 <!-- Botón para editar -->
-                <a class="button edit-button" th:href="@{'/FacturaController/pdf'}">PDF</a>
+                <a class="button pdf-button" th:href="@{'/FacturaController/pdf/' + ${factura.getFacturaId()}}">PDF</a>
                 <!-- Botón para borrar -->
-                <a  class="button delete-button" th:href="@{'/FacturaController/xml'}">XML</a>
+                <a class="button xml-button" th:href="@{'/FacturaController/xml/' + ${factura.getFacturaId()}}">XML</a>
             </td>
         </tr>
 
