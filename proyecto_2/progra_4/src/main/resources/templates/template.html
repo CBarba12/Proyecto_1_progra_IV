@@ -22,13 +22,14 @@
     </div>
 
 </header>
-<footer th:fragment="footer">
+<footer th:fragment="footerWithLogout">
     <p class="left-text" th:text="#{Pie}">Sistema Web</p>
     <div class="right-content">
         <img src="/Imagenes/facebook.png" alt="Logo de Facebook" class="social-logo">
         <img src="/Imagenes/instagram.png" alt="Logo de Instagram" class="social-logo">
         <img src="/Imagenes/twitter.png" alt="Logo de Twitter" class="social-logo">
         <p class="right-text" th:text="#{Proyecto}">Proyecto I, 2024</p>
+        <a th:href="@{/LoginController/logout}" class="button logout-button" th:text="#{CerrarSesion}">Cerrar sesión</a>
     </div>
 </footer>
 </body>

@@ -17,7 +17,7 @@ body {
     margin-left: 35%;
 }
 .container {
-    max-width: 350px;
+    max-width: 300px;
     width: 100%;
     padding: 20px;
     background: #fff;
@@ -26,6 +26,7 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
     flex-direction: column;
+    height: auto;
     justify-content: center;
 }
 
