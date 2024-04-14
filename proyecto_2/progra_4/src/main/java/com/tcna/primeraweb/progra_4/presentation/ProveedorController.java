@@ -64,6 +64,12 @@ public class ProveedorController {
             return "formularioproveedor";
         }
 
+        if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
+            redirectAttributes.addFlashAttribute("error", "El nombre solo puede contener letras y espacios.");
+            model.addAttribute("proveedor", proveedor);
+            return "formularioproveedor";
+        }
+
         if (HaciendaStub.validarRegistroProveedor(proveedor)) {
             proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);

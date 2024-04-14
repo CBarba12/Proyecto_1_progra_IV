@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se agregan ciertas validaciones y el STUB">
+    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se trabajan validaciones">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/service/HaciendaStub.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/service/HaciendaStub.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,12 +65,21 @@
       <option name="project" value="LOCAL" />
       <updated>1713065321074</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Se trabajan validaciones">
+      <option name="closed" value="true" />
+      <created>1713071522925</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713071522925</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se edita formulario proveedores" />
     <MESSAGE value="Se agregan ciertas validaciones y el STUB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregan ciertas validaciones y el STUB" />
+    <MESSAGE value="Se trabajan validaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se trabajan validaciones" />
   </component>
 </project>

@@ -92,11 +92,8 @@
             <option value="Infraestructura">Infraestructura</option>
             <option value="Bienes">Bienes</option>
         </select>
-        <label>Identificación:
-            <input id="idProveedor" type="text" th:field="*{idProveedor}" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" th:required="${proveedor.tipoProveedor != null}">
-            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Físico'}">Debe contener 9 dígitos.</span>
-            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Jurídico'}">Debe contener 10 dígitos.</span>
-        </label>
+        <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
+
         <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
