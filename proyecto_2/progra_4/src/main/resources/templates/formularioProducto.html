@@ -11,9 +11,9 @@
 <div class="container">
     <h1 th:text="#{TituloProducto}">Nuevo Producto</h1>
     <form th:object="${producto}" th:action="@{/ProductoController/nuevo}" method="post">
-        <label th:text="#{Nombre}">Nombre: <input type="text" th:field="*{nombre}"></label>
-        <label th:text="#{Descripcion}">Descripcion: <input type="text" th:field="*{descripcion}"></label>
-        <label th:text="#{Precio}">Precio: <input type="number" th:field="*{precio}"></label>
+        <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{nombre}">
+        <label th:text="#{Descripcion}">Descripcion: </label><input type="text" th:field="*{descripcion}">
+        <label th:text="#{Precio}">Precio: </label><input type="number" th:field="*{precio}">
         <label>Tipo de producto:
             <select th:field="*{tipoProducto}">
                 <option th:each="tipo : ${actividad}" th:value="${actividad}" th:text="${actividad}"></option>
