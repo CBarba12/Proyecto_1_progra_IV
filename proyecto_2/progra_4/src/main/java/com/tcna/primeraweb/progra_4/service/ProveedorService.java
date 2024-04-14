@@ -38,7 +38,7 @@ public class ProveedorService {
 
         for (ProveedorEntity proveedor : proveedores) {
 
-            if (proveedor != null && proveedor.getAdmin() != null) {
+            if (proveedor.getAdmin() == 1) {
                 byte adminValue = proveedor.getAdmin().byteValue();
             }else {
                 noAdminProveedores.add(proveedor);
