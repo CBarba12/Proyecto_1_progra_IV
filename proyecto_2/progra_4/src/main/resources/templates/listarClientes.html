@@ -19,6 +19,7 @@
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Correo</th>
+            <th>Tipo</th>
         </tr>
         </thead>
 
@@ -28,9 +29,12 @@
             <td th:text="${cliente.getNombre()}"></td>
             <td th:text="${cliente.getDireccion()}"></td>
             <td th:text="${cliente.correoElectronico}"></td>
+            <td th:text="${cliente.getTipoCliente()}"></td>
             <td>
-                    <button type="submit" class="button edit-button">Editar</button>
-                    <button type="submit" class="button delete-button">Borrar</button>
+                <!-- Botón para editar -->
+                <a th:href="@{/ClienteController/editar/{id}(id=${cliente.getClienteId()})}" style="margin-right: 10px;">Editar</a>
+
+
             </td>
         </tr>
             <form action="/ClienteController/nuevocliente" method="get">

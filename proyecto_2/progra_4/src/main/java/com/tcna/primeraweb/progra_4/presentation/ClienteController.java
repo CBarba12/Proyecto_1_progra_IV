@@ -1,6 +1,7 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
+import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
@@ -96,30 +97,30 @@ public class ClienteController {
 
         return "listarClientes";
     }
-    @GetMapping("/editarCliente/{id}")
-    public String editarCliente(@PathVariable("id") String id, Model model, HttpSession session) {
-        List<ClienteEntity> clientes = clienteService.ObtenerCliente();
 
-        ClienteEntity cliente = clientes.stream().filter(c -> c.getClienteId() == id).findFirst().orElse(null);
-        String Provedor= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor",Provedor);
-        if (cliente != null) {
 
-            model.addAttribute("cliente", cliente);
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
-            return "formularioEditarCliente";
-        } else {
-            return "redirect:/ClienteController/ListadeClientes";
+       ClienteEntity p= clienteService.ObtenerClienteId(id);
+
+        if (p != null) {
+
+            model.addAttribute("Cliente_editar", p);
+            model.addAttribute("editar_CLIENTE","/ClienteController/editar"+id);
+            return "FormularioEditarCliente";
+        }else {
+            return "redirect:/ClienteController/listarClientes";
         }
-    }
 
-    @PostMapping("/editCliente")
-    public String guardarEditarCliente(@ModelAttribute ClienteEntity cliente, Model model, HttpSession session){
-        String Provedor= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor",Provedor);
-        cliente.setProveedorId(Provedor);
-        clienteService.actualizarCliente(cliente);
-        return "redirect:/ClienteController/ListadeClientes";
+
+    }
+    @PostMapping("/editar/{id}")
+    public String actualizarProveedores(@PathVariable String id, @ModelAttribute  ClienteEntity cliente){
+
+        clienteService.actualizarCliente(id,cliente);
+
+        return "redirect:/ClienteController/Listadeclientes";
     }
 
 }
