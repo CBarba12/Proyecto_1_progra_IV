@@ -16,7 +16,4 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity,String> {
 
     List<ClienteEntity> findByProveedorId(String proveedorId);
 
-
-
-
 }

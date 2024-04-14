@@ -102,7 +102,9 @@ public class ClienteController {
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
+
        ClienteEntity p= clienteService.obtenerClienteId(id);
+
 
         if (p != null) {
 

@@ -37,11 +37,11 @@ public class LoginController {
             if (p.getAdmin() != null && p.getAdmin() == 1) {
 
                 List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
-
+                session.setAttribute("id_proveedor",numeroIdentificacion);
                 model.addAttribute("listaProveedor",prob);
-                return "listarproveedor";
+                return "redirect:/ProveedorController/Listadeproveedores";
 
-            } else {
+            } else if(p.getEstado().equals("Aceptado")) {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
                 return "proveedorAcciones";
             }

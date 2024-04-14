@@ -13,6 +13,7 @@
     <div class="container">
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
+
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
         <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
             <option value="Registrar">Registrar</option>
@@ -33,6 +34,7 @@
         <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
         <label>Teléfono: <input type="text" th:field="*{telefono}" required></label>
         <label>Dirección: <input type="text" th:field="*{direccion}" required></label>
+
         <button type="submit">Guardar</button>
 
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>

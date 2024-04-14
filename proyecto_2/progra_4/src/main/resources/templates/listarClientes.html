@@ -33,6 +33,7 @@
             <td th:text="${cliente.tipoCliente}"></td>
             <td>
                 <a th:href="@{/ClienteController/editar/{id}(id=${cliente.getClienteId()})}" style="margin-right: 10px;">Editar</a>
+
             </td>
         </tr>
             <form action="/ClienteController/nuevocliente" method="get">
