@@ -43,9 +43,7 @@
             <td th:text="${factura.getCantidad()}"></td>
             <td th:text="${factura.getTotal()}"></td>
             <td>
-                <!-- Botón para editar -->
                 <a class="button pdf-button" th:href="@{'/FacturaController/pdf/' + ${factura.getFacturaId()}}">PDF</a>
-                <!-- Botón para borrar -->
                 <a class="button xml-button" th:href="@{'/FacturaController/xml/' + ${factura.getFacturaId()}}">XML</a>
             </td>
         </tr>
