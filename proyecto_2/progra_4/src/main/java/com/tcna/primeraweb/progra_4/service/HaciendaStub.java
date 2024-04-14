@@ -14,15 +14,13 @@ public class HaciendaStub {
     private ProveedorService proveedorService;
 
     public boolean validarRegistroProveedor(ProveedorEntity proveedor) {
-        // Obtener la lista de proveedores existentes
         List<ProveedorEntity> proveedoresRegistrados = proveedorService.ObtenerProveedores();
 
-        // Verificar si el proveedor ya está registrado
         for (ProveedorEntity proveedorRegistrado : proveedoresRegistrados) {
-            if (proveedorRegistrado.getCorreoElectronico().equals(proveedor.getCorreoElectronico())) {
-                return false; // El proveedor ya está registrado, no permitir el registro
+            if (proveedorRegistrado.getIdProveedor().equals(proveedor.getIdProveedor())) {
+                return false;
             }
         }
-        return true; // El proveedor no está registrado, permitir el registro
+        return true;
     }
 }

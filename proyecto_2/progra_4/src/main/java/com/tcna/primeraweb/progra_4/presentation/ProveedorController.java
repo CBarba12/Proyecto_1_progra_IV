@@ -27,7 +27,7 @@ public class ProveedorController {
     @Autowired
     private HaciendaStub HaciendaStub;
 
-    @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
+    @GetMapping("/Listadeproveedores")
     public String listaProveedor(Model model){
 
         List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
@@ -52,29 +52,23 @@ public class ProveedorController {
     @PostMapping("/nuevo_proveedor")
     public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, RedirectAttributes redirectAttributes, Model model){
 
-        // Verificar si el tipo de proveedor es "Registrar"
         if ("Registrar".equals(proveedor.getTipoProveedor())) {
-            // El tipo de proveedor es "Registrar", no permitir guardar el proveedor
             redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");
             model.addAttribute("proveedor", proveedor);
             return "formularioproveedor";
         }
 
-        // Verificar si la actividad comercial es "Registrar"
         if ("Registrar".equals(proveedor.getActividadComercial())) {
-            // La actividad comercial es "Registrar", no permitir guardar el proveedor
             redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");
             model.addAttribute("proveedor", proveedor);
             return "formularioproveedor";
         }
 
         if (HaciendaStub.validarRegistroProveedor(proveedor)) {
-            // El proveedor no está registrado, permitir el registro
             proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);
             return "redirect:/";
         } else {
-            // El proveedor ya está registrado, mostrar un mensaje de error o redirigir a una página de error
             return "redirect:/";
         }
     }

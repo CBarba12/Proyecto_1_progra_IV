@@ -78,7 +78,6 @@
 
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
 
-
         <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
         <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" required>
             <option value="Registrar">Registrar</option>
@@ -93,7 +92,11 @@
             <option value="Infraestructura">Infraestructura</option>
             <option value="Bienes">Bienes</option>
         </select>
-        <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
+        <label>Identificación:
+            <input id="idProveedor" type="text" th:field="*{idProveedor}" th:maxlength="${proveedor.tipoProveedor == 'Físico' ? '9' : '10'}" th:required="${proveedor.tipoProveedor != null}">
+            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Físico'}">Debe contener 9 dígitos.</span>
+            <span class="error-message" th:if="${proveedor.tipoProveedor == 'Jurídico'}">Debe contener 10 dígitos.</span>
+        </label>
         <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
         <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
@@ -107,16 +110,16 @@
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
 
     </form>
+    <div th:if="${errorTipoProveedor}" class="alert alert-danger" role="alert">
+        <p th:text="${errorTipoProveedor}"></p>
+    </div>
+
+    <div th:if="${errorActividadComercial}" class="alert alert-danger" role="alert">
+        <p th:text="${errorActividadComercial}"></p>
+    </div>
+
 </div>
 
-
-<div th:if="${errorTipoProveedor}" class="alert alert-danger" role="alert">
-    <p th:text="${errorTipoProveedor}"></p>
-</div>
-
-<div th:if="${errorActividadComercial}" class="alert alert-danger" role="alert">
-    <p th:text="${errorActividadComercial}"></p>
-</div>
 
 </body>
 </html>
