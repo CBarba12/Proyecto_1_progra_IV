@@ -34,10 +34,12 @@ public class LoginController {
 
             ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
 
+
+
             if (p.getAdmin() != null && p.getAdmin() == 1) {
 
                 List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
-                session.setAttribute("id_proveedor",numeroIdentificacion);
+                session.setAttribute("id_admin",numeroIdentificacion);
                 model.addAttribute("listaProveedor",prob);
                 return "redirect:/ProveedorController/Listadeproveedores";
 
