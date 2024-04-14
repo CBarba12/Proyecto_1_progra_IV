@@ -23,14 +23,22 @@ public class FacturaEntity {
     @Basic
     @Column(name = "proveedor")
     private String proveedor;
+    @Basic
+    @Column(name = "id_producto")
+    private int id_producto;
+    @Basic
+    @Column(name = "cantidad")
+    private int cantidad;
 
 
-    public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor) {
+    public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor, int id_producto, int cantidad) {
         this.facturaId = facturaId;
         this.fecha = fecha;
         this.total = total;
         this.cliente = cliente;
         this.proveedor = proveedor;
+        this.id_producto = id_producto;
+        this.cantidad = cantidad;
     }
 
     public FacturaEntity() {
@@ -78,7 +86,19 @@ public class FacturaEntity {
         this.proveedor = proveedor;
     }
 
+    public int getId_producto() {
+        return id_producto;
+    }
 
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
+    }
 
+    public int getCantidad() {
+        return cantidad;
+    }
 
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }
