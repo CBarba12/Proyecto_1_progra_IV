@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario de proveedor</title>
+
     <link rel="stylesheet" th:href="@{/css/formularioProveedor.css}">
     <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
@@ -10,6 +11,7 @@
 <body>
     <div class="card">
     <h1>Formulario de proveedor</h1>
+
     <div class="container">
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
@@ -30,7 +32,7 @@
         </select>
         <label>Identificación: <input type="text" th:field="*{idProveedor}" required></label>
         <label>Nombre: <input type="text" th:field="*{nombre}" required></label>
-        <label>Correo: <input type="text" th:field="*{correoElectronico}" required></label>
+        <label>Correo: <input type="text" th:field="*{correoElectronico}" pattern=".+@.+\..+" required></label>
         <label>Contraseña: <input type="text" th:field="*{contrasena}" required></label>
         <label>Teléfono: <input type="text" th:field="*{telefono}" required></label>
         <label>Dirección: <input type="text" th:field="*{direccion}" required></label>
@@ -39,8 +41,20 @@
 
         <a th:href="@{/}" class="link">Ir a la página de inicio</a>
     </form>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+    <div th:if="${errorTipoProveedor}" class="alert alert-danger" role="alert">
+        <p th:text="${errorTipoProveedor}"></p>
+    </div>
+    <div th:if="${errorActividadComercial}" class="alert alert-danger" role="alert">
+        <p th:text="${errorActividadComercial}"></p>
     </div>
     </div>
+    </div>
+
+
+<pre th:text="${{model}}"></pre>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>

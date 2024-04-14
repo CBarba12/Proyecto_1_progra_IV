@@ -6,10 +6,12 @@ import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.tcna.primeraweb.progra_4.service.HaciendaStub;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +27,14 @@ public class ProveedorController {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private HaciendaStub HaciendaStub;
+
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
     public String listaProveedor(Model model, HttpSession session) {
         String estado[] = {"Aceptado","Rechazado"};
-        List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
+      List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
 
         ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId((String) session.getAttribute("id_admin"));
 
@@ -85,14 +90,48 @@ public class ProveedorController {
 
 
 
-
     @PostMapping("/nuevo_proveedor")
-   public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor){
-        proveedor.setEstado("En espera");
-        proveedorService.crearProveedores(proveedor);
+    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, Model model){
 
-        return "redirect:/ProveedorController/Listadeproveedores";
-   }
+        if ("Registrar".equals(proveedor.getTipoProveedor())) {
+            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
+            model.addAttribute("proveedor", proveedor);
+            return "formularioproveedor";
+        }
+
+        if ("Registrar".equals(proveedor.getActividadComercial())) {
+           /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
+            model.addAttribute("proveedor", proveedor);
+            return "formularioproveedor";
+        }
+
+        if ("Fisico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
+            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
+            return "formularioproveedor";
+        }
+
+        if ("Juridico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
+            model.addAttribute("error", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
+            return "formularioproveedor";
+        }
+
+        if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
+            model.addAttribute("error", "El nombre solo puede contener letras y espacios.");
+            return "formularioproveedor";
+        }
+
+
+
+        if (HaciendaStub.validarRegistroProveedor(proveedor)) {
+            proveedor.setAdmin((byte) 0);
+            proveedor.setEstado("En espera");
+            proveedorService.crearProveedores(proveedor);
+            return "redirect:/";
+        } else {
+            return "redirect:/";
+        }
+    }
+
 
 
 
@@ -148,7 +187,6 @@ public class ProveedorController {
             return "index";
         }
     }
-
 
 
 }
