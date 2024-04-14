@@ -1,53 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .button-container {
-            text-align: center;
-        }
-
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-
-        .login-button {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .signup-button {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .button:hover {
-            opacity: 0.8;
-        }
-    </style>
+    <title th:text="#{Sistema}">Sistema de facturación</title>
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <link rel="stylesheet" th:href="@{/css/Home.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
 <div class="button-container">
-    <button class="button login-button" onclick="window.location.href='/LoginController/inicio'">Ingresar</button>
-    <button class="button signup-button" onclick="window.location.href='/ProveedorController/nuevo'">Registrarse</button>
+    <h1 th:text="#{Encabezado}">¡Bienvenidos al Sistema web de factura Electrónica simplificada!</h1>
+    <p class="subtitle" th:text="#{Subtitulo}">Para la gestión de Facturas electrónicas.</p><br>
+    <img th:src="@{/Imagenes/FacturaInicio.jpg}" alt="Factura inicio"><br>
+    <button class="button login-button" onclick="window.location.href='/LoginController/inicio'" th:text="#{IniciarSesion}">Ingresar</button>
+    <button class="button signup-button" onclick="window.location.href='/ProveedorController/nuevo'"th:text="#{Registrar}">Registrarse</button>
 </div>
 </body>
+<footer th:replace="~{/template :: footer}"></footer>
 </html>

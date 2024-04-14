@@ -47,12 +47,15 @@ tr:hover {
     margin-right: 5px;
     cursor: pointer;
     background: paleturquoise;
-    border: 1px solid #ccc;
+    border: 1px solid #2b312d;
 }
 
 .edit-button {
     background-color: #4CAF50;
     color: white;
+}
+.id-proveedor {
+    color: #637bff;
 }
 
 .edit-button:hover {

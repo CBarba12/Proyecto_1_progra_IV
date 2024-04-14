@@ -67,6 +67,13 @@ public class ClienteService {
     public List<ClienteEntity> obtenerClientesPorProveedor(String id_proveedor) {
         return  clienteRepository.findByProveedorId(id_proveedor);
     }
+    public void actualizarCliente(ClienteEntity cliente) {
+        clienteRepository.save(cliente);
+    }
+
+    public void eliminarCliente(String id) {
+        clienteRepository.deleteById(id);
+    }
 
 
     public ClienteEntity optenerClienteId(String id) {
