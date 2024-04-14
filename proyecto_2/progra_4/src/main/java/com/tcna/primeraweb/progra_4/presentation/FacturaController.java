@@ -1,8 +1,8 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
@@ -47,6 +47,12 @@ public class FacturaController {
     private ProductoService productoService;
     @Autowired
     private FacturaService facturaService;
+
+
+    Font fontheader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD, BaseColor.WHITE);
+    Font fontfooter = FontFactory.getFont(FontFactory.COURIER, 10, Font.BOLD, BaseColor.WHITE);
+    Font font = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, BaseColor.BLACK);
+
 
     @GetMapping("/ListadeFacturas") // Añade esta línea para mapear el método a la URL
     public String listarFacturas(Model model, HttpSession session) {
@@ -150,22 +156,26 @@ public class FacturaController {
         response.setContentType("application/pdf");
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, response.getOutputStream());
+            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
             document.open();
-
-            document.add(new Paragraph("Factura ID: " + factura.getFacturaId()));
-            document.add(new Paragraph("Proveedor: " + factura.getProveedor()));
-            document.add(new Paragraph("Cliente: " + factura.getCliente() + "  Nombre: " +
-                    clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre() + "  Correo: " +
-                    clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico()));
-            document.add(new Paragraph("Producto ID: " + factura.getId_producto() + "  Nombre: " +
-                    productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre() + "  Precio: " +
-                    productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio()));
-            document.add(new Paragraph("Cantidad: " + factura.getCantidad()));
-            document.add(new Paragraph("Total: " + factura.getTotal()));
-            document.add(new Paragraph("Fecha: " + factura.getFecha()));
             document.add(new Paragraph("\n\n"));
+            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
+            document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
+            document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
+            document.add(new Paragraph("    Nombre: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre(), font));
+            document.add(new Paragraph("    Correo: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico(), font));
+            document.add(new Paragraph("Producto ID: " + factura.getId_producto(), font));
+            document.add(new Paragraph("    Nombre: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre(), font));
+            document.add(new Paragraph("    Precio: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio(), font));
+            document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
+            document.add(new Paragraph("Total: " + factura.getTotal(), font));
+            document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
 
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("\n\n"));
+            document.add(style(new Chunk("Reporte Generado por: " + ID), fontfooter));
             document.close();
         } catch (DocumentException | IOException ex) {
             throw new RuntimeException("Error al generar el PDF", ex);
@@ -188,27 +198,48 @@ public class FacturaController {
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, response.getOutputStream());
+
             document.open();
+            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
+
 
             for (FacturaEntity factura : filteredFacturas) {
-                document.add(new Paragraph("Factura ID: " + factura.getFacturaId()));
-                document.add(new Paragraph("Proveedor: " + factura.getProveedor()));
-                document.add(new Paragraph("Cliente: " + factura.getCliente() + "  Nombre: " +
-                        clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre() + "  Correo: " +
-                        clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico()));
-                document.add(new Paragraph("Producto ID: " + factura.getId_producto() + "  Nombre: " +
-                        productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre() + "  Precio: " +
-                        productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio()));
-                document.add(new Paragraph("Cantidad: " + factura.getCantidad()));
-                document.add(new Paragraph("Total: " + factura.getTotal()));
-                document.add(new Paragraph("Fecha: " + factura.getFecha()));
                 document.add(new Paragraph("\n\n"));
+                document.add(new Paragraph("------------------------------------------------------------------------", font));
+                document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
+                document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
+                document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
+                    document.add(new Paragraph("    Nombre: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre(), font));
+                    document.add(new Paragraph("    Correo: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico(), font));
+                document.add(new Paragraph("Producto ID: " + factura.getId_producto()));
+                    document.add(new Paragraph("        Nombre: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre(), font));
+                    document.add(new Paragraph("        Precio: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio(), font));
+                document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
+                document.add(new Paragraph("Total: " + factura.getTotal(), font));
+                document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
             }
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("\n\n"));
+
+            document.add(style(new Chunk("Reporte Generado por: " + ID), fontfooter));
 
             document.close();
         } catch (DocumentException | IOException ex) {
             throw new RuntimeException("Error al generar el PDF", ex);
         }
+    }
+
+    private PdfPTable style(Chunk c, Font font) {
+        PdfPCell cell = new PdfPCell(new Phrase(c));
+        cell.setBackgroundColor(BaseColor.BLUE);
+        cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(com.itextpdf.text.Element.ALIGN_MIDDLE);
+        cell.setFixedHeight(50); // puedes ajustar la altura según tus necesidades
+
+        PdfPTable table = new PdfPTable(1);
+        table.setWidthPercentage(100); // esto hará que la tabla ocupe todo el ancho de la página
+        table.addCell(cell);
+        return table;
     }
     @GetMapping("/xml/{id}")
     public void xml(@PathVariable("id") String facturaID, Model model, HttpSession session, HttpServletResponse response) {

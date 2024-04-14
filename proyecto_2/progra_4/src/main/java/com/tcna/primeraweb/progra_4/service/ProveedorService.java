@@ -38,7 +38,7 @@ public class ProveedorService {
 
         for (ProveedorEntity proveedor : proveedores) {
 
-            if (proveedor != null && proveedor.getAdmin() != null) {
+            if (proveedor.getAdmin() == 1) {
                 byte adminValue = proveedor.getAdmin().byteValue();
             }else {
                 noAdminProveedores.add(proveedor);
@@ -70,11 +70,17 @@ public class ProveedorService {
 
         if(provedor !=null ){
             assert prove != null;
+            prove.setIdProveedor(provedor.getIdProveedor());
             prove.setNombre(provedor.getNombre());
             prove.setCorreoElectronico(provedor.getCorreoElectronico());
+            prove.setContrasena(provedor.getContrasena());
+            prove.setEstado(provedor.getEstado());
+            prove.setAdmin(provedor.getAdmin());
             prove.setTelefono(provedor.getTelefono());
             prove.setDireccion(provedor.getDireccion());
-            prove.setDireccion(provedor.getTipoProveedor());
+            prove.setTipoProveedor(provedor.getTipoProveedor());
+            prove.setActividadComercial(provedor.getActividadComercial());
+
 
             return proveedorRepository.save(prove);
         }
@@ -106,6 +112,8 @@ public class ProveedorService {
 
 
 
-
+    public void eliminarProveedor(String id) {
+        proveedorRepository.deleteById(id);
+    }
 }
 

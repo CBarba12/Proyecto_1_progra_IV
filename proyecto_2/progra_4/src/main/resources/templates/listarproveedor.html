@@ -13,10 +13,10 @@
         }
 
         .container {
-            max-width: 800px;
+            width: 80%;
             margin: 20px auto;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
@@ -52,6 +52,18 @@
             color: #666;
         }
 
+        .button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
         .alert {
             margin-bottom: 20px;
             padding: 15px;
@@ -81,6 +93,23 @@
         .add-link:hover {
             background-color: #0056b3;
         }
+        .aceptar-button {
+            background-color: rgba(53, 117, 55, 0.87);
+            color: white;
+        }
+
+        .aceptar-button:hover {
+            background-color: rgba(53, 117, 55, 0.87);
+        }
+
+        .rechazar-button {
+            background-color: #065b80;
+            color: white;
+        }
+
+        .rechazar-button:hover {
+            background-color: #065b80;
+        }
     </style>
 
 </head>
@@ -99,9 +128,11 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Teléfono</th>
             <th>Correo</th>
-            <th>Estado</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Tipo de Proveedor</th>
+           <th>Estado</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -110,12 +141,14 @@
         <tr th:each="proveedor : ${listaProveedor}">
             <td th:text="${proveedor.idProveedor}"></td>
             <td th:text="${proveedor.nombre}"></td>
-            <td th:text="${proveedor.telefono}"></td>
             <td th:text="${proveedor.correoElectronico}"></td>
-            <td th:text="${proveedor.estado}"></td> <!-- Nueva celda para el estado -->
+            <td th:text="${proveedor.telefono}"></td>
+            <td th:text="${proveedor.direccion}"></td>
+            <td th:text="${proveedor.tipoProveedor}"></td>
+            <td th:text="${proveedor.estado}"></td>
             <td>
-                <a th:href="@{/ProveedorController/editar/{id}(id=${proveedor.idProveedor})}" style="margin-right: 10px;">Editar</a>
-                <a th:href="@{/ProveedorController/eliminar/{id}(id=${proveedor.idProveedor})}">Eliminar</a>
+                <a class="button aceptar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Aceptado'}">Aceptar</a>
+                <a class="button rechazar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Rechazado'}">Rechazar</a>
             </td>
         </tr>
         </tbody>

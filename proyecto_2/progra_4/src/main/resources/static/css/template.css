@@ -20,9 +20,11 @@ header {
     font-size: 1.0em;
     font-family: 'Arial';
     justify-content: flex-end;
+    margin-right: 1.5%;
 }
 footer {
     position: absolute;
+    box-sizing: border-box;
     bottom: 0;
     width: 100%;
 }
@@ -49,7 +51,7 @@ h2{
 }
 .right-content{
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
 }
 .social-logo{
@@ -78,4 +80,21 @@ h2{
     font-size: 1.0em;
     font-family: 'Arial';
     margin-left: 0.5%;
+
+}
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #cccccc;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    color:white;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+    color: white;
 }
