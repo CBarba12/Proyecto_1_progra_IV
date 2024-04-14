@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se trabajan validaciones">
+    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formulariocliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formulariocliente.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,13 +75,22 @@
       <option name="project" value="LOCAL" />
       <updated>1713071522925</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre">
+      <option name="closed" value="true" />
+      <created>1713073505872</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713073505873</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se edita formulario proveedores" />
     <MESSAGE value="Se agregan ciertas validaciones y el STUB" />
     <MESSAGE value="Se trabajan validaciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se trabajan validaciones" />
+    <MESSAGE value="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre" />
   </component>
 </project>

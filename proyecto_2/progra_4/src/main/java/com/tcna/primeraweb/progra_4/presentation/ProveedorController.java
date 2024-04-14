@@ -50,23 +50,32 @@ public class ProveedorController {
 
 
     @PostMapping("/nuevo_proveedor")
-    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, RedirectAttributes redirectAttributes, Model model){
+    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, Model model){
 
         if ("Registrar".equals(proveedor.getTipoProveedor())) {
-            redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");
+            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
             model.addAttribute("proveedor", proveedor);
             return "formularioproveedor";
         }
 
         if ("Registrar".equals(proveedor.getActividadComercial())) {
-            redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");
+           /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
             model.addAttribute("proveedor", proveedor);
             return "formularioproveedor";
         }
 
+        if ("Fisico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
+            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
+            return "formularioproveedor";
+        }
+
+        if ("Juridico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
+            model.addAttribute("error", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
+            return "formularioproveedor";
+        }
+
         if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
-            redirectAttributes.addFlashAttribute("error", "El nombre solo puede contener letras y espacios.");
-            model.addAttribute("proveedor", proveedor);
+            model.addAttribute("error", "El nombre solo puede contener letras y espacios.");
             return "formularioproveedor";
         }
 
