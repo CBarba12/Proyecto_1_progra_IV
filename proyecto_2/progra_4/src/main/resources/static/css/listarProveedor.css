@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #f7f7f7;
+}
+
+td {
+    color: #666;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    text-align: center;
+}
+
+.add-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.add-link:hover {
+    background-color: #0056b3;
+}
+.aceptar-button {
+    background-color: rgba(53, 117, 55, 0.87);
+    color: white;
+}
+
+.aceptar-button:hover {
+    background-color: rgba(53, 117, 55, 0.87);
+}
+
+.rechazar-button {
+    background-color: #065b80;
+    color: white;
+}
+
+.rechazar-button:hover {
+    background-color: #065b80;
+}
