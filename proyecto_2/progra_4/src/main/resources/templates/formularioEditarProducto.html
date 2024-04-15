@@ -1,109 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
-
-    <title>Editar Producto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 50%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        form {
-            display: grid;
-            gap: 10px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        .submit-button {
-            padding: 10px 20px;
-            margin: 5px 10px;
-            background-color: #2b312d;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .submit-button:hover {
-            background-color: #623625;
-        }
-
-        a {
-            display: block;
-            margin-top: 10px;
-            text-align: center;
-            color: #4caf50;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title th:text="#{EditarProductos}">Editar Producto</title>
+    <link rel="stylesheet" th:href="@{/css/FormularioEditarProductos.css}">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
 <div class="container">
-    <h1>Editar Producto</h1>
+    <h1 th:text="#{EditarProductos}">Editar Producto</h1>
     <form th:object="${producto}" th:action="@{/ProductoController/edit}" method="post">
-
-        <label>Nombre: <input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly></label>
-        <label>Nombre: <input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
-        <label>Descripcion: <input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}"></label>
-        <label>Precio: <input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
-        <label>Nombre: <input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly></label>
-        <label>Tipo de producto:
+        <label th:text="#{Codigo}">Código: </label><input type="text" th:field="*{productoId}" th:value="${producto.productoId}" readonly>
+        <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{nombre}" th:value="${producto.nombre}"></label>
+        <label th:text="#{Descripcion}">Descripción: </label><input type="text" th:field="*{descripcion}" th:value="${producto.descripcion}">
+        <label th:text="#{Precio}">Precio: </label><input type="number" th:field="*{precio}" th:value="${producto.precio}"></label>
+        <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{proveedorId}" th:value="${producto.proveedorId}" readonly>
+        <label th:text="#{TipoProducto}">Tipo de producto:
             <select th:field="*{tipoProducto}">
                 <option th:each="tipo : ${producto.tipoProducto}" th:value="${tipo}" th:text="${tipo}"></option>
             </select>
         </label>
 
-        <button type="submit">Guardar</button>
+        <button type="submit" th:text="#{Guardar}">Guardar</button>
     </form>
-    <button class="submit-button" th:onclick="'window.location.href=\'/ProductoController/ListadeProducto\''">Volver</button>
+    <button class="submit-button" th:onclick="'window.location.href=\'/ProductoController/ListadeProducto\''" th:text="#{Regresar}">Volver</button>
 </div>
 </body>
+<footer th:replace="/template :: footer"></footer>
 </html>

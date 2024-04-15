@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
-    <title>Configurar perfil clientes</title>
+    <title th:text="#{Perfil}">Configuración perfil clientes</title>
     <link rel="stylesheet" th:href="@{/css/template.css}">
     <link rel="stylesheet" th:href="@{/css/FormularioEditarCliente.css}">
 </head>
@@ -11,16 +11,17 @@
 <form th:object="${Cliente_editar}" th:action="@{/ClienteController/editar/{id}(id=${Cliente_editar.clienteId})}" method="post">
     <div class="form-group">
         <div class="form-row" style="display: inline;">
-            <h1>Configuración de perfil cliente</h1>
-    <label>Nombre: <input type="text" th:field="*{nombre}"></label><br><br>
-    <label>Direccion: <input type="text" th:field="*{direccion}"></label><br><br>
-    <label>Correo: <input type="text" th:field="*{correoElectronico}"></label><br><br>
-    <select id="tipo_cliente" onchange="" th:field="*{tipoCliente}">
+            <h1 th:text="#{Perfil}">Configuración perfil cliente</h1>
+            <label th:text="#{ID}">ID:</label> <input type="text" th:field="*{clienteId}" readonly><br><br>
+            <label th:text="#{Nombre}">Nombre:</label> <input type="text" th:field="*{nombre}" readonly><br><br>
+    <label th:text="#{Direccion}">Direccion:</label> <input type="text" th:field="*{direccion}"><br><br>
+    <label th:text="#{Correo}">Correo:</label> <input type="text" th:field="*{correoElectronico}"><br><br>
+    <select id="tipo_cliente" onchange="" th:field="*{tipoCliente}" disabled>
         <option value="juridica" th:text="#{TipoCedulaJuridica}">Cédula Jurídica</option>
         <option value="fisica" th:text="#{TipoCedulaFisica}">Cédula Física</option>
     </select><br><br>
-    <button type="submit" class="botones">Guardar</button>
-    <td><button class="botones" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+    <button type="submit" class="botones" th:text="#{Guardar}">Guardar</button>
+    <td><button class="botones" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
     </div>
     </div>
 </form>

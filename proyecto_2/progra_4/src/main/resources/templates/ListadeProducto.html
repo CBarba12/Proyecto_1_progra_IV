@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Productos</title>
+    <title th:text="#{Productos}">Productos</title>
     <link rel="stylesheet" th:href="@{/css/template.css}">
     <link rel="stylesheet" th:href="@{/css/ListadoProductos.css}">
 </head>
 <header th:replace="/template :: header"></header>
 <body>
 <div class="container">
-    <h1>Listado de Productos</h1>
+    <h1 th:text="#{ListadoP}">Listado de Productos</h1>
     <td th:text="${session.id_proveedor}"></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/ProductoController/nuevoProducto\''">Nuevo Producto</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/ProductoController/nuevoProducto\''" th:text="#{NuevoP}">Nuevo Producto</button></td>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Tipo de producto</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Proveedor</th>
-            <th>Acciones</th>
+            <th th:text="#{Codigo}">ID</th>
+            <th th:text="#{Nombre}">Nombre</th>
+            <th th:text="#{TipoProducto}">Tipo de producto</th>
+            <th th:text="#{Descripcion}">Descripcion</th>
+            <th th:text="#{Precio}">Precio</th>
+            <th th:text="#{ProductoID}">Proveedor</th>
+            <th th:text="#{Acciones}">Acciones</th>
         </tr>
         <tbody>
         <tr th:each="producto : ${ProductoProveedor}">
@@ -32,10 +32,10 @@
             <td th:text="${producto.precio}"></td>
             <td th:text="${producto.proveedorId}"></td>
             <td>
-                <a class="button edit-button" th:href="@{'/ProductoController/editarProducto/' + ${producto.productoId}}">Editar</a>
+                <a class="button edit-button" th:href="@{'/ProductoController/editarProducto/' + ${producto.productoId}}" th:text="#{Editar}">Editar</a>
             </td>
         </tr>
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
         </tbody>
     </table>
 </div>
