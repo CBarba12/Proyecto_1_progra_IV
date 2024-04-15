@@ -19,6 +19,12 @@
         <div th:if="${alerta}" class="alert alert-danger" role="alert">
             <p th:text="${alerta}"></p>
         </div>
+        <div th:if="${mensaj}" class="alert alert-danger" role="alert">
+            <p th:text="${mensaj}"></p>
+        </div>
+        <div th:if="${erro}" class="alert alert-danger" role="alert">
+            <p th:text="${erro}"></p>
+        </div>
     <form th:object="${proveedor}" th:action="@{/ProveedorController/nuevo_proveedor}" method="post">
     <!--  <input type="hidden" th:field="*{idProveedor}">-->
 

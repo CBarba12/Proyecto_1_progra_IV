@@ -109,16 +109,16 @@ public class ProveedorController {
 
         if ("Fisico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
             model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
-            return "formularioproveedor";
+            return "redirect:/ProveedorController/nuevo";
         }
 
         if ("Juridico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
             model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
-            return "formularioproveedor";
+            return "redirect:/ProveedorController/nuevo";
         }
 
         if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
-            model.addAttribute("error", "El nombre solo puede contener letras y espacios.");
+            model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
             return "formularioproveedor";
         }
 
