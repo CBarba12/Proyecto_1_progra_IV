@@ -8,18 +8,19 @@
 </head>
 <header th:replace="/template :: header"></header>
 <body>
+<main>
 
 <div class="container">
+
     <h1 th:text="#{ListadoF}">Listado de Facturas</h1>
-    <p class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </p>
-    <p><span th:text="${session.id_proveedor}"></span></p>
+    <span class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </span>
+    <span th:text="${session.id_proveedor}"></span>
     <p th:if="${mensaje}" th:text="${mensaje}"></p>
 
-    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
     <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''" th:text="#{NuevaF}">Nueva Factura</button></td>
     <td><button class="button pdf-button" th:onclick="'window.location.href=\'/FacturaController/pdf\''" th:text="#{GenerarPDF}">Generar PDF de Facturas</button></td>
     <td><button class="button xml-button" th:onclick="'window.location.href=\'/FacturaController/xml\''" th:text="#{GenerarXML}">Generar XML de Facturas</button></td>
-
+    <div class="table-container">
     <table>
         <tr>
             <th th:text="#{FacturaID}">Factura ID</th>
@@ -49,8 +50,10 @@
         </tr>
 
     </table>
+    </div>
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
 </div>
-
+</main>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>

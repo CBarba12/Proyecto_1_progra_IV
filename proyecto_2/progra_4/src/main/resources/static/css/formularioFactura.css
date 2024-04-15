@@ -3,9 +3,10 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-
-
 
 h1 {
     text-align: center;
@@ -14,8 +15,10 @@ h1 {
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 th, td {
@@ -31,12 +34,15 @@ tr:hover {
 .container-clientes {
     float: left;
     width: 45%;
+    margin-top: 20px;
     margin-right: 1%;
     margin-left: 1%;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    overflow-x: auto;
+    max-height: 100px;
 }
 
 .container-clientes h1{
@@ -52,6 +58,8 @@ tr:hover {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    overflow-x: auto;
+    max-height: 100px;
 }
 
 .container-productos h1{
@@ -74,7 +82,8 @@ tr:hover {
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: auto;
+    margin-top: 150px;
+    margin-left: 25%;
     text-align: center;
 }
 

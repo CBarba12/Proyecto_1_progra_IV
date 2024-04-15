@@ -8,11 +8,13 @@
 </head>
 <header th:replace="/template :: header"></header>
 <body>
+<main>
 <div class="container">
     <h1 th:text="#{ListadoP}">Listado de Productos</h1>
     <td th:text="${session.id_proveedor}"></td>
     <td><button class="button" th:onclick="'window.location.href=\'/ProductoController/nuevoProducto\''" th:text="#{NuevoP}">Nuevo Producto</button></td>
-    <table>
+        <div class="table-container">
+        <table>
         <tr>
             <th th:text="#{Codigo}">ID</th>
             <th th:text="#{Nombre}">Nombre</th>
@@ -35,10 +37,13 @@
                 <a class="button edit-button" th:href="@{'/ProductoController/editarProducto/' + ${producto.productoId}}" th:text="#{Editar}">Editar</a>
             </td>
         </tr>
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+
         </tbody>
     </table>
+    </div>
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
 </div>
+    </main>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>
