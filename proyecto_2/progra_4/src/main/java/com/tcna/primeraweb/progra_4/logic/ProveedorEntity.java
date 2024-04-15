@@ -1,6 +1,7 @@
 package com.tcna.primeraweb.progra_4.logic;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "proveedor", schema = "proyecto_1")
@@ -8,6 +9,7 @@ public class ProveedorEntity {
 
     @Id
     @Column(name = "id_proveedor")
+    @Size(min=3,max=20)
     private String idProveedor;
     @Basic
     @Column(name = "nombre")
