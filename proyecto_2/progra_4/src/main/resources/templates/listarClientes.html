@@ -8,10 +8,13 @@
 </head>
 <header th:replace="/template :: header"></header>
 <body>
+<main>
 <div class="container">
     <h1 th:text="#{Listado}">Listado de Clientes</h1>
-    <p class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </p>
-        <p><span th:text="${session.id_proveedor}"></span></p>
+    <span class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </span>
+        <span th:text="${session.id_proveedor}"></span>
+    <div class="table-container">
+
     <table>
         <thead>
         <tr>
@@ -39,10 +42,13 @@
                 <button type="submit" class="button" th:text="#{Agregar}">Agregar Cliente</button>
             </form>
 
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+
         </tbody>
     </table>
     </div>
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+    </div>
+</main>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>

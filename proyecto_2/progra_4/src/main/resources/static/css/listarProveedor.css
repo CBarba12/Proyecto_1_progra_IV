@@ -3,11 +3,14 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
     width: 80%;
-    margin: 20px auto;
+    margin: 105px auto;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -102,4 +105,9 @@ td {
 
 .rechazar-button:hover {
     background-color: #065b80;
+}
+
+.table-container{
+    overflow-x: auto;
+    max-height: 300px;
 }

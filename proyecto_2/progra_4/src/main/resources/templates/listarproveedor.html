@@ -8,7 +8,7 @@
 </head>
 <header th:replace="/template :: header"></header>
 <body>
-
+<main>
 <div class="container">
     <h1 th:text="#{ListadoProvedores}">Listado de Proveedores</h1>
 
@@ -16,7 +16,7 @@
     <div th:if="${error}" class="alert alert-danger" role="alert">
         <p th:text="${error}"></p>
     </div>
-
+    <div class="table-container">
     <table>
         <thead>
         <tr>
@@ -47,9 +47,12 @@
         </tr>
         </tbody>
     </table>
-    <a href="/LoginController/inicio" class="add-link" th:text="#{Regresar}">Regresar</a>
-</div>
+    </div>
 
+    <a href="/LoginController/inicio" class="add-link" th:text="#{Regresar}">Regresar</a>
+
+</div>
+</main>
 </body>
 <footer th:replace="/template :: footer"></footer>
 </html>

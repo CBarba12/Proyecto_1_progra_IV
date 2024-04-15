@@ -9,6 +9,8 @@
 <header th:replace="/template :: header"></header>
 <body>
 <div class="container">
+    <div class="form-group">
+        <div class="form-row" style="display: inline;">
     <h1 th:text="#{TituloProducto}">Nuevo Producto</h1>
     <form th:object="${producto}" th:action="@{/ProductoController/nuevo}" method="post">
         <label th:text="#{Nombre}">Nombre: </label><input type="text" th:field="*{nombre}">
@@ -22,6 +24,9 @@
         <button type="submit" th:text="#{Guardar}">Guardar</button>
     </form>
     <button class="submit-button" th:onclick="'window.location.href=\'/ProductoController/ListadeProducto\''" th:text="#{Regresar}">Volver</button>
+        </div>
+
+    </div>
 </div>
 </body>
 <footer th:replace="/template :: footer"></footer>
