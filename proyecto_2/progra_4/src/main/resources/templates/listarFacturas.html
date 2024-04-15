@@ -1,97 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
-    <title>Facturas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        tr:hover {
-            background-color: #f2f2f2;
-        }
-
-        .button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-
-        .pdf-button {
-            background-color: rgba(53, 117, 55, 0.87);
-            color: white;
-        }
-
-        .pdf-button:hover {
-            background-color: rgba(53, 117, 55, 0.87);
-        }
-
-        .xml-button {
-            background-color: #065b80;
-            color: white;
-        }
-
-        .xml-button:hover {
-            background-color: #065b80;
-        }
-    </style>
+    <title th:text="#{ListadoF}">Listado de Facturas</title>
+    <link rel="stylesheet" th:href="@{/css/ListarFacturas.css}">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
-<h1>Listado de Facturas</h1>
+
 <div class="container">
-    <td th:text="${session.id_proveedor}"></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''">Volver</button></td>
-    <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''">Nueva Factura</button></td>
-    <td><button class="button pdf-button" th:onclick="'window.location.href=\'/FacturaController/pdf\''">Generar PDF de Facturas</button></td>
-    <td><button class="button xml-button" th:onclick="'window.location.href=\'/FacturaController/xml\''">Generar XML de Facturas</button></td>
+    <h1 th:text="#{ListadoF}">Listado de Facturas</h1>
+    <p class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </p>
+    <p><span th:text="${session.id_proveedor}"></span></p>
+    <p th:if="${mensaje}" th:text="${mensaje}"></p>
+
+    <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+    <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/NuevaFactura\''" th:text="#{NuevaF}">Nueva Factura</button></td>
+    <td><button class="button pdf-button" th:onclick="'window.location.href=\'/FacturaController/pdf\''" th:text="#{GenerarPDF}">Generar PDF de Facturas</button></td>
+    <td><button class="button xml-button" th:onclick="'window.location.href=\'/FacturaController/xml\''" th:text="#{GenerarXML}">Generar XML de Facturas</button></td>
 
     <table>
         <tr>
-            <th>Factura ID</th>
-            <th>Proveedor</th>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Fecha</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-            <th>Acciones</th>
+            <th th:text="#{FacturaID}">Factura ID</th>
+            <th th:text="#{ProveedorID}">Proveedor</th>
+            <th th:text="#{ClienteID}">Cliente</th>
+            <th th:text="#{ProductoID}">Producto</th>
+            <th th:text="#{Precio}">Precio</th>
+            <th th:text="#{Fecha}">Fecha</th>
+            <th th:text="#{Cantidad}">Cantidad</th>
+            <th th:text="#{Total}">Total</th>
+            <th th:text="#{Acciones}">Acciones</th>
         </tr>
 
         <tr th:each="factura : ${Facturas}">
@@ -104,9 +43,7 @@
             <td th:text="${factura.getCantidad()}"></td>
             <td th:text="${factura.getTotal()}"></td>
             <td>
-                <!-- Botón para editar -->
                 <a class="button pdf-button" th:href="@{'/FacturaController/pdf/' + ${factura.getFacturaId()}}">PDF</a>
-                <!-- Botón para borrar -->
                 <a class="button xml-button" th:href="@{'/FacturaController/xml/' + ${factura.getFacturaId()}}">XML</a>
             </td>
         </tr>
@@ -115,4 +52,5 @@
 </div>
 
 </body>
+<footer th:replace="/template :: footer"></footer>
 </html>

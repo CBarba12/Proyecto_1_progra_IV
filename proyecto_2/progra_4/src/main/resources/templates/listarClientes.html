@@ -12,7 +12,6 @@
     <h1 th:text="#{Listado}">Listado de Clientes</h1>
     <p class="id-proveedor" th:text="#{IDP}"><b>Identificación del Provedor:</b> </p>
         <p><span th:text="${session.id_proveedor}"></span></p>
-    <p th:if="${mensaje}" th:text="${mensaje}"></p>
     <table>
         <thead>
         <tr>
@@ -32,7 +31,7 @@
             <td th:text="${cliente.correoElectronico}"></td>
             <td th:text="${cliente.tipoCliente}"></td>
             <td>
-                <a th:href="@{/ClienteController/editar/{id}(id=${cliente.getClienteId()})}" style="margin-right: 10px;">Editar</a>
+                <a th:href="@{/ClienteController/editar/{id}(id=${cliente.getClienteId()})}" style="margin-right: 10px;" th:text="#{Editar}">Editar</a>
 
             </td>
         </tr>

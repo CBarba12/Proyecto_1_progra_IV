@@ -1,116 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
-    <title>Factura</title>
-   <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
-
-
-
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    tr:hover {
-        background-color: #f2f2f2;
-    }
-
-    .container-clientes {
-        float: left;
-        width: 45%;
-        margin-right: 1%;
-        margin-left: 1%;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-    }
-
-    .container-clientes h1{
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
-    .container-productos {
-        float: right;
-        width: 45%;
-        margin-right: 1%;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-    }
-
-    .container-productos h1{
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .container-clientes, .container-productos {
-        display: inline-block;
-        vertical-align: top; /* Alinea las tablas en la parte superior si tienen alturas diferentes */
-        margin-right: 1%; /* Añade un pequeño margen entre las tablas */
-    }
-
-    .form-factura {
-        display: block;
-        max-width: 400px;
-        width: 100%;
-        padding: 20px;
-        background: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: auto;
-        text-align: center;
-    }
-
-    .form-factura h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .form-factura label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-    }
-
-</style>
+    <title th:text="#{Factura}">Factura</title>
+    <link rel="stylesheet" th:href="@{/css/formularioFactura.css}">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
-    <h1>Factura</h1>
+    <h1 th:text="#{Facturacion}">Facturacion</h1>
     <div class="container">
-<!--        <td th:text="${session.id_proveedor}"></td>-->
-<!--        <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/ListadeFacturas\''">Volver</button></td>-->
+        <td th:text="${session.id_proveedor}"></td>
+        <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/ListadeFacturas\''">Volver</button></td>
         <div class="container-clientes">
-            <h1>Clientes</h1>
+            <h1 th:text="#{Clientes}">Clientes</h1>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
+                    <th th:text="#{Nombre}">Nombre</th>
+                    <th th:text="#{Correo}">Correo</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -123,14 +32,14 @@
             </table>
         </div>
         <div class="container-productos">
-            <h1>Productos</h1>
+            <h1 th:text="#{Productos}">Productos</h1>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
+                    <th th:text="#{Nombre}">Nombre</th>
+                    <th th:text="#{Descripcion}">Descripción</th>
+                    <th th:text="#{Precio}">Precio</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -144,16 +53,17 @@
             </table>
         </div>
         <div class="form-factura">
-            <h1>Facturar</h1>
+            <h1 th:text="#{Facturar}">Facturar</h1>
             <form  th:action="@{/FacturaController/guardarFactura}" method="post">
-                <label for="clienteId">ID del cliente:</label>
+                <label for="clienteId" th:text="#{IDCliente}">ID del cliente:</label>
                 <input type="text" id="clienteId" name="clienteId" required></br>
-                <label for="productoId">ID del producto:</label>
+                <label for="productoId" th:text="#{IDProducto}">ID del producto:</label>
                 <input type="text" id="productoId" name="productoId" required></br>
-                <label for="cantidad">Cantidad a facturar:</label>
+                <label for="cantidad" th:text="#{CantidadF}">Cantidad a facturar:</label>
                 <input type="number" id="cantidad" name="cantidad" required></br></br>
 
-                <input type="submit" value="Facturar">
+                <input type="submit" th:value="#{Facturar}">
+                <td><button class="button" th:onclick="'window.location.href=\'/FacturaController/ListadeFacturas\''" th:text="#{Regresar}">Volver</button></td>
             </form>
         </div>
     </div>
@@ -161,4 +71,5 @@
 
 
 </body>
+<footer th:replace="~{/template :: footerWithLogout}"></footer>
 </html>

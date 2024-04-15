@@ -45,13 +45,14 @@ public class LoginController {
 
             } else if(p.getEstado().equals("Aceptado")) {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
-                return "proveedorAcciones";
+                return "redirect:/homecontroler/ProveedorAcciones";
             }
 
         }
 
 
         return "redirect:/LoginController/inicio";
+
     }
 
 

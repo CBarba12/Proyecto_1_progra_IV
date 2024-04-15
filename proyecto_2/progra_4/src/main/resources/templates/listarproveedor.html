@@ -2,121 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Proveedores</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        tr:hover {
-            background-color: #f2f2f2;
-        }
-
-        th {
-            background-color: #f7f7f7;
-        }
-
-        td {
-            color: #666;
-        }
-
-        .button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-
-        .alert {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            text-align: center;
-        }
-
-        .add-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .add-link:hover {
-            background-color: #0056b3;
-        }
-        .aceptar-button {
-            background-color: rgba(53, 117, 55, 0.87);
-            color: white;
-        }
-
-        .aceptar-button:hover {
-            background-color: rgba(53, 117, 55, 0.87);
-        }
-
-        .rechazar-button {
-            background-color: #065b80;
-            color: white;
-        }
-
-        .rechazar-button:hover {
-            background-color: #065b80;
-        }
-    </style>
-
+    <title th:text="#{Listado}">Listado de Proveedores</title>
+    <link rel="stylesheet" th:href="@{/css/listarProveedor.css}">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
 </head>
+<header th:replace="/template :: header"></header>
 <body>
 
 <div class="container">
-    <h1>Listado de Proveedores</h1>
+    <h1 th:text="#{ListadoProvedores}">Listado de Proveedores</h1>
 
     <!-- Agrega el bloque para mostrar el mensaje de error -->
     <div th:if="${error}" class="alert alert-danger" role="alert">
@@ -126,14 +20,14 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Tipo de Proveedor</th>
-           <th>Estado</th>
-            <th>Acciones</th>
+            <th th:text="#{Proveedor}">ID</th>
+            <th th:text="#{Nombre}">Nombre</th>
+            <th th:text="#{Correo}">Correo</th>
+            <th th:text="#{Telefono}">Teléfono</th>
+            <th th:text="#{Direccion}">Dirección</th>
+            <th th:text="#{TipoProveedor}">Tipo de Proveedor</th>
+            <th th:text="#{Estado}">Estado</th>
+            <th th:text="#{Acciones}">Acciones</th>
         </tr>
         </thead>
 
@@ -147,15 +41,15 @@
             <td th:text="${proveedor.tipoProveedor}"></td>
             <td th:text="${proveedor.estado}"></td>
             <td>
-                <a class="button aceptar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Aceptado'}">Aceptar</a>
-                <a class="button rechazar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Rechazado'}">Rechazar</a>
+                <a class="button aceptar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Aceptado'}" th:text="#{Aceptar}">Aceptar</a>
+                <a class="button rechazar-button" th:href="@{'/ProveedorController/estado/' + ${proveedor.idProveedor} + '/Rechazado'}" th:text="#{Rechazar}">Rechazar</a>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <a th:href="@{/}" class="link" style="display: block; text-align: center;">Ir a la página de inicio</a>
+    <a href="/LoginController/inicio" class="add-link" th:text="#{Regresar}">Regresar</a>
 </div>
 
 </body>
+<footer th:replace="/template :: footer"></footer>
 </html>
