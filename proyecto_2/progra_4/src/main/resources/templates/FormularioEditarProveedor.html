@@ -14,18 +14,19 @@
     <form th:object="${proveedor}" th:action="@{/ProveedorController/editar/{id}(id=${proveedor.getIdProveedor()})}" method="post">
         <label th:text="#{ID}">Identificación: </label>
         <span th:text="${session.id_proveedor}" readonly></span><br><br>
-        <label th:text="#{Nombre}">Nombre:</label> <input type="text" th:field="*{nombre}"><br><br>
-        <label th:text="#{Correo}">Correo:</label> <input type="text" th:field="*{correoElectronico}"><br><br>
-        <label th:text="#{Contrasena}">Contraseña: </label><input type="text" th:field="*{contrasena}"><br><br>
-        <label th:text="#{Telefono}">Teléfono: </label><input type="text" th:field="*{telefono}"><br><br>
-        <label th:text="#{Direccion}">Dirección: </label><input type="text" th:field="*{direccion}"><br><br>
-        <label for="tipoProveedor">Tipo (Físico/Jurídico):</label>
-        <select id="tipoProveedor" name="tipoProveedor" th:field="*{tipoProveedor}" disabled>
-            <option value="Físico">Físico</option>
-            <option value="Jurídico">Jurídico</option>
+        <label th:text="#{Nombre}">Nombre:</label> <input type="text" th:field="*{nombre}" required><br><br>
+        <label th:text="#{Correo}">Correo:</label> <input type="text" th:field="*{correoElectronico}" required><br><br>
+        <label th:text="#{Contrasena}">Contraseña: </label><input type="text" th:field="*{contrasena}" required><br><br>
+        <label th:text="#{Telefono}">Teléfono: </label><input type="text" th:field="*{telefono}" required><br><br>
+        <label th:text="#{Direccion}">Dirección: </label><input type="text" th:field="*{direccion}" required><br><br>
+        <label for="tipo_proveedor"><span style="color: red;">*</span><span th:text="#{TipoCedula}">Tipo de Cédula</span>:</label>
+        <select id="tipo_proveedor" onchange="" th:field="*{tipoProveedor}" disabled>
+            <option value="ninguna" th:text="#{TipoCedulaNinguna}">Tipo de cédula</option>
+            <option value="Jurídico" th:text="#{TipoCedulaJuridica}">Cédula Jurídica</option>
+            <option value="Físico" th:text="#{TipoCedulaFisica}">Cédula Física</option>
         </select><br><br>
         <button type="submit" th:text="#{Guardar}">Guardar</button>
-        <td><button class="button" th:onclick="'window.location.href=\'/homecontroler/ProveedorAcciones\''" th:text="#{Regresar}">Volver</button></td>
+        <a href="/homecontroler/ProveedorAcciones" class="add-link" th:text="#{Regresar}">Regresar</a>
     </form>
 </div>o
 </div>

@@ -97,37 +97,40 @@ public class ProveedorController {
             /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
             model.addAttribute("proveedor", proveedor);
             model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
-            return "formularioproveedor";
+            return "redirect:/ProveedorController/nuevo";
         }
 
         if ("Registrar".equals(proveedor.getActividadComercial())) {
            /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
             model.addAttribute("proveedor", proveedor);
             model.addAttribute("alerta", "Seleccione una actividad comercial");
-            return "formularioproveedor";
+            return "redirect:/ProveedorController/nuevo";
         }
 
-        if ("Fisico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
+        if ("Físico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
             model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
             return "redirect:/ProveedorController/nuevo";
         }
 
-        if ("Juridico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
+        if ("Jurídico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
             model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
             return "redirect:/ProveedorController/nuevo";
         }
 
         if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
             model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
-            return "formularioproveedor";
+            return "redirect:/ProveedorController/nuevo";
         }
-
-        if (HaciendaStub.validarRegistroProveedor(proveedor)) {
-            proveedor.setAdmin((byte) 0);
-            proveedor.setEstado("En espera");
-            proveedorService.crearProveedores(proveedor);
-            return "redirect:/";
-        } else {
+        if(proveedorService.obtenerProveedorPorId(proveedor.getIdProveedor())==null){
+            if (HaciendaStub.validarRegistroProveedor(proveedor)) {
+                proveedor.setAdmin((byte) 0);
+                proveedor.setEstado("En espera");
+                proveedorService.crearProveedores(proveedor);
+                return "redirect:/";
+            } else {
+                return "redirect:/";
+            }
+        }else {
             return "redirect:/";
         }
     }
@@ -137,8 +140,10 @@ public class ProveedorController {
 
 //----------------------------------------------------------------------------------------
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor,Model model){
-        proveedor.setIdProveedor(id);
+    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor,Model model, HttpSession session){
+        String ID = (String) session.getAttribute("id_proveedor");
+        proveedor = proveedorService.obtenerProveedorPorId(ID);
+        model.addAttribute("id_proveedor",ID);
         model.addAttribute("proveedor",proveedor);
         model.addAttribute("editar_PROVEDOR","/ProveedorController/editar"+id);
 
@@ -150,9 +155,15 @@ public class ProveedorController {
 
 
     @PostMapping("/editar/{id}")
-    public String actualizarProveedores(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor){
-     proveedorService.actualizarProveedor(id,proveedor);
-     return "redirect:/ProveedorController/Listadeproveedores";
+    public String actualizarProveedores(@PathVariable String id, @ModelAttribute ProveedorEntity proveedor, HttpSession session){
+        String ID = (String) session.getAttribute("id_proveedor");
+        ProveedorEntity p = proveedorService.obtenerProveedorPorId(ID);
+        proveedor.setIdProveedor(ID);
+        proveedor.setAdmin(p.getAdmin());
+        proveedor.setEstado(p.getEstado());
+        proveedor.setTipoProveedor(p.getTipoProveedor());
+        proveedorService.actualizarProveedor(id,proveedor);
+     return "redirect:/homecontroler/ProveedorAcciones";
     }
 
 

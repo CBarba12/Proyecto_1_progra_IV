@@ -85,9 +85,37 @@ public class ClienteController {
         String Provedor= (String) session.getAttribute("id_proveedor");
         cliente.setProveedorId(Provedor);
 
-        clienteService.crearCliente(cliente);
+        if ("ninguna".equals(cliente.getTipoCliente())) {
+            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
+            model.addAttribute("proveedor", cliente);
+            model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
+            return "redirect:/ClienteController/nuevocliente";
+        }
+
+        if ("Físico".equals(cliente.getTipoCliente()) && cliente.getClienteId().length() != 9) {
+            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
+            return "redirect:/ClienteController/nuevocliente";
+        }
+
+        if ("Jurídico".equals(cliente.getTipoCliente()) && cliente.getClienteId().length() != 10) {
+            model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
+            return "redirect:/ClienteController/nuevocliente";
+        }
+
+        if (!cliente.getNombre().matches("[a-zA-Z ]+")) {
+            model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
+            return "redirect:/ClienteController/nuevocliente";
+        }
+
+        if(clienteService.obtenerClienteId(cliente.getClienteId())==null){
+            clienteService.crearCliente(cliente);
+        }else {
+            return "redirect:/ClienteController/nuevocliente";
+        }
 
         List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(Provedor);
+
+
 
         if (clientesProveedor != null) {
             model.addAttribute("clientesProveedor", clientesProveedor);
