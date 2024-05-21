@@ -34,6 +34,7 @@ public class ProveedorController {
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
     public String listaProveedor(Model model, HttpSession session) {
         String estado[] = {"Aceptado","Rechazado"};
+
       List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
 
         ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId((String) session.getAttribute("id_admin"));
@@ -63,6 +64,16 @@ public class ProveedorController {
         }
 
     }
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/estado/{id}/{estado}")
     public String cambiarEstado(@PathVariable("id") String id, @PathVariable("estado") String estado, Model model, HttpSession session) {
