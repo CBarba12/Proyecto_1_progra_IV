@@ -27,13 +27,17 @@ public class ProductoEntity {
     @Basic
     @Column(name = "proveedor_id")
     private String proveedorId;
+    @Basic
+    @Column(name = "unidad")
+    private String unidad;
 
 
-    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto) {
+    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto, String unidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.tipoProducto = tipoProducto;
+        this.unidad = unidad;
     }
 
 
@@ -91,6 +95,10 @@ public class ProductoEntity {
         this.proveedorId = proveedorId;
     }
 
+    public String getUnidad() { return unidad; }
+
+    public void setUnidad(String unidad) { this.unidad = unidad; }
+
     @Override
     public String toString() {
         return "ProductoEntity{" +
@@ -100,6 +108,7 @@ public class ProductoEntity {
                 ", precio=" + precio +
                 ", tipoProducto='" + tipoProducto + '\'' +
                 ", proveedorId='" + proveedorId + '\'' +
+                ", unidad='" + unidad + '\'' +
                 '}';
     }
 }

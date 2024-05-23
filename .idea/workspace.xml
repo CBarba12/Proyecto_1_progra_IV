@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Se agregan más validaciones de proveedor">
+    <list default="true" id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="Ultimos cambios">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/FacturaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/ProductoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/logic/ProductoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/FacturaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/java/com/tcna/primeraweb/progra_4/presentation/ProveedorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_2/progra_4/src/main/resources/templates/formularioproveedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,33 +30,54 @@
       </list>
     </option>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;Spring Boot.Progra4Application.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;valeria2&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
-  }
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Control" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
 }</component>
+  <component name="ProjectId" id="2f7ihgRlAElpPjsIQWWmF5wkDZk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Progra4Application.executor": "Run",
+    "git-widget-placeholder": "Joshua",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/joshua/Documents/Universidad/Ciclo_I_2024/Programacion IV/Proyectos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb",
+      "mysql"
+    ]
+  }
+}]]></component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="progra_4" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="progra_4" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Progra4Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="progra_4" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.tcna.primeraweb.progra_4.Progra4Application" />
@@ -58,6 +86,15 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="Se agregan ciertas validaciones y el STUB">
       <option name="closed" value="true" />
@@ -99,8 +136,43 @@
       <option name="project" value="LOCAL" />
       <updated>1713138590737</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0eca6115-2f7f-4f80-a71d-c1fcd8685c02" name="Changes" comment="css" />
+      <created>1713158640865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713158640865</updated>
+      <workItem from="1713158644592" duration="1868000" />
+      <workItem from="1713640156345" duration="440000" />
+      <workItem from="1713844281651" duration="4523000" />
+      <workItem from="1713852002107" duration="2516000" />
+      <workItem from="1713899553721" duration="671000" />
+      <workItem from="1713918373507" duration="2457000" />
+      <workItem from="1713995211633" duration="1650000" />
+      <workItem from="1713997924155" duration="1831000" />
+      <workItem from="1714013558833" duration="1151000" />
+      <workItem from="1714016726289" duration="2961000" />
+      <workItem from="1714021373392" duration="3642000" />
+      <workItem from="1714146418246" duration="14118000" />
+      <workItem from="1715402139841" duration="754000" />
+      <workItem from="1715917015441" duration="59000" />
+      <workItem from="1716269899412" duration="1147000" />
+      <workItem from="1716307638243" duration="9594000" />
+      <workItem from="1716419538472" duration="4657000" />
+    </task>
+    <task id="LOCAL-00006" summary="Ultimos cambios">
+      <option name="closed" value="true" />
+      <created>1713640330056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713640330056</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se edita formulario proveedores" />
@@ -109,6 +181,8 @@
     <MESSAGE value="Se agrega validacion para que en proveedor no pueda escribir numeros en el nombre" />
     <MESSAGE value="Se agrega validacion" />
     <MESSAGE value="Se agregan más validaciones de proveedor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregan más validaciones de proveedor" />
+    <MESSAGE value="css" />
+    <MESSAGE value="Ultimos cambios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ultimos cambios" />
   </component>
 </project>

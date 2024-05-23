@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/ProveedorController")
 public class ProveedorController {
 
@@ -26,7 +27,6 @@ public class ProveedorController {
     private ProveedorService proveedorService;
     @Autowired
     private ClienteService clienteService;
-
     @Autowired
     private HaciendaStub HaciendaStub;
 
@@ -64,15 +64,6 @@ public class ProveedorController {
         }
 
     }
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/estado/{id}/{estado}")

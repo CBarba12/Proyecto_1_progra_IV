@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/LoginController")
 public class LoginController {
 
@@ -34,8 +35,6 @@ public class LoginController {
 
             ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
 
-
-
             if (p.getAdmin() != null && p.getAdmin() == 1) {
 
                 List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
@@ -47,10 +46,7 @@ public class LoginController {
                 session.setAttribute("id_proveedor",numeroIdentificacion);
                 return "redirect:/homecontroler/ProveedorAcciones";
             }
-
         }
-
-
         return "redirect:/LoginController/inicio";
 
     }
