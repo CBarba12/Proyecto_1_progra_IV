@@ -5,6 +5,7 @@ import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.HaciendaStub;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,13 +34,18 @@ public class pruebacontroller {
 
 
 
+
+
+
+
     @PostMapping("/listar")
-    public ProveedorEntity crear(@RequestBody ProveedorDTO proveedorDTO) {
+    public ProveedorEntity crear(@RequestBody ProveedorDTO proveedorDTO, HttpSession session) {
         // Aquí puedes hacer cualquier validación o transformación necesaria
         // por ejemplo, convertir ProveedorDTO a ProveedorEntity si es necesario
         ProveedorEntity proveedorEntity = convertirProveedorDTOaProveedorEntity(proveedorDTO);
         return proveedorService.crearProveedores(proveedorEntity);
     }
+
 
     private ProveedorEntity convertirProveedorDTOaProveedorEntity(ProveedorDTO proveedorDTO) {
         ProveedorEntity proveedorEntity = new ProveedorEntity();
@@ -53,7 +59,6 @@ public class pruebacontroller {
         proveedorEntity.setDireccion(proveedorDTO.getDireccion());
         proveedorEntity.setTipoProveedor(proveedorDTO.getTipoProveedor());
         proveedorEntity.setActividadComercial(proveedorDTO.getActividadComercial());
-
         // Setear otros campos según sea necesario
         return proveedorEntity;
     }
