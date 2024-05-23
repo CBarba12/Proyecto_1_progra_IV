@@ -2,10 +2,17 @@ package com.tcna.primeraweb.progra_4.logic;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "proveedor", schema = "proyecto_1")
-public class ProveedorEntity {
+public class ProveedorEntity implements UserDetails {
 
     @Id
     @Column(name = "id_proveedor")
@@ -137,6 +144,44 @@ public class ProveedorEntity {
     }
 
 
+   @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> autoridades = new HashSet<>();
+        if (this.admin != 0) { // Si admin es diferente de 0, el usuario es administrador
+            autoridades.add(new Authority("ROLE_ADMIN"));
+        } else {
+            autoridades.add(new Authority("ROLE_USER"));
+        }
+        return autoridades;
+    }
 
+    @Override
+    public String getPassword() {
+        return contrasena;
+    }
 
+    @Override
+    public String getUsername() {
+        return idProveedor;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

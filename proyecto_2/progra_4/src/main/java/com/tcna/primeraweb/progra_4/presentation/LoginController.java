@@ -7,6 +7,7 @@ import com.tcna.primeraweb.progra_4.service.ClienteService;
 import jakarta.servlet.http.HttpSession;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,29 +27,12 @@ public class LoginController {
     private ClienteService clienteService;
 
     @PostMapping("/login")
-    public String login(@RequestParam("numero_identificacion") String numeroIdentificacion,
-                        @RequestParam("contrasena") String contrasena,
-                        HttpSession session, Model model) {
-
-
-        if (proveedorService.verificarEmailPaswor(numeroIdentificacion, contrasena)) {
-
-            ProveedorEntity p=proveedorService.obtenerProveedorPorId(numeroIdentificacion);
-
-            if (p.getAdmin() != null && p.getAdmin() == 1) {
-
-                List<ProveedorEntity> prob=proveedorService.ObtenerProveedores();
-                session.setAttribute("id_admin",numeroIdentificacion);
-                model.addAttribute("listaProveedor",prob);
-                return "redirect:/ProveedorController/Listadeproveedores";
-
-            } else if(p.getEstado().equals("Aceptado")) {
-                session.setAttribute("id_proveedor",numeroIdentificacion);
-                return "redirect:/homecontroler/ProveedorAcciones";
-            }
+    public ResponseEntity<ProveedorEntity> login(@RequestBody ProveedorEntity proveedor) {
+        if (proveedorService.verificarEmailPaswor(proveedor.getIdProveedor(), proveedor.getContrasena())) {
+            ProveedorEntity p=proveedorService.obtenerProveedorPorId(proveedor.getIdProveedor());
+            return ResponseEntity.ok(p);
         }
-        return "redirect:/LoginController/inicio";
-
+        return ResponseEntity.notFound().build();
     }
 
 

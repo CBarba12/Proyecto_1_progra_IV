@@ -15,7 +15,7 @@ public interface ProveedorRepository extends JpaRepository<ProveedorEntity,Strin
 
     ProveedorEntity findByIdProveedorAndContrasena(String ID, String contrasena);
 
-
+    ProveedorEntity findById2(String id);
     List<ProveedorEntity> findAllByIdProveedor(String id);
     List<ProveedorEntity> findAll();
 
