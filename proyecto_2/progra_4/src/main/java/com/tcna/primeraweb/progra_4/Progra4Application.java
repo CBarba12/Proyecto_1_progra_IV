@@ -21,12 +21,12 @@ public class Progra4Application  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         var chain = http
                 .authorizeHttpRequests(customizer -> customizer
-                        .requestMatchers("/api/LoginController/login").permitAll()
-                        .requestMatchers("/api/LoginController/logout").authenticated()
-                        .requestMatchers("/api/ProveedorController/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                        .requestMatchers("/api/ClienteController/**").hasAnyAuthority("ROLE_USER")
-                        .requestMatchers("/api/FacturaController/**").hasAnyAuthority("ROLE_USER")
-                        .requestMatchers("/api/ProductoController/**").hasAnyAuthority("ROLE_USER")
+//                        .requestMatchers("/api/LoginController/login").permitAll()
+//                        .requestMatchers("/api/LoginController/logout").authenticated()
+//                        .requestMatchers("/api/ProveedorController/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+//                        .requestMatchers("/api/ClienteController/**").hasAnyAuthority("ROLE_USER")
+//                        .requestMatchers("/api/FacturaController/**").hasAnyAuthority("ROLE_USER")
+//                        .requestMatchers("/api/ProductoController/**").hasAnyAuthority("ROLE_USER")
                         .requestMatchers("/**").permitAll()
                 )
                 .exceptionHandling(customizer -> customizer
