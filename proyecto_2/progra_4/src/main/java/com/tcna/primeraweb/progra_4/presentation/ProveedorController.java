@@ -17,8 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
-@RequestMapping("/ProveedorController")
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/ProveedorController")
 public class ProveedorController {
 
 
@@ -66,16 +67,7 @@ public class ProveedorController {
     }
 
 
-
-
-
-
-
-
-
-
-
-    @GetMapping("/estado/{id}/{estado}")
+    @GetMapping("estado/{id}/{estado}")
     public String cambiarEstado(@PathVariable("id") String id, @PathVariable("estado") String estado, Model model, HttpSession session) {
         String ID = (String) session.getAttribute("id_proveedor");
         ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(id);
@@ -102,48 +94,50 @@ public class ProveedorController {
 
 
     @PostMapping("/nuevo_proveedor")
-    public String guardarNuevoProveedor(@ModelAttribute ProveedorEntity proveedor, Model model){
+    public void guardarNuevoProveedor(@RequestBody ProveedorEntity proveedor){
 
-        if ("Registrar".equals(proveedor.getTipoProveedor())) {
-            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
-            model.addAttribute("proveedor", proveedor);
-            model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
-            return "redirect:/ProveedorController/nuevo";
-        }
+        proveedor.setAdmin((byte) 0);
+        proveedor.setEstado("En espera");
+        proveedorService.crearProveedores(proveedor);
 
-        if ("Registrar".equals(proveedor.getActividadComercial())) {
-           /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
-            model.addAttribute("proveedor", proveedor);
-            model.addAttribute("alerta", "Seleccione una actividad comercial");
-            return "redirect:/ProveedorController/nuevo";
-        }
-
-        if ("Físico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
-            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
-            return "redirect:/ProveedorController/nuevo";
-        }
-
-        if ("Jurídico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
-            model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
-            return "redirect:/ProveedorController/nuevo";
-        }
-
-        if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
-            model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
-            return "redirect:/ProveedorController/nuevo";
-        }
-        if(proveedorService.obtenerProveedorPorId(proveedor.getIdProveedor())==null){
-            if (HaciendaStub.validarRegistroProveedor(proveedor)) {
-                proveedor.setAdmin((byte) 0);
-                proveedor.setEstado("En espera");
-                proveedorService.crearProveedores(proveedor);
-                return "redirect:/";
-            } else {
-                return "redirect:/";
-            }
-        }else {
-            return "redirect:/";
-        }
+//        if ("Registrar".equals(proveedor.getTipoProveedor())) {
+//            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
+//            model.addAttribute("proveedor", proveedor);
+//            model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
+//            return "redirect:/ProveedorController/nuevo";
+//        }
+//
+//        if ("Registrar".equals(proveedor.getActividadComercial())) {
+//           /* redirectAttributes.addFlashAttribute("error", "Por favor, seleccione una actividad comercial válida (Servicios, Consumibles, Infraestructura, Bienes)");*/
+//            model.addAttribute("proveedor", proveedor);
+//            model.addAttribute("alerta", "Seleccione una actividad comercial");
+//            return "redirect:/ProveedorController/nuevo";
+//        }
+//
+//        if ("Físico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 9) {
+//            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
+//            return "redirect:/ProveedorController/nuevo";
+//        }
+//
+//        if ("Jurídico".equals(proveedor.getTipoProveedor()) && proveedor.getIdProveedor().length() != 10) {
+//            model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
+//            return "redirect:/ProveedorController/nuevo";
+//        }
+//
+//        if (!proveedor.getNombre().matches("[a-zA-Z ]+")) {
+//            model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
+//            return "redirect:/ProveedorController/nuevo";
+//        }
+//        if(proveedorService.obtenerProveedorPorId(proveedor.getIdProveedor())==null){
+//            if (HaciendaStub.validarRegistroProveedor(proveedor)) {
+//                proveedor.setAdmin((byte) 0);
+//                proveedor.setEstado("En espera");
+//                proveedorService.crearProveedores(proveedor);
+//            } else {
+//
+//            }
+//        }else {
+//        }
     }
 
 

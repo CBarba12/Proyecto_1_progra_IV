@@ -8,6 +8,7 @@ import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,8 @@ public class ProveedorService {
     }
 
     public ProveedorEntity crearProveedores(ProveedorEntity persona) {
-
+        var encoder = new BCryptPasswordEncoder();
+        persona.setContrasena("{bcrypt}"+encoder.encode(persona.getContrasena()));
         return proveedorRepository.save(persona);
     }
     

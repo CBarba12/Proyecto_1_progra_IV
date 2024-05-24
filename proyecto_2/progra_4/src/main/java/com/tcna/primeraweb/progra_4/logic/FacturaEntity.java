@@ -29,6 +29,9 @@ public class FacturaEntity {
     @Basic
     @Column(name = "cantidad")
     private int cantidad;
+    @Basic
+    @Column(name = "unidad")
+    private String unidad;
 
 
     public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor, int id_producto, int cantidad) {

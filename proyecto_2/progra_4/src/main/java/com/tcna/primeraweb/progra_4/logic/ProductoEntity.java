@@ -27,6 +27,9 @@ public class ProductoEntity {
     @Basic
     @Column(name = "proveedor_id")
     private String proveedorId;
+    @Basic
+    @Column(name = "unidad")
+    private String unidad;
 
 
     public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto) {

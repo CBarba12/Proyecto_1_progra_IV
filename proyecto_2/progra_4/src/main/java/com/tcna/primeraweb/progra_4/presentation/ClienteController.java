@@ -16,8 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Controller
-@RequestMapping("/ClienteController")
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/ClienteController")
 public class ClienteController {
 
     @Autowired
