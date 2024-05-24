@@ -34,7 +34,7 @@ public class FacturaEntity {
     private String unidad;
 
 
-    public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor, int id_producto, int cantidad) {
+    public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor, int id_producto, int cantidad, String unidad) {
         this.facturaId = facturaId;
         this.fecha = fecha;
         this.total = total;
@@ -42,6 +42,7 @@ public class FacturaEntity {
         this.proveedor = proveedor;
         this.id_producto = id_producto;
         this.cantidad = cantidad;
+        this.unidad = unidad;
     }
 
     public FacturaEntity() {
@@ -103,5 +104,13 @@ public class FacturaEntity {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 }

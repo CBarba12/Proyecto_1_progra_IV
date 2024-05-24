@@ -32,11 +32,12 @@ public class ProductoEntity {
     private String unidad;
 
 
-    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto) {
+    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto, String unidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.tipoProducto = tipoProducto;
+        this.unidad = unidad;
     }
 
 
@@ -92,6 +93,14 @@ public class ProductoEntity {
 
     public void setProveedorId(String proveedorId) {
         this.proveedorId = proveedorId;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 
     @Override
