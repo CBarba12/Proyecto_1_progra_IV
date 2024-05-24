@@ -57,17 +57,17 @@ public class LoginController {
         }
     }
 
-
-
-    @GetMapping("/inicio")
-    public String inicio( ) {
-        return "login";
-    }
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/";
-    }
+//
+//
+//    @GetMapping("/inicio")
+//    public String inicio( ) {
+//        return "login";
+//    }
+//    @GetMapping("/logout")
+//    public String logout(HttpSession session) {
+//        session.invalidate();
+//        return "redirect:/";
+//    }
 
     @GetMapping("/current-user")
     public ProveedorEntity getCurrentUser(@AuthenticationPrincipal UserDetailsImp user) {
