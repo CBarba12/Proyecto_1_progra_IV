@@ -30,23 +30,17 @@ public class ClienteController {
     @Autowired
     private FacturaService facturaService;
 
-
+    // Se ocupa que venga el id del proveedor para mostrar los clientes asociados
     @GetMapping("/Listadeclientes") // Añade esta línea para mapear el método a la URL
-    public String listarClientes(Model model, HttpSession session) {
-
-        String ID= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor", ID); // Añade esta línea
-
-        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(ID);
-
-
+    public List<ClienteEntity> listarClientes(@RequestBody ProveedorEntity proveedor) {
+        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(proveedor.getIdProveedor());
         if (clientesProveedor != null) {
-            model.addAttribute("clientesProveedor", clientesProveedor);
+            return clientesProveedor;
         }
-
-
-        return "listarClientes";
+        return null;
     }
+
+
     @GetMapping("/RegistroCliente")
     public String showForm(Model model, HttpSession session) {
         ClienteEntity cliente = new ClienteEntity();

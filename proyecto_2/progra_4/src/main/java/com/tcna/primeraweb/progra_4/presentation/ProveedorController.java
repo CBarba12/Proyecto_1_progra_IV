@@ -34,9 +34,8 @@ public class ProveedorController {
 
 
     @GetMapping("/Listadeproveedores") // Añade esta línea para mapear el método a la URL
-    public List<ProveedorEntity> listaProveedor(Model model, HttpSession session) {
+    public List<ProveedorEntity> listaProveedor() {
       List<ProveedorEntity> proveedores=  proveedorService.ObtenerProveedores();
-      ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId((String) session.getAttribute("id_admin"));
       // Define el orden de los estados
       Map<String, Integer> estadoOrden = new HashMap<>();
       estadoOrden.put("Aceptado", 2);
@@ -56,7 +55,7 @@ public class ProveedorController {
     public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor) {
         try {
             proveedor.setAdmin((byte) 0);
-            proveedor.setEstado("En espera");
+//            proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);
             return ResponseEntity.ok(proveedor);
         } catch (DataIntegrityViolationException e) {
@@ -65,7 +64,7 @@ public class ProveedorController {
     }
 
 // Falta
-    @GetMapping("estado/{id}/{estado}")
+    @GetMapping("/estado")
     public ResponseEntity<ProveedorEntity> cambiarEstado(@RequestBody ProveedorEntity p, @PathVariable String id, @PathVariable String estado) {
         ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(p.getIdProveedor());
         if(estado.equals("Aceptado")){

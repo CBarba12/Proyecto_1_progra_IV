@@ -8,6 +8,7 @@ import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,57 +34,40 @@ public class ProductoController {
 
 
     @GetMapping("/ListadeProducto") // Añade esta línea para mapear el método a la URL
-    public String listarProducto(Model model, HttpSession session) {
-
-        String ID= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor",ID);
-
-        List<ProductoEntity> ProductoProveedor =productoService.obtenerProductoPorProveedor(ID);
-
-
+    public List<ProductoEntity> listarProducto(@RequestBody ProveedorEntity proveedor) {
+        List<ProductoEntity> ProductoProveedor =productoService.obtenerProductoPorProveedor(proveedor.getIdProveedor());
         if (ProductoProveedor != null) {
-            model.addAttribute("ProductoProveedor", ProductoProveedor);
+            return ProductoProveedor;
         }
-
-
-        return "ListadeProducto";
+        return null;
     }
 
 
 
+//    // Eliminar
+//    @GetMapping("/nuevoProducto")
+//    public String MostrarFormularioNuevoCliente(HttpSession session, Model model){
+//
+//        ProductoEntity cle=new ProductoEntity();
+//        String ID= (String) session.getAttribute("id_proveedor");
+//        String actividadComercial = (String) proveedorService.obtenerProveedorPorId(ID).getActividadComercial();
+//        model.addAttribute("actividad",actividadComercial);
+//        model.addAttribute("id_proveedor",ID);
+//        cle.setProveedorId(ID);
+//
+//        model.addAttribute("producto",cle);
+//
+//        return "formularioProducto";
+//    }
 
-    @GetMapping("/nuevoProducto")
-    public String MostrarFormularioNuevoCliente(HttpSession session, Model model){
 
-        ProductoEntity cle=new ProductoEntity();
-        String ID= (String) session.getAttribute("id_proveedor");
-        String actividadComercial = (String) proveedorService.obtenerProveedorPorId(ID).getActividadComercial();
-        model.addAttribute("actividad",actividadComercial);
-        model.addAttribute("id_proveedor",ID);
-        cle.setProveedorId(ID);
-
-        model.addAttribute("producto",cle);
-
-        return "formularioProducto";
-    }
-
-
-    @PostMapping("/nuevo")
-    public String guardarNuevoCliente(@ModelAttribute ProductoEntity producto, HttpSession session, Model model){
-
-        String Provedor= (String) session.getAttribute("id_proveedor");
-
-        producto.setProveedorId(Provedor);
-        productoService.crearProductos(producto);
-
-        List<ProductoEntity> ProductoProveedor =productoService. obtenerProductoPorProveedor(Provedor);
-
-        if (ProductoProveedor != null) {
-            model.addAttribute("ProductoProveedor", ProductoProveedor);
+    @PostMapping("/NewProducto")
+    public ResponseEntity<ProductoEntity> guardarNuevoCliente(@RequestBody ProductoEntity producto){
+        if(producto != null){
+            productoService.crearProductos(producto);
+            return ResponseEntity.ok(producto);
         }
-
-
-        return "ListadeProducto";
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/editarProducto/{id}")
