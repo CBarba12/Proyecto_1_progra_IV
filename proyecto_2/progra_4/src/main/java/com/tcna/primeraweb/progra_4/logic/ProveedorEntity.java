@@ -9,7 +9,7 @@ public class ProveedorEntity {
 
     @Id
     @Column(name = "id_proveedor")
-    @Size(min=3,max=20)
+    @Size(min=9,max=10)
     private String idProveedor;
     @Basic
     @Column(name = "nombre")
@@ -35,11 +35,8 @@ public class ProveedorEntity {
     @Basic
     @Column(name = "tipo_proveedor")
     private String tipoProveedor;
-    @Basic
-    @Column(name = "actividad_comercial")
-    private String actividadComercial;
 
-    public ProveedorEntity(String idProveedor, String nombre, String correoElectronico, String contrasena, String estado, Byte admin, Integer telefono, String direccion, String tipoProveedor, String actividadComercial) {
+    public ProveedorEntity(String idProveedor, String nombre, String correoElectronico, String contrasena, String estado, Byte admin, Integer telefono, String direccion, String tipoProveedor) {
         this.idProveedor = idProveedor;
         this.nombre = nombre;
         this.correoElectronico = correoElectronico;
@@ -49,7 +46,6 @@ public class ProveedorEntity {
         this.telefono = telefono;
         this.direccion = direccion;
         this.tipoProveedor = tipoProveedor;
-        this.actividadComercial = actividadComercial;
     }
 
     public ProveedorEntity() {
@@ -127,16 +123,5 @@ public class ProveedorEntity {
     public void setTipoProveedor(String tipoProveedor) {
         this.tipoProveedor = tipoProveedor;
     }
-
-    public String getActividadComercial() {
-        return actividadComercial;
-    }
-
-    public void setActividadComercial(String actividadComercial) {
-        this.actividadComercial = actividadComercial;
-    }
-
-
-
 
 }

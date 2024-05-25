@@ -18,6 +18,12 @@ public class FacturaEntity {
     @Column(name = "total")
     private Double total;
     @Basic
+    @Column(name = "unidad")
+    private String unidad;
+    @Basic
+    @Column(name = "cantidad")
+    private int cantidad;
+    @Basic
     @Column(name = "cliente")
     private String cliente;
     @Basic
@@ -26,12 +32,7 @@ public class FacturaEntity {
     @Basic
     @Column(name = "id_producto")
     private int id_producto;
-    @Basic
-    @Column(name = "cantidad")
-    private int cantidad;
-    @Basic
-    @Column(name = "unidad")
-    private String unidad;
+
 
 
     public FacturaEntity(int facturaId, Date fecha, Double total, String cliente, String proveedor, int id_producto, int cantidad, String unidad) {

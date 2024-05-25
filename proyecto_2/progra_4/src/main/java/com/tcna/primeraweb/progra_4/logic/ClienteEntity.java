@@ -27,19 +27,15 @@ public class ClienteEntity {
     @Basic
     @Column(name = "correo_electronico")
     private String correoElectronico;
-    @Basic
-    @Column(name = "proveedor_id")
-    private String proveedorId;
 
-    public ClienteEntity() {
-    }
-    public ClienteEntity(String clienteId, String nombre, String direccion, String tipoCliente, String correoElectronico, String proveedorId) {
+    public ClienteEntity() {    }
+
+    public ClienteEntity(String clienteId, String nombre, String direccion, String tipoCliente, String correoElectronico) {
         this.clienteId = clienteId;
         this.nombre = nombre;
         this.direccion = direccion;
         this.tipoCliente = tipoCliente;
         this.correoElectronico = correoElectronico;
-        this.proveedorId = proveedorId;
     }
     public String getClienteId() {
         return clienteId;
@@ -79,13 +75,5 @@ public class ClienteEntity {
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
-    }
-
-    public String getProveedorId() {
-        return proveedorId;
-    }
-
-    public void setProveedorId(String proveedorId) {
-        this.proveedorId = proveedorId;
     }
 }

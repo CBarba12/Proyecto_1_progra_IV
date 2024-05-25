@@ -24,25 +24,12 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public  void actualizarCliente(String id, ClienteEntity cliente) {
-
-
-        ClienteEntity prove=clienteRepository.findById(id).orElse(null);
-
-        if(prove !=null ){
-            assert cliente != null;
-            prove.setNombre(cliente.getNombre());
-            prove.setCorreoElectronico(cliente.getCorreoElectronico());
-            prove.setDireccion(cliente.getDireccion());
-            prove.setTipoCliente(cliente.getTipoCliente());
-
-             clienteRepository.save(prove);
+    public  boolean actualizarCliente(ClienteEntity cliente) {
+        if(clienteRepository.existsById(cliente.getClienteId())){
+            clienteRepository.save(cliente);
+            return true;
         }
-
-
-
-
-
+        return false;
     }
 
 
@@ -63,13 +50,11 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+// Este metodo se debe cambiar o no va aqui
+//    public List<ClienteEntity> obtenerClientesPorProveedor(String id_proveedor) {
+//        return  clienteRepository.findByProveedorId(id_proveedor);
+//    }
 
-    public List<ClienteEntity> obtenerClientesPorProveedor(String id_proveedor) {
-        return  clienteRepository.findByProveedorId(id_proveedor);
-    }
-    public void actualizarCliente(ClienteEntity cliente) {
-        clienteRepository.save(cliente);
-    }
 
     public void eliminarCliente(String id) {
         clienteRepository.deleteById(id);
@@ -81,4 +66,7 @@ public class ClienteService {
     }
 
 
+    public boolean existeCliente(String clienteId) {
+        return clienteRepository.existsById(clienteId);
+    }
 }

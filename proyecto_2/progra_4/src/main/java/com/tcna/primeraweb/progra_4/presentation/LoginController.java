@@ -45,7 +45,7 @@ public class LoginController {
         ProveedorEntity user = ((UserDetailsImp) auth.getPrincipal()).getUser();
         return new ProveedorEntity(user.getIdProveedor(), user.getNombre(), user.getCorreoElectronico(),
                 null, user.getEstado(), user.getAdmin(), user.getTelefono(), user.getDireccion(),
-                user.getTipoProveedor(), user.getActividadComercial());
+                user.getTipoProveedor());
     }
 
 
@@ -73,7 +73,7 @@ public class LoginController {
     public ProveedorEntity getCurrentUser(@AuthenticationPrincipal UserDetailsImp user) {
         return new ProveedorEntity(user.getUser().getIdProveedor(), user.getUser().getNombre(), user.getUser().getCorreoElectronico(),
                 null, user.getUser().getEstado(), user.getUser().getAdmin(), user.getUser().getTelefono(), user.getUser().getDireccion(),
-                user.getUser().getTipoProveedor(), user.getUser().getActividadComercial());
+                user.getUser().getTipoProveedor());
     }
 
 }
