@@ -124,6 +124,7 @@ public class FacturaController {
                 .collect(Collectors.toList());
 
         response.setContentType("application/pdf");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=facturas_" + proveedor.getIdProveedor() + ".pdf");
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, response.getOutputStream());
