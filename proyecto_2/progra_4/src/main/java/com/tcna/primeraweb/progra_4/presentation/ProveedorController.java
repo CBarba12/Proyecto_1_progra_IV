@@ -59,11 +59,12 @@ public class ProveedorController {
     }
 
     @PostMapping("NewProveedor")
-    public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor) {
+    public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor, @RequestBody ActividadEntity actividad) {
         try {
             proveedor.setAdmin((byte) 0);
             proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);
+            actividadService.crear(actividad);
             return ResponseEntity.ok(proveedor);
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().build();
