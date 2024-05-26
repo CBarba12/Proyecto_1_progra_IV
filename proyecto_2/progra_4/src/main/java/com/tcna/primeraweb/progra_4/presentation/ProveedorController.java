@@ -61,7 +61,7 @@ public class ProveedorController {
     }
 
     @PostMapping("/NewProveedor")
-    public ResponseEntity<?> crearProveedor(@RequestBody ProveedorEntity proveedor) {
+    public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor) {
         try {
             proveedor.setAdmin((byte) 0);
             proveedorService.crearProveedores(proveedor);
