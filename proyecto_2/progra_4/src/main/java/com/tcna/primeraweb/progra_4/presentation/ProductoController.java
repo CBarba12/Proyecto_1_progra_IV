@@ -30,9 +30,9 @@ public class ProductoController {
     private FacturaService facturaService;
 
 
-    @GetMapping("/ListadeProducto") // Añade esta línea para mapear el método a la URL
-    public List<ProductoEntity> listarProducto(@RequestBody ProveedorEntity proveedor) {
-        List<ProductoEntity> ProductoProveedor =productoService.obtenerProductoPorProveedor(proveedor.getIdProveedor());
+    @GetMapping("/ListadeProducto/{idproveedor}") // Añade esta línea para mapear el método a la URL
+    public List<ProductoEntity> listarProducto(@PathVariable("idproveedor") String proveedor){
+        List<ProductoEntity> ProductoProveedor =productoService.obtenerProductoPorProveedor(proveedor);
         if (ProductoProveedor != null) {
             return ProductoProveedor;
         }
