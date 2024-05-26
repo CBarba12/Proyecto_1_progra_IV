@@ -27,34 +27,38 @@ public class ClienteController {
     private ProveedoresService proveedoresService;
 
     // Modificar ya que los clientes asociados a un proveedor se va a manejar diferente
-//    @GetMapping("/Listadeclientes")
-//    public List<ClienteEntity> listarClientes(@RequestBody ProveedorEntity proveedor) {
-//        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(proveedor.getIdProveedor());
-//        if (clientesProveedor != null) {
-//            return clientesProveedor;
-//        }
-//        return null;
-//    }
-// modificar
-    @PostMapping("/NewCliente")
-    public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @RequestBody ProveedorEntity proveedor) {
-        try {
-            if(proveedorService.existeProveedor(proveedor.getIdProveedor())){ // Verifica si el proveedor existe
-                if(!clienteService.existeCliente(cliente.getClienteId())){ // Verifica si el cliente existe y si no existe lo crea
-                    clienteService.crearCliente(cliente);
+    @GetMapping("/Listadeclientes/{idproveedor}")
+    public List<ClienteEntity> listarClientes(@PathVariable String proveedor) {
+        List<ClienteEntity> clientesProveedor = proveedoresService.obtenerClientesPorProveedor(proveedor);
+        if (clientesProveedor != null) {
+            return clientesProveedor;
+        }
+        return null;
+    }
+
+
+    @PostMapping("/NewCliente/{idproveedor}")
+    public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @PathVariable String idproveedor) {
+        {
+            try {
+                if (proveedorService.existeProveedor(idproveedor)) { // Verifica si el proveedor existe
+                    ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(idproveedor);
+                    if (!clienteService.existeCliente(cliente.getClienteId())) { // Verifica si el cliente existe y si no existe lo crea
+                        clienteService.crearCliente(cliente);
+                    }
+                    if (proveedoresService.crear(cliente, proveedor)) { // Verifica si se pudo crear la relación entre el cliente y el proveedor
+                        return ResponseEntity.ok(cliente);
+                    }
                 }
-                if(proveedoresService.crear(cliente, proveedor)){ // Verifica si se pudo crear la relación entre el cliente y el proveedor
-                    return ResponseEntity.ok(cliente);
-                }
+                return ResponseEntity.badRequest().build();
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
             }
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
         }
     }
 
-    @PostMapping("/editar")
-    public ResponseEntity<ClienteEntity> actualizarProveedores(@RequestBody ClienteEntity cliente){
+    @PostMapping("/edit")
+    public ResponseEntity<ClienteEntity> actualizarCliente(@RequestBody ClienteEntity cliente){
         try {
             if(clienteService.actualizarCliente(cliente)){
                 return ResponseEntity.ok(cliente);
@@ -66,68 +70,24 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/existe/{idcliente}/{idproveedor}")
+    public boolean existeCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
+        return proveedoresService.existeCliente(idcliente, idproveedor);
+    }
 
-    // Modificar
-//    @GetMapping("/existe/{idcliente}/{idproveedor}")
-//    public boolean existeCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
-//        return clienteService.existeCliente(idcliente) && proveedoresService.existe(idcliente, idproveedor);
-//    }
-
-
-    // metodo que existe
-
-    // Creo que no se ocupa
-//    @GetMapping("/RegistroCliente")
-//    public String showForm(Model model, HttpSession session) {
-//        ClienteEntity cliente = new ClienteEntity();
-//        String ID= (String) session.getAttribute("proveedorId");
-//        cliente.setProveedorId(ID);
-//        cliente.setClienteId("clienteId"); // establece el clienteId aquí
-//        model.addAttribute("cliente", cliente);
-//        return "registroCliente";
-//    }
-
-
-
-    //-------------------------------------
-
-    // Si es para mostrar el formulario de registro de un nuevo cliente, creo que no se ocupa
-//    @GetMapping("/nuevocliente")
-//    public String MostrarFormularioNuevoCliente(HttpSession session,Model model){
-//
-//        ClienteEntity cle=new ClienteEntity();
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//        cle.setProveedorId(ID);
-//        cle.setTipoCliente("tipoCliente");
-//        cle.setClienteId("clienteId");
-//        model.addAttribute("cliente",cle);
-//        return "registroCliente";
-//    }
-
-
-
-
-// Creo que no se ocupa
-//    @GetMapping("/editar/{id}")
-//    public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
-//
-//
-//       ClienteEntity p= clienteService.obtenerClienteId(id);
-//
-//
-//        if (p != null) {
-//
-//            model.addAttribute("Cliente_editar", p);
-//            model.addAttribute("editar_CLIENTE","/ClienteController/editar"+id);
-//            return "FormularioEditarCliente";
-//        }else {
-//            return "redirect:/ClienteController/listarClientes";
-//        }
-//
-//
-//    }
-
+    @PostMapping("/delete/{idcliente}/{idproveedor}")
+    public ResponseEntity<ClienteEntity> eliminarCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
+        try {
+            if(proveedoresService.existeCliente(idcliente, idproveedor)){
+                proveedoresService.eliminarCliente(idcliente, idproveedor);
+                return ResponseEntity.ok().build();
+            }else {
+                return ResponseEntity.badRequest().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
 
 

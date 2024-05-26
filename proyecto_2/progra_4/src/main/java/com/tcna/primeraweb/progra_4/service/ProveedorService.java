@@ -96,8 +96,6 @@ public class ProveedorService {
         return proveedorRepository.findById(proveedorId).orElse(null);
     }
 
-
-
     public void eliminarProveedor(String id) {
         proveedorRepository.deleteById(id);
     }
@@ -105,5 +103,6 @@ public class ProveedorService {
     public boolean existeProveedor(String idProveedor) {
         return proveedorRepository.existsById(idProveedor);
     }
+
 }
 
