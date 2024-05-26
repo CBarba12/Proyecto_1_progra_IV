@@ -78,7 +78,7 @@ public class FacturaController {
     }
 
     // PDF para una factura en especifico
-    @GetMapping("/pdf")
+    @GetMapping("/pdfFactura")
     public void pdf(@RequestBody FacturaEntity factura, HttpServletResponse response) {
         ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
         ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
@@ -116,7 +116,7 @@ public class FacturaController {
     }
 
     // PDF para todas las facturas de un proveedor
-    @GetMapping("/pdf")
+    @GetMapping("/pdfProveedor")
     public void pdf(@RequestBody ProveedorEntity proveedor ,HttpServletResponse response) {
         List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
         List<FacturaEntity> filteredFacturas = facturaEntities.stream()
