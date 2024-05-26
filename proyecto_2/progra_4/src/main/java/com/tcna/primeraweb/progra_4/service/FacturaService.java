@@ -29,8 +29,9 @@ public class FacturaService {
         return facturaRepository.findAll();
     }
 
-    public FacturaEntity crearFactura(FacturaEntity factura) {
-        return facturaRepository.save(factura);
+    public boolean crearFactura(FacturaEntity factura) {
+        facturaRepository.save(factura);
+        return true;
     }
     public Long ContarFactura() {
         return facturaRepository.count();

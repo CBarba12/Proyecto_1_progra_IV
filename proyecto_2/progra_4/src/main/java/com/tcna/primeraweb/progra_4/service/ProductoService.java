@@ -48,4 +48,8 @@ public class ProductoService {
     public void eliminarProducto(int id) {
         productoRepository.deleteById(id);
     }
+
+    public ProductoEntity obtenerProductoPorId(int idProducto) {
+        return productoRepository.findById(idProducto).get();
+    }
 }

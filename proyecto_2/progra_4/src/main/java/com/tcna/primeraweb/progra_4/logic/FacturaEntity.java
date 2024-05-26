@@ -110,7 +110,6 @@ public class FacturaEntity {
     public String getUnidad() {
         return unidad;
     }
-
     public void setUnidad(String unidad) {
         this.unidad = unidad;
     }

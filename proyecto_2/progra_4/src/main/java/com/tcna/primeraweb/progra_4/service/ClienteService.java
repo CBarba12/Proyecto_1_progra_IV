@@ -69,4 +69,8 @@ public class ClienteService {
     public boolean existeCliente(String clienteId) {
         return clienteRepository.existsById(clienteId);
     }
+
+    public ClienteEntity obtenerClientePorId(String cliente) {
+        return clienteRepository.findById(cliente).orElse(null);
+    }
 }

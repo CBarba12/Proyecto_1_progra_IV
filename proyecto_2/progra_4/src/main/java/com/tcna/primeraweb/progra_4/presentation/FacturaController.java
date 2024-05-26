@@ -15,6 +15,8 @@ import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,34 +57,131 @@ public class FacturaController {
     Font font = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, BaseColor.BLACK);
 
 
+    @GetMapping("/ListadeFacturas") // Añade esta línea para mapear el método a la URL
+    public List<FacturaEntity> listarFacturas(@RequestBody ProveedorEntity proveedor) {
+        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
+        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
+                .filter(factura -> factura.getProveedor().equals(proveedor.getIdProveedor()))
+                .collect(Collectors.toList());
+         return filteredFacturas; // Devolver la lista de facturas
+    }
+
+    @PostMapping("/NewFactura")
+    public ResponseEntity<FacturaEntity> crearFactura(@RequestBody FacturaEntity factura) {
+        LocalDate fecha = LocalDate.now();
+        factura.setFecha(Date.valueOf(fecha));
+    //    factura.setTotal(factura.getCantidad() * factura.getPrecio()); // Puede no ser necesario si ya viene correcto
+        if(facturaService.crearFactura(factura)){
+            return ResponseEntity.ok(factura);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    // PDF para una factura en especifico
+    @GetMapping("/pdf")
+    public void pdf(@RequestBody FacturaEntity factura, HttpServletResponse response) {
+        ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
+        ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
+
+        response.setContentType("application/pdf");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=factura_" + factura.getFacturaId() + ".pdf");
+
+        try {
+            Document document = new Document();
+            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+
+            document.add(new Paragraph("\n\n"));
+            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
+            document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
+            document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
+            document.add(new Paragraph("    Nombre: " + cliente.getNombre(), font));
+            document.add(new Paragraph("    Correo: " + cliente.getCorreoElectronico(), font));
+            document.add(new Paragraph("Producto ID: " + factura.getId_producto(), font));
+            document.add(new Paragraph("    Nombre: " + producto.getNombre(), font));
+            document.add(new Paragraph("    Precio: " + producto.getPrecio(), font));
+            document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
+            document.add(new Paragraph("Total: " + factura.getTotal(), font));
+            document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("\n\n"));
+            document.add(style(new Chunk("Reporte Generado por: " + factura.getProveedor()), fontfooter));
+
+            document.close();
+        } catch (DocumentException | IOException ex) {
+            throw new RuntimeException("Error al generar el PDF", ex);
+        }
+    }
+
+    // PDF para todas las facturas de un proveedor
+    @GetMapping("/pdf")
+    public void pdf(@RequestBody ProveedorEntity proveedor ,HttpServletResponse response) {
+        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
+        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
+                .filter(factura -> factura.getProveedor().equals(proveedor.getIdProveedor()))
+                .collect(Collectors.toList());
+
+        response.setContentType("application/pdf");
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, response.getOutputStream());
+            document.open();
+
+            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
+            for (FacturaEntity factura : filteredFacturas) {
+                ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
+                ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
+                document.add(new Paragraph("\n\n"));
+                document.add(new Paragraph("------------------------------------------------------------------------", font));
+                document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
+                document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
+                document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
+                document.add(new Paragraph("    Nombre: " + cliente.getNombre(), font));
+                document.add(new Paragraph("    Correo: " + cliente.getCorreoElectronico(), font));
+                document.add(new Paragraph("Producto ID: " + factura.getId_producto()));
+                document.add(new Paragraph("        Nombre: " + producto.getNombre(), font));
+                document.add(new Paragraph("        Precio: " + producto.getPrecio(), font));
+                document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
+                document.add(new Paragraph("Total: " + factura.getTotal(), font));
+                document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
+            }
+            document.add(new Paragraph("------------------------------------------------------------------------", font));
+            document.add(new Paragraph("\n\n"));
+            document.add(style(new Chunk("Reporte Generado por: " + proveedor.getIdProveedor()), fontfooter));
+
+            document.close();
+        } catch (DocumentException | IOException ex) {
+            throw new RuntimeException("Error al generar el PDF", ex);
+        }
+    }
+
+    private PdfPTable style(Chunk c, Font font) {
+        PdfPCell cell = new PdfPCell(new Phrase(c));
+        cell.setBackgroundColor(BaseColor.BLUE);
+        cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(com.itextpdf.text.Element.ALIGN_MIDDLE);
+        cell.setFixedHeight(50); // puedes ajustar la altura según tus necesidades
+
+        PdfPTable table = new PdfPTable(1);
+        table.setWidthPercentage(100); // esto hará que la tabla ocupe todo el ancho de la página
+        table.addCell(cell);
+        return table;
+    }
 
 
 
-//    @GetMapping("/ListadeFacturas") // Añade esta línea para mapear el método a la URL
-//    public List<FacturaEntity> listarFacturas(@RequestBody ProveedorEntity proveedor) {
-//
-//        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
-//        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-//                .filter(factura -> factura.getProveedor().equals(proveedor.getIdProveedor()))
-//                .collect(Collectors.toList());
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(proveedor.getIdProveedor());
-//
-//
-//        // Crear un mapa de nombres de productos
-//       Map<String, String> nombresProductos = productos.stream()
-//        .collect(Collectors.toMap(producto -> String.valueOf(producto.getProductoId()), ProductoEntity::getNombre));
-//
-//        // Crear un mapa de nombres de productos
-//        Map<String, Double> preciosProductos = productos.stream()
-//                .collect(Collectors.toMap(producto -> String.valueOf(producto.getProductoId()), ProductoEntity::getPrecio));
-//
-//
-//
-//        return "listarFacturas"; // Suponiendo que el nombre de la vista es listarFacturas.html
-//    }
 
 
-    // Revisar
+
+
+
+
+
+
+
+    // Creo que no es necesario
 //    @GetMapping("/NuevaFactura") // Añade esta línea para mapear el método a la URL
 //    public String nuevaFactura(Model model, HttpSession session) {
 //        String ID= (String) session.getAttribute("id_proveedor");
@@ -103,7 +202,10 @@ public class FacturaController {
 
 
 
-    // Revisar
+
+
+
+    // Va a quedar este metodo para guia por aquello de que se vaya a ocupar para la idea
 //    @PostMapping("/guardarFactura") // Añade esta línea para mapear el método a la URL
 //    public String guardarFactura(@RequestParam("clienteId") String clienteId, @RequestParam("productoId") String productoId, @RequestParam("cantidad") String cantidad, Model model, HttpSession session) {
 //        String ID= (String) session.getAttribute("id_proveedor");
@@ -138,116 +240,7 @@ public class FacturaController {
 
 
 
-    // Revisar
-//    @GetMapping("/pdf/{id}")
-//    public void pdf(@PathVariable("id") String facturaID, Model model, HttpSession session, HttpServletResponse response) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
-//        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
-//        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
-//
-//
-//        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-//                .filter(factura -> factura.getProveedor().equals(ID))
-//                .collect(Collectors.toList());
-//        FacturaEntity factura = filteredFacturas.stream()
-//                .filter(f -> f.getFacturaId() == Integer.parseInt(facturaID))
-//                .findFirst()
-//                .orElse(null);
-//
-//
-//
-//        response.setContentType("application/pdf");
-//        try {
-//            Document document = new Document();
-//            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-//            document.open();
-//            document.add(new Paragraph("\n\n"));
-//            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
-//            document.add(new Paragraph("------------------------------------------------------------------------", font));
-//            document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
-//            document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
-//            document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
-//            document.add(new Paragraph("    Nombre: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre(), font));
-//            document.add(new Paragraph("    Correo: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico(), font));
-//            document.add(new Paragraph("Producto ID: " + factura.getId_producto(), font));
-//            document.add(new Paragraph("    Nombre: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre(), font));
-//            document.add(new Paragraph("    Precio: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio(), font));
-//            document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
-//            document.add(new Paragraph("Total: " + factura.getTotal(), font));
-//            document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
-//
-//            document.add(new Paragraph("------------------------------------------------------------------------", font));
-//            document.add(new Paragraph("\n\n"));
-//            document.add(style(new Chunk("Reporte Generado por: " + ID), fontfooter));
-//            document.close();
-//        } catch (DocumentException | IOException ex) {
-//            throw new RuntimeException("Error al generar el PDF", ex);
-//        }
-//    }
 
-
-    // Revisar
-//    @GetMapping("/pdf")
-//    public void pdf(Model model, HttpSession session, HttpServletResponse response) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
-//        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
-//        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
-//
-//        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-//                .filter(factura -> factura.getProveedor().equals(ID))
-//                .collect(Collectors.toList());
-//
-//        response.setContentType("application/pdf");
-//        try {
-//            Document document = new Document();
-//            PdfWriter.getInstance(document, response.getOutputStream());
-//
-//            document.open();
-//            document.add(style(new Chunk("Reporte Sistema de facturacion"), fontheader));
-//
-//
-//            for (FacturaEntity factura : filteredFacturas) {
-//                document.add(new Paragraph("\n\n"));
-//                document.add(new Paragraph("------------------------------------------------------------------------", font));
-//                document.add(new Paragraph("Factura ID: " + factura.getFacturaId(), font));
-//                document.add(new Paragraph("Proveedor: " + factura.getProveedor(), font));
-//                document.add(new Paragraph("Cliente: " + factura.getCliente(), font));
-//                    document.add(new Paragraph("    Nombre: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getNombre(), font));
-//                    document.add(new Paragraph("    Correo: " + clientesProveedor.stream().filter(c -> c.getClienteId().equals(factura.getCliente())).findFirst().orElse(null).getCorreoElectronico(), font));
-//                document.add(new Paragraph("Producto ID: " + factura.getId_producto()));
-//                    document.add(new Paragraph("        Nombre: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getNombre(), font));
-//                    document.add(new Paragraph("        Precio: " + productos.stream().filter(p -> p.getProductoId() == factura.getId_producto()).findFirst().orElse(null).getPrecio(), font));
-//                document.add(new Paragraph("Cantidad: " + factura.getCantidad(), font));
-//                document.add(new Paragraph("Total: " + factura.getTotal(), font));
-//                document.add(new Paragraph("Fecha: " + factura.getFecha(), font));
-//            }
-//            document.add(new Paragraph("------------------------------------------------------------------------", font));
-//            document.add(new Paragraph("\n\n"));
-//
-//            document.add(style(new Chunk("Reporte Generado por: " + ID), fontfooter));
-//
-//            document.close();
-//        } catch (DocumentException | IOException ex) {
-//            throw new RuntimeException("Error al generar el PDF", ex);
-//        }
-//    }
-
-//    private PdfPTable style(Chunk c, Font font) {
-//        PdfPCell cell = new PdfPCell(new Phrase(c));
-//        cell.setBackgroundColor(BaseColor.BLUE);
-//        cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
-//        cell.setVerticalAlignment(com.itextpdf.text.Element.ALIGN_MIDDLE);
-//        cell.setFixedHeight(50); // puedes ajustar la altura según tus necesidades
-//
-//        PdfPTable table = new PdfPTable(1);
-//        table.setWidthPercentage(100); // esto hará que la tabla ocupe todo el ancho de la página
-//        table.addCell(cell);
-//        return table;
-//    }
 //    @GetMapping("/xml/{id}")
 //    public void xml(@PathVariable("id") String facturaID, Model model, HttpSession session, HttpServletResponse response) {
 //        String ID= (String) session.getAttribute("id_proveedor");
