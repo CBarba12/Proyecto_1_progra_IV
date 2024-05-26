@@ -10,6 +10,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,10 +34,11 @@ public class ProveedoresService {
 
     public List<ClienteEntity> obtenerClientesPorProveedor(String idProveedor) {
         List<ProveedoresEntity> proveedores = proveedoresRepository.findAll();
-        List<ClienteEntity> clientes = null;
+        List<ClienteEntity> clientes = new ArrayList<>();
         for (ProveedoresEntity proveedor : proveedores) {
             if (proveedor.getIdProveedor().equals(idProveedor)) {
-                clientes.add(clienteRepository.findById(proveedor.getIdCliente()).get());
+                ClienteEntity cliente = clienteRepository.findById(proveedor.getIdCliente()).get();
+                clientes.add(cliente);
             }
         }
         return clientes;

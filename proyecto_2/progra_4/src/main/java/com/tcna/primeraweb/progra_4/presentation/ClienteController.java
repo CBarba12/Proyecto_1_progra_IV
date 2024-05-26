@@ -26,16 +26,17 @@ public class ClienteController {
     @Autowired
     private ProveedoresService proveedoresService;
 
-    // Modificar ya que los clientes asociados a un proveedor se va a manejar diferente
+
     @GetMapping("/Listadeclientes/{idproveedor}")
     public List<ClienteEntity> listarClientes(@PathVariable("idproveedor") String proveedor) {
-        List<ClienteEntity> clientesProveedor = proveedoresService.obtenerClientesPorProveedor(proveedor);
-        if (clientesProveedor != null) {
-            return clientesProveedor;
+        if(proveedorService.existeProveedor(proveedor)) {
+            List<ClienteEntity> clientesProveedor = proveedoresService.obtenerClientesPorProveedor(proveedor);
+            if (clientesProveedor != null) {
+                return clientesProveedor;
+            }
         }
         return null;
     }
-
 
     @PostMapping("/NewCliente/{idproveedor}")
     public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @PathVariable("idproveedor") String idproveedor) {
