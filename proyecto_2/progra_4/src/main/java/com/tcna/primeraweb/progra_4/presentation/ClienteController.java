@@ -28,7 +28,7 @@ public class ClienteController {
 
     // Modificar ya que los clientes asociados a un proveedor se va a manejar diferente
     @GetMapping("/Listadeclientes/{idproveedor}")
-    public List<ClienteEntity> listarClientes(@PathVariable String proveedor) {
+    public List<ClienteEntity> listarClientes(@PathVariable("idproveedor") String proveedor) {
         List<ClienteEntity> clientesProveedor = proveedoresService.obtenerClientesPorProveedor(proveedor);
         if (clientesProveedor != null) {
             return clientesProveedor;
@@ -38,7 +38,7 @@ public class ClienteController {
 
 
     @PostMapping("/NewCliente/{idproveedor}")
-    public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @PathVariable String idproveedor) {
+    public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @PathVariable("idproveedor") String idproveedor) {
         {
             try {
                 if (proveedorService.existeProveedor(idproveedor)) { // Verifica si el proveedor existe
@@ -71,12 +71,12 @@ public class ClienteController {
     }
 
     @GetMapping("/existe/{idcliente}/{idproveedor}")
-    public boolean existeCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
+    public boolean existeCliente(@PathVariable("idcliente") String idcliente, @PathVariable("idproveedor") String idproveedor){
         return proveedoresService.existeCliente(idcliente, idproveedor);
     }
 
     @PostMapping("/delete/{idcliente}/{idproveedor}")
-    public ResponseEntity<ClienteEntity> eliminarCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
+    public ResponseEntity<ClienteEntity> eliminarCliente(@PathVariable("idcliente") String idcliente, @PathVariable("idproveedor") String idproveedor){
         try {
             if(proveedoresService.existeCliente(idcliente, idproveedor)){
                 proveedoresService.eliminarCliente(idcliente, idproveedor);
@@ -88,7 +88,5 @@ public class ClienteController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-
 
 }

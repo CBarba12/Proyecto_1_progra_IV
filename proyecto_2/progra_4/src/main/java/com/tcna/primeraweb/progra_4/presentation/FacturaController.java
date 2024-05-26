@@ -56,7 +56,7 @@ public class FacturaController {
     Font fontfooter = FontFactory.getFont(FontFactory.COURIER, 10, Font.BOLD, BaseColor.WHITE);
     Font font = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, BaseColor.BLACK);
 
-
+    // Cambiar por id url
     @GetMapping("/ListadeFacturas") // Añade esta línea para mapear el método a la URL
     public List<FacturaEntity> listarFacturas(@RequestBody ProveedorEntity proveedor) {
         List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
