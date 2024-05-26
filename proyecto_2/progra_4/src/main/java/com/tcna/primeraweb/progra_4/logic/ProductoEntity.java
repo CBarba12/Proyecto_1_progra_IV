@@ -32,11 +32,12 @@ public class ProductoEntity {
     private String unidad;
 
 
-    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto, String unidad) {
+    public ProductoEntity(String nombre, String descripcion, Double precio, String tipoProducto, String proveedorId, String unidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.tipoProducto = tipoProducto;
+        this.proveedorId = proveedorId;
         this.unidad = unidad;
     }
 

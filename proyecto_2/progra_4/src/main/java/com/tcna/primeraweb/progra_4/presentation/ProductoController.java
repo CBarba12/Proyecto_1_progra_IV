@@ -1,11 +1,9 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
+import com.tcna.primeraweb.progra_4.logic.ActividadEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
-import com.tcna.primeraweb.progra_4.service.FacturaService;
-import com.tcna.primeraweb.progra_4.service.ProductoService;
-import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import com.tcna.primeraweb.progra_4.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +26,9 @@ public class ProductoController {
     private ProductoService productoService;
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+    private ActividadService actividadService;
+
 
 
     @GetMapping("/ListadeProducto/{idproveedor}") // Añade esta línea para mapear el método a la URL
@@ -39,8 +40,18 @@ public class ProductoController {
         return null;
     }
 
+    @GetMapping("/Actividades/{idproveedor}")
+    public List<ActividadEntity> actividades(@PathVariable("idproveedor") String proveedor){
+        if(proveedorService.existeProveedor(proveedor)){
+            return actividadService.actividadesPorProveedor(proveedor);
+        }
+        return null;
+    }
+
+
+
     @PostMapping("/NewProducto")
-    public ResponseEntity<ProductoEntity> guardarNuevoCliente(@RequestBody ProductoEntity producto){
+    public ResponseEntity<ProductoEntity> NewProducto(@RequestBody ProductoEntity producto){
         if(producto != null){
             productoService.crearProductos(producto);
             return ResponseEntity.ok(producto);

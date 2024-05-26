@@ -40,4 +40,9 @@ public class ActividadService {
         }
     }
 
+    public List<ActividadEntity> actividadesPorProveedor(String proveedor) {
+        return actividadRepository.findAll().stream()
+                .filter(a -> a.getIdProveedor().equals(proveedor))
+                .collect(Collectors.toList());
+    }
 }
