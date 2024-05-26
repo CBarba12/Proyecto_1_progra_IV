@@ -42,6 +42,7 @@ public class ProveedorService {
             if (proveedor.getAdmin() == 1) {
                 byte adminValue = proveedor.getAdmin().byteValue();
             }else {
+                proveedor.setContrasena("");
                 noAdminProveedores.add(proveedor);
             }
         }
@@ -66,12 +67,15 @@ public class ProveedorService {
     }
 
 
-    public boolean actualizarProveedor(ProveedorEntity provedor) {
+    public ProveedorEntity actualizarProveedor(ProveedorEntity provedor) {
         if(proveedorRepository.existsById(provedor.getIdProveedor())){
+            var encoder = new BCryptPasswordEncoder();
+            ProveedorEntity p = proveedorRepository.findById(provedor.getIdProveedor()).get();
+            provedor.setContrasena("{bcrypt}"+encoder.encode(p.getContrasena()));
             proveedorRepository.save(provedor);
-            return true;
+            return provedor;
         }
-        return false;
+        return null;
     }
 
 

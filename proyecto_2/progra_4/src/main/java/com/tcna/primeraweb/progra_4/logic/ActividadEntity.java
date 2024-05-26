@@ -15,9 +15,9 @@ public class ActividadEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_Proveedor")
-    private ProveedorEntity idProveedor;
+    @Basic
+    @Column(name = "id_Proveedor", nullable = false, length = 15)
+    private String idProveedor;
 
     @Size(max = 15)
     @Column(name = "nombre_Actividad", length = 15)
@@ -26,7 +26,7 @@ public class ActividadEntity {
 
     public ActividadEntity() {   }
 
-    public ActividadEntity(ProveedorEntity idProveedor, String nombreActividad) {
+    public ActividadEntity(String idProveedor, String nombreActividad) {
         this.idProveedor = idProveedor;
         this.nombreActividad = nombreActividad;
     }
@@ -35,9 +35,9 @@ public class ActividadEntity {
 
     public void setId(Integer id) { this.id = id; }
 
-    public ProveedorEntity getIdProveedor() { return idProveedor; }
+    public String getIdProveedor() { return idProveedor; }
 
-    public void setIdProveedor(ProveedorEntity idProveedor) { this.idProveedor = idProveedor; }
+    public void setIdProveedor(String idProveedor) { this.idProveedor = idProveedor; }
 
     public String getNombreActividad() { return nombreActividad; }
 
