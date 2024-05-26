@@ -40,8 +40,12 @@ public class ProductoService {
 
 
 
-    public void actualizarProducto(ProductoEntity producto) {
-        productoRepository.save(producto);
+    public boolean actualizarProducto(ProductoEntity producto) {
+        if(productoRepository.existsById(producto.getProductoId())) {
+            productoRepository.save(producto);
+            return true;
+        }
+        return false;
     }
 
 

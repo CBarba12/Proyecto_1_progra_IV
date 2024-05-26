@@ -35,7 +35,7 @@ public class ClienteController {
 //        }
 //        return null;
 //    }
-
+// modificar
     @PostMapping("/NewCliente")
     public ResponseEntity<ClienteEntity> guardarNuevoCliente(@RequestBody ClienteEntity cliente, @RequestBody ProveedorEntity proveedor) {
         try {
@@ -66,6 +66,15 @@ public class ClienteController {
         }
     }
 
+
+    // Modificar
+//    @GetMapping("/existe/{idcliente}/{idproveedor}")
+//    public boolean existeCliente(@PathVariable String idcliente, @PathVariable String idproveedor){
+//        return clienteService.existeCliente(idcliente) && proveedoresService.existe(idcliente, idproveedor);
+//    }
+
+
+    // metodo que existe
 
     // Creo que no se ocupa
 //    @GetMapping("/RegistroCliente")
