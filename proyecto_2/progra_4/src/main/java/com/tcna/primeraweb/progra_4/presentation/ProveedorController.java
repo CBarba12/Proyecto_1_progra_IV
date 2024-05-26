@@ -57,6 +57,7 @@ public class ProveedorController {
     public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor) {
         try {
             proveedor.setAdmin((byte) 0);
+            proveedor.setEstado("En espera");
             proveedorService.crearProveedores(proveedor);
             proveedor.setContrasena("");
             return ResponseEntity.ok(proveedor);
