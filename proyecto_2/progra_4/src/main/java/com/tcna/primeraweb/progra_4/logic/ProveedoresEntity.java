@@ -15,19 +15,17 @@ public class ProveedoresEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private ClienteEntity idCliente;
+    @Basic
+    @Column(name = "id_cliente", nullable = false)
+    private String idCliente;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_proveedor", nullable = false)
-    private ProveedorEntity idProveedor;
+   @Basic
+    @Column(name = "id_proveedor", nullable = false)
+    private String idProveedor;
 
     public ProveedoresEntity() {    }
 
-    public ProveedoresEntity(ClienteEntity idCliente, ProveedorEntity idProveedor) {
+    public ProveedoresEntity(String idCliente, String idProveedor) {
         this.idCliente = idCliente;
         this.idProveedor = idProveedor;
     }
@@ -36,11 +34,11 @@ public class ProveedoresEntity {
 
     public void setId(Integer id) { this.id = id; }
 
-    public ClienteEntity getIdCliente() { return idCliente; }
+    public String getIdCliente() { return idCliente; }
 
-    public void setIdCliente(ClienteEntity idCliente) { this.idCliente = idCliente; }
+    public void setIdCliente(String idCliente) { this.idCliente = idCliente; }
 
-    public ProveedorEntity getIdProveedor() { return idProveedor; }
+    public String getIdProveedor() { return idProveedor; }
 
-    public void setIdProveedor(ProveedorEntity idProveedor) { this.idProveedor = idProveedor; }
+    public void setIdProveedor(String idProveedor) { this.idProveedor = idProveedor; }
 }

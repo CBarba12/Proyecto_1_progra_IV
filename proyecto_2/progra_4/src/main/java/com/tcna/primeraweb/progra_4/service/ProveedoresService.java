@@ -24,19 +24,19 @@ public class ProveedoresService {
     public boolean crear(ClienteEntity cliente, ProveedorEntity proveedor){ // Para crearlo no debe existir
         List<ProveedoresEntity> proveedores = proveedoresRepository.findAll();
         for (ProveedoresEntity proveedor1 : proveedores) {
-            if (proveedor1.getIdCliente().getClienteId().equals(cliente.getClienteId()) && proveedor1.getIdProveedor().getIdProveedor().equals(proveedor.getIdProveedor())) {
+            if (proveedor1.getIdCliente().equals(cliente.getClienteId()) && proveedor1.getIdProveedor().equals(proveedor.getIdProveedor())) {
                 return false;
             }
         }
-        return proveedoresRepository.save(new ProveedoresEntity(cliente, proveedor)) != null;
+        return proveedoresRepository.save(new ProveedoresEntity(cliente.getClienteId(), proveedor.getIdProveedor())) != null;
     }
 
     public List<ClienteEntity> obtenerClientesPorProveedor(String idProveedor) {
         List<ProveedoresEntity> proveedores = proveedoresRepository.findAll();
         List<ClienteEntity> clientes = null;
         for (ProveedoresEntity proveedor : proveedores) {
-            if (proveedor.getIdProveedor().getIdProveedor().equals(idProveedor)) {
-                clientes.add(clienteRepository.findById(proveedor.getIdCliente().getClienteId()).get());
+            if (proveedor.getIdProveedor().equals(idProveedor)) {
+                clientes.add(clienteRepository.findById(proveedor.getIdCliente()).get());
             }
         }
         return clientes;
@@ -45,7 +45,7 @@ public class ProveedoresService {
     public boolean existeCliente(String idcliente, String idproveedor) {
         List<ProveedoresEntity> proveedores = proveedoresRepository.findAll();
         for (ProveedoresEntity proveedor : proveedores) {
-            if (proveedor.getIdCliente().getClienteId().equals(idcliente) && proveedor.getIdProveedor().getIdProveedor().equals(idproveedor)) {
+            if (proveedor.getIdCliente().equals(idcliente) && proveedor.getIdProveedor().equals(idproveedor)) {
                 return true;
             }
         }
@@ -55,7 +55,7 @@ public class ProveedoresService {
     public boolean eliminarCliente(String idcliente, String idproveedor) {
         List<ProveedoresEntity> proveedores = proveedoresRepository.findAll();
         for (ProveedoresEntity proveedor : proveedores) {
-            if (proveedor.getIdCliente().getClienteId().equals(idcliente) && proveedor.getIdProveedor().getIdProveedor().equals(idproveedor)) {
+            if (proveedor.getIdCliente().equals(idcliente) && proveedor.getIdProveedor().equals(idproveedor)) {
                 proveedoresRepository.delete(proveedor);
                 return true;
             }
