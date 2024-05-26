@@ -8,10 +8,7 @@ import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
-import com.tcna.primeraweb.progra_4.service.FacturaService;
-import com.tcna.primeraweb.progra_4.service.ProductoService;
-import com.tcna.primeraweb.progra_4.service.ProveedorService;
+import com.tcna.primeraweb.progra_4.service.*;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +47,8 @@ public class FacturaController {
     private ProductoService productoService;
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+private ProveedoresService proveedoresService;
 
 
     Font fontheader = FontFactory.getFont(FontFactory.COURIER, 20, Font.BOLD, BaseColor.WHITE);
@@ -57,14 +56,33 @@ public class FacturaController {
     Font font = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, BaseColor.BLACK);
 
     // Cambiar por id url
-    @GetMapping("/ListadeFacturas") // Añade esta línea para mapear el método a la URL
-    public List<FacturaEntity> listarFacturas(@RequestBody ProveedorEntity proveedor) {
+    @GetMapping("/ListadeFacturas/{idproveedor}") // Añade esta línea para mapear el método a la URL
+    public List<FacturaEntity> listarFacturas(@PathVariable("idproveedor") String proveedor) {
         List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
         List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-                .filter(factura -> factura.getProveedor().equals(proveedor.getIdProveedor()))
+                .filter(factura -> factura.getProveedor().equals(proveedor))
                 .collect(Collectors.toList());
          return filteredFacturas; // Devolver la lista de facturas
     }
+
+    @GetMapping("/ListaProductos/{idProveedor}")
+    public List<ProductoEntity> listarProductos(@PathVariable("idProveedor") String proveedor) {
+        if(proveedorService.existeProveedor(proveedor)) {
+            List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(proveedor);
+            return productos;
+        }
+        return null;
+    }
+
+    @GetMapping("/Listaclientes/{idProveedor}")
+    public List<ClienteEntity> Clientes(@PathVariable("idProveedor") String proveedor) {
+        if(proveedorService.existeProveedor(proveedor)) {
+            List<ClienteEntity> clientes = proveedoresService.obtenerClientesPorProveedor(proveedor);
+            return clientes;
+        }
+        return null;
+    }
+
 
     @PostMapping("/NewFactura")
     public ResponseEntity<FacturaEntity> crearFactura(@RequestBody FacturaEntity factura) {
