@@ -1,5 +1,6 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tcna.primeraweb.progra_4.logic.ActividadEntity;
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorActividad;
@@ -59,33 +60,16 @@ public class ProveedorController {
       return proveedores;
     }
 
-    @PostMapping("NewProveedor")
-public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorActividad proveedorActividad) {
-    try {
-        ProveedorEntity proveedor = proveedorActividad.getProveedor();
-        ActividadEntity actividad = proveedorActividad.getActividad();
-        proveedor.setAdmin((byte) 0);
-        proveedorService.crearProveedores(proveedor);
-        actividadService.crear(actividad);
-        return ResponseEntity.ok(proveedor);
-    } catch (DataIntegrityViolationException e) {
-        return ResponseEntity.badRequest().build();
+    @PostMapping("/NewProveedor")
+    public ResponseEntity<?> crearProveedor(@RequestBody ProveedorEntity proveedor) {
+        try {
+            proveedor.setAdmin((byte) 0);
+            proveedorService.crearProveedores(proveedor);
+            return ResponseEntity.ok(proveedor);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
-}
-
-
-//    @PostMapping("NewProveedor")
-//    public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor, @RequestBody ActividadEntity actividad) {
-//        try {
-//            proveedor.setAdmin((byte) 0);
-//            proveedor.setEstado("En espera");
-//            proveedorService.crearProveedores(proveedor);
-//            actividadService.crear(actividad);
-//            return ResponseEntity.ok(proveedor);
-//        } catch (DataIntegrityViolationException e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
 
     @PostMapping("/editar")
     public ResponseEntity<ProveedorEntity> actualizarProveedores(@RequestBody ProveedorEntity proveedor){
