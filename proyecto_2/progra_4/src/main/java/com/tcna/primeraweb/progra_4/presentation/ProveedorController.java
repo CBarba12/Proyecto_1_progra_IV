@@ -27,10 +27,6 @@ public class ProveedorController {
     @Autowired
     private ActividadService actividadService;
 
-
-    @Autowired
-    private ClienteService clienteService;
-
     @Autowired
     private HaciendaStub HaciendaStub;
 
@@ -56,11 +52,15 @@ public class ProveedorController {
     @PostMapping("/NewProveedor")
     public ResponseEntity<ProveedorEntity> crearProveedor(@RequestBody ProveedorEntity proveedor) {
         try {
-            proveedor.setAdmin((byte) 0);
-            proveedor.setEstado("En espera");
-            proveedorService.crearProveedores(proveedor);
-            proveedor.setContrasena("");
-            return ResponseEntity.ok(proveedor);
+            if(HaciendaStub.validarRegistroProveedor(proveedor)) {
+                proveedor.setAdmin((byte) 0);
+                proveedor.setEstado("En espera");
+                proveedorService.crearProveedores(proveedor);
+                proveedor.setContrasena("");
+                return ResponseEntity.ok(proveedor);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().build();
         }
