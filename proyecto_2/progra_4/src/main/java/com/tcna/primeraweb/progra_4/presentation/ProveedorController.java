@@ -85,8 +85,12 @@ public class ProveedorController {
     @PostMapping("/NewActividad")
     public ResponseEntity<ActividadEntity> crearActividad(@RequestBody ActividadEntity actividad) {
         try {
-            actividadService.crear(actividad);
-            return ResponseEntity.ok(actividad);
+            if(!actividad.getNombreActividad().isEmpty()) {
+                actividadService.crear(actividad);
+                return ResponseEntity.ok(actividad);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().build();
         }

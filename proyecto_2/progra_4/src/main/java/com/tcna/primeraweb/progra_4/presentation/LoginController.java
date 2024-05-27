@@ -33,11 +33,15 @@ public class LoginController {
     private ClienteService clienteService;
 
 
-
+/// Solo los Aceptados pueden loguearse
     @PostMapping("/login")
     public ProveedorEntity login(@RequestBody ProveedorEntity form,  HttpServletRequest request) {
         try {
-            request.login(form.getIdProveedor(), form.getContrasena());
+            if(proveedorService.existeProveedor(form.getIdProveedor()) && proveedorService.obtenerProveedorPorId(form.getIdProveedor()).getEstado().equals("Aceptado")){
+                request.login(form.getIdProveedor(), form.getContrasena());
+            }else{
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+            }
         } catch (ServletException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
