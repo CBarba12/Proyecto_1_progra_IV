@@ -37,10 +37,8 @@ public class LoginController {
     @PostMapping("/login")
     public ProveedorEntity login(@RequestBody ProveedorEntity form,  HttpServletRequest request) {
         try {
-            if(proveedorService.existeProveedor(form.getIdProveedor()) && proveedorService.obtenerProveedorPorId(form.getIdProveedor()).getEstado().equals("Aceptado")){
+            if(proveedorService.obtenerProveedorPorId(form.getIdProveedor()).getEstado().equals("Aceptado")) {
                 request.login(form.getIdProveedor(), form.getContrasena());
-            }else{
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
             }
         } catch (ServletException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

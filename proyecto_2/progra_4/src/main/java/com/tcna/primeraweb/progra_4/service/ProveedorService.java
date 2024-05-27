@@ -69,9 +69,8 @@ public class ProveedorService {
 
     public ProveedorEntity actualizarProveedor(ProveedorEntity provedor) {
         if(proveedorRepository.existsById(provedor.getIdProveedor())){
-            var encoder = new BCryptPasswordEncoder();
             ProveedorEntity p = proveedorRepository.findById(provedor.getIdProveedor()).get();
-            provedor.setContrasena("{bcrypt}"+encoder.encode(p.getContrasena()));
+            provedor.setContrasena(p.getContrasena());
             proveedorRepository.save(provedor);
             return provedor;
         }
