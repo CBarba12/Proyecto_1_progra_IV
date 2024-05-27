@@ -134,15 +134,15 @@ private ProveedoresService proveedoresService;
     }
 
     // PDF para todas las facturas de un proveedor
-    @GetMapping("/pdfProveedor")
-    public void pdf(@RequestBody ProveedorEntity proveedor ,HttpServletResponse response) {
+    @GetMapping("/pdfProveedor/{idproveedor}")
+    public void pdf(@PathVariable("idproveedor") String proveedor ,HttpServletResponse response) {
         List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
         List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-                .filter(factura -> factura.getProveedor().equals(proveedor.getIdProveedor()))
+                .filter(factura -> factura.getProveedor().equals(proveedor))
                 .collect(Collectors.toList());
 
         response.setContentType("application/pdf");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=facturas_" + proveedor.getIdProveedor() + ".pdf");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=facturas_" + proveedor + ".pdf");
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, response.getOutputStream());
@@ -168,7 +168,7 @@ private ProveedoresService proveedoresService;
             }
             document.add(new Paragraph("------------------------------------------------------------------------", font));
             document.add(new Paragraph("\n\n"));
-            document.add(style(new Chunk("Reporte Generado por: " + proveedor.getIdProveedor()), fontfooter));
+            document.add(style(new Chunk("Reporte Generado por: " + proveedor), fontfooter));
 
             document.close();
         } catch (DocumentException | IOException ex) {
@@ -190,232 +190,128 @@ private ProveedoresService proveedoresService;
     }
 
 
+    @GetMapping("/xml")
+    public void xml(@RequestBody FacturaEntity factura, HttpServletResponse response) {
+        ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(factura.getProveedor());
+        ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
+        ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
+
+        try {
+            org.w3c.dom.Document document = createXmlDocument();
+
+            Element facturasxml = document.createElement("facturas");
+            Element facturaxml = createFacturaElement(document, factura, proveedor, cliente, producto);
+
+            facturasxml.appendChild(facturaxml);
+            document.getDocumentElement().appendChild(facturasxml);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+
+            response.setContentType("application/xml");
+            response.setHeader("Content-Disposition", "attachment; filename=factura.xml");
+
+            transformer.transform(source, new StreamResult(response.getOutputStream()));
+
+        } catch (ParserConfigurationException | TransformerException | IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/xml/{idproveedor}")
+    public void xml(@PathVariable("idproveedor") String idproveedor, HttpServletResponse response) {
+        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
+        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
+                .filter(factura -> factura.getProveedor().equals(idproveedor))
+                .collect(Collectors.toList());
+
+        try {
+            org.w3c.dom.Document document = createXmlDocument();
+
+            Element facturasxml = document.createElement("facturas");
+
+            for (FacturaEntity factura : filteredFacturas) {
+                ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(idproveedor);
+                ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
+                ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
+                Element facturaxml = createFacturaElement(document, factura, proveedor, cliente, producto);
+                facturasxml.appendChild(facturaxml);
+            }
+
+            document.getDocumentElement().appendChild(facturasxml);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+
+            response.setContentType("application/xml");
+            response.setHeader("Content-Disposition", "attachment; filename=facturas.xml");
+
+            transformer.transform(source, new StreamResult(response.getOutputStream()));
+
+        } catch (ParserConfigurationException | TransformerException | IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 
+    private org.w3c.dom.Document createXmlDocument() throws ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation implementation = builder.getDOMImplementation();
+        return implementation.createDocument(null, "factura", null);
+    }
 
+    private Element createFacturaElement(org.w3c.dom.Document document, FacturaEntity factura, ProveedorEntity proveedor, ClienteEntity cliente, ProductoEntity producto) {
+        Element facturaxml = document.createElement("factura");
 
+        facturaxml.appendChild(createElementWithText(document, "facturaID", String.valueOf(factura.getFacturaId())));
+        facturaxml.appendChild(createProveedorElement(document, factura, proveedor));
+        facturaxml.appendChild(createClienteElement(document, factura, cliente));
+        facturaxml.appendChild(createProductoElement(document, factura, producto));
+        facturaxml.appendChild(createElementWithText(document, "cantidad", String.valueOf(factura.getCantidad())));
+        facturaxml.appendChild(createElementWithText(document, "total", String.valueOf(factura.getTotal())));
+        facturaxml.appendChild(createElementWithText(document, "fecha", String.valueOf(factura.getFecha())));
 
+        return facturaxml;
+    }
 
+    private Element createProveedorElement(org.w3c.dom.Document document, FacturaEntity factura, ProveedorEntity proveedor) {
+        Element proveedorxml = document.createElement("proveedor");
 
+        proveedorxml.appendChild(createElementWithText(document, "proveedorID", factura.getProveedor()));
+        proveedorxml.appendChild(createElementWithText(document, "proveedorNombre", proveedor.getNombre()));
 
+        return proveedorxml;
+    }
 
+    private Element createClienteElement(org.w3c.dom.Document document, FacturaEntity factura, ClienteEntity cliente) {
+        Element clientexml = document.createElement("cliente");
 
-    // Creo que no es necesario
-//    @GetMapping("/NuevaFactura") // Añade esta línea para mapear el método a la URL
-//    public String nuevaFactura(Model model, HttpSession session) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//
-//        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
-//
-//
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
-//
-//
-//        model.addAttribute("clientes", clientesProveedor);
-//        model.addAttribute("productos", productos);
-//
-//
-//        return "formularioFactura";
-//    }
+        clientexml.appendChild(createElementWithText(document, "clienteID", factura.getCliente()));
+        clientexml.appendChild(createElementWithText(document, "nombreCliente", cliente.getNombre()));
+        clientexml.appendChild(createElementWithText(document, "correoCliente", cliente.getCorreoElectronico()));
 
+        return clientexml;
+    }
 
+    private Element createProductoElement(org.w3c.dom.Document document, FacturaEntity factura, ProductoEntity producto) {
+        Element productoxml = document.createElement("producto");
 
+        productoxml.appendChild(createElementWithText(document, "productoID", String.valueOf(factura.getId_producto())));
+        productoxml.appendChild(createElementWithText(document, "nombreProducto", producto.getNombre()));
+        productoxml.appendChild(createElementWithText(document, "precio", String.valueOf(producto.getPrecio())));
+        productoxml.appendChild(createElementWithText(document, "unidad", String.valueOf(factura.getUnidad())));
 
+        return productoxml;
+    }
 
-
-    // Va a quedar este metodo para guia por aquello de que se vaya a ocupar para la idea
-//    @PostMapping("/guardarFactura") // Añade esta línea para mapear el método a la URL
-//    public String guardarFactura(@RequestParam("clienteId") String clienteId, @RequestParam("productoId") String productoId, @RequestParam("cantidad") String cantidad, Model model, HttpSession session) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
-//        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(ID);
-//
-//        ProductoEntity producto = productos.stream()
-//            .filter(p -> p.getProductoId() == Integer.parseInt(productoId))
-//            .findFirst()
-//            .orElse(null);
-//
-//        ClienteEntity cliente = clientesProveedor.stream()
-//            .filter(c -> c.getClienteId().equals(clienteId))
-//            .findFirst()
-//            .orElse(null);
-//
-//        if (producto != null && cliente != null) {
-//            FacturaEntity factura = new FacturaEntity();
-//            LocalDate fecha = LocalDate.now();
-//            factura.setProveedor(ID);
-//            factura.setCliente(cliente.getClienteId());
-//            factura.setId_producto(producto.getProductoId());
-//            factura.setFecha(Date.valueOf(fecha));
-//            factura.setCantidad(Integer.parseInt(cantidad));
-//            factura.setTotal(producto.getPrecio() * factura.getCantidad());
-//            facturaService.crearFactura(factura);
-//        }
-//
-//        model.addAttribute("id_proveedor",ID);
-//        return "redirect:/FacturaController/ListadeFacturas"; // Redirigir a la lista de facturas
-//    }
-
-
-
-
-//    @GetMapping("/xml/{id}")
-//    public void xml(@PathVariable("id") String facturaID, Model model, HttpSession session, HttpServletResponse response) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//
-//        FacturaEntity factura = getFactura(ID, facturaID);
-//        ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(ID);
-//        ClienteEntity cliente = getCliente(factura);
-//        ProductoEntity producto = getProducto(ID, factura);
-//
-//        try {
-//            org.w3c.dom.Document document = createXmlDocument();
-//
-//            Element facturasxml = document.createElement("facturas");
-//            Element facturaxml = createFacturaElement(document, factura, proveedor, cliente, producto);
-//
-//            facturasxml.appendChild(facturaxml);
-//            document.getDocumentElement().appendChild(facturasxml);
-//
-//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-//            Transformer transformer = transformerFactory.newTransformer();
-//            DOMSource source = new DOMSource(document);
-//
-//            response.setContentType("application/xml");
-//            response.setHeader("Content-Disposition", "attachment; filename=factura.xml");
-//
-//            transformer.transform(source, new StreamResult(response.getOutputStream()));
-//
-//        } catch (ParserConfigurationException | TransformerException | IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//    }
-//
-//    @GetMapping("/xml")
-//    public void xml(Model model, HttpSession session, HttpServletResponse response) {
-//        String ID= (String) session.getAttribute("id_proveedor");
-//        model.addAttribute("id_proveedor",ID);
-//
-//        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
-//        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-//                .filter(factura -> factura.getProveedor().equals(ID))
-//                .collect(Collectors.toList());
-//
-//        try {
-//            org.w3c.dom.Document document = createXmlDocument();
-//
-//            Element facturasxml = document.createElement("facturas");
-//
-//            for (FacturaEntity factura : filteredFacturas) {
-//                ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(ID);
-//                ClienteEntity cliente = getCliente(factura);
-//                ProductoEntity producto = getProducto(ID, factura);
-//
-//                Element facturaxml = createFacturaElement(document, factura, proveedor, cliente, producto);
-//                facturasxml.appendChild(facturaxml);
-//            }
-//
-//            document.getDocumentElement().appendChild(facturasxml);
-//
-//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-//            Transformer transformer = transformerFactory.newTransformer();
-//            DOMSource source = new DOMSource(document);
-//
-//            response.setContentType("application/xml");
-//            response.setHeader("Content-Disposition", "attachment; filename=facturas.xml");
-//
-//            transformer.transform(source, new StreamResult(response.getOutputStream()));
-//
-//        } catch (ParserConfigurationException | TransformerException | IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//    }
-//
-//    private FacturaEntity getFactura(String ID, String facturaID) {
-//        List<FacturaEntity> facturaEntities = facturaService.ObtenerFacturas();
-//        List<FacturaEntity> filteredFacturas = facturaEntities.stream()
-//                .filter(factura -> factura.getProveedor().equals(ID))
-//                .collect(Collectors.toList());
-//        return filteredFacturas.stream()
-//                .filter(f -> f.getFacturaId() == Integer.parseInt(facturaID))
-//                .findFirst()
-//                .orElse(null);
-//    }
-//
-//    // Revisar
-////    private ClienteEntity getCliente(FacturaEntity factura) {
-////        List<ClienteEntity> clientesProveedor = clienteService.obtenerClientesPorProveedor(factura.getProveedor());
-////        return clientesProveedor.stream()
-////                .filter(c -> c.getClienteId().equals(factura.getCliente()))
-////                .findFirst()
-////                .orElse(null);
-////    }
-//
-//    private ProductoEntity getProducto(String ID, FacturaEntity factura) {
-//        List<ProductoEntity> productos = productoService.obtenerProductoPorProveedor(ID);
-//        return productos.stream()
-//                .filter(p -> p.getProductoId() == factura.getId_producto())
-//                .findFirst()
-//                .orElse(null);
-//    }
-//
-//    private org.w3c.dom.Document createXmlDocument() throws ParserConfigurationException {
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
-//        DocumentBuilder builder = factory.newDocumentBuilder();
-//        DOMImplementation implementation = builder.getDOMImplementation();
-//        return implementation.createDocument(null, "factura", null);
-//    }
-//
-//    private Element createFacturaElement(org.w3c.dom.Document document, FacturaEntity factura, ProveedorEntity proveedor, ClienteEntity cliente, ProductoEntity producto) {
-//        Element facturaxml = document.createElement("factura");
-//
-//        facturaxml.appendChild(createElementWithText(document, "facturaID", String.valueOf(factura.getFacturaId())));
-//        facturaxml.appendChild(createProveedorElement(document, factura, proveedor));
-//        facturaxml.appendChild(createClienteElement(document, factura, cliente));
-//        facturaxml.appendChild(createProductoElement(document, factura, producto));
-//        facturaxml.appendChild(createElementWithText(document, "cantidad", String.valueOf(factura.getCantidad())));
-//        facturaxml.appendChild(createElementWithText(document, "total", String.valueOf(factura.getTotal())));
-//        facturaxml.appendChild(createElementWithText(document, "fecha", String.valueOf(factura.getFecha())));
-//
-//        return facturaxml;
-//    }
-//
-//    private Element createProveedorElement(org.w3c.dom.Document document, FacturaEntity factura, ProveedorEntity proveedor) {
-//        Element proveedorxml = document.createElement("proveedor");
-//
-//        proveedorxml.appendChild(createElementWithText(document, "proveedorID", factura.getProveedor()));
-//        proveedorxml.appendChild(createElementWithText(document, "proveedorNombre", proveedor.getNombre()));
-//
-//        return proveedorxml;
-//    }
-//
-//    private Element createClienteElement(org.w3c.dom.Document document, FacturaEntity factura, ClienteEntity cliente) {
-//        Element clientexml = document.createElement("cliente");
-//
-//        clientexml.appendChild(createElementWithText(document, "clienteID", factura.getCliente()));
-//        clientexml.appendChild(createElementWithText(document, "nombreCliente", cliente.getNombre()));
-//        clientexml.appendChild(createElementWithText(document, "correoCliente", cliente.getCorreoElectronico()));
-//
-//        return clientexml;
-//    }
-//
-//    private Element createProductoElement(org.w3c.dom.Document document, FacturaEntity factura, ProductoEntity producto) {
-//        Element productoxml = document.createElement("producto");
-//
-//        productoxml.appendChild(createElementWithText(document, "productoID", String.valueOf(factura.getId_producto())));
-//        productoxml.appendChild(createElementWithText(document, "nombreProducto", producto.getNombre()));
-//        productoxml.appendChild(createElementWithText(document, "precio", String.valueOf(producto.getPrecio())));
-//
-//        return productoxml;
-//    }
-//
-//    private Element createElementWithText(org.w3c.dom.Document document, String elementName, String textContent) {
-//        Element element = document.createElement(elementName);
-//        Text text = document.createTextNode(textContent);
-//        element.appendChild(text);
-//        return element;
-//    }
+    private Element createElementWithText(org.w3c.dom.Document document, String elementName, String textContent) {
+        Element element = document.createElement(elementName);
+        Text text = document.createTextNode(textContent);
+        element.appendChild(text);
+        return element;
+    }
 
 }
