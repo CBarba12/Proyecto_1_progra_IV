@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Component
-public class HaciendaStub {
+public class     HaciendaStub {
 
     @Autowired
     private ProveedorService proveedorService;
