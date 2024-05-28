@@ -178,7 +178,7 @@ private ProveedoresService proveedoresService;
 
     private PdfPTable style(Chunk c, Font font) {
         PdfPCell cell = new PdfPCell(new Phrase(c));
-        cell.setBackgroundColor(BaseColor.BLUE);
+        cell.setBackgroundColor(new BaseColor(25, 174, 212));
         cell.setHorizontalAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
         cell.setVerticalAlignment(com.itextpdf.text.Element.ALIGN_MIDDLE);
         cell.setFixedHeight(50); // puedes ajustar la altura según tus necesidades
