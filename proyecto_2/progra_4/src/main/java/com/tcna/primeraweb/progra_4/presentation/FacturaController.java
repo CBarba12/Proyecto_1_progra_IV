@@ -96,7 +96,7 @@ private ProveedoresService proveedoresService;
     }
 
     // PDF para una factura en especifico
-    @GetMapping("/pdfFactura")
+    @PostMapping("/pdfFactura")
     public void pdf(@RequestBody FacturaEntity factura, HttpServletResponse response) {
         ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
         ProductoEntity producto = productoService.obtenerProductoPorId(factura.getId_producto());
@@ -190,7 +190,7 @@ private ProveedoresService proveedoresService;
     }
 
 
-    @GetMapping("/xml")
+    @PostMapping("/xml")
     public void xml(@RequestBody FacturaEntity factura, HttpServletResponse response) {
         ProveedorEntity proveedor = proveedorService.obtenerProveedorPorId(factura.getProveedor());
         ClienteEntity cliente = clienteService.obtenerClientePorId(factura.getCliente());
