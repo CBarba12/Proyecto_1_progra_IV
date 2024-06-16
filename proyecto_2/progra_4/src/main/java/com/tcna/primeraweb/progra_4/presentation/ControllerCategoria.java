@@ -9,10 +9,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/platillos")
+@RequestMapping("/categoria")
+
 public class ControllerCategoria {
 
     private CategoriaServices categoriaServices=new CategoriaServices();
+
 
 
     public ControllerCategoria() {
@@ -30,5 +32,12 @@ public class ControllerCategoria {
         return categoriaServices.getAll();
     }
 
-    
+
+
+    @GetMapping("/listarPorNombre")
+    public List<String> optener_nombre (){
+        return categoriaServices.optener_nombre();
+    }
+
+
 }
