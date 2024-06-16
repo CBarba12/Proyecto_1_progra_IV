@@ -1,7 +1,10 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 
+import com.tcna.primeraweb.progra_4.logic.Categoria;
 import com.tcna.primeraweb.progra_4.logic.Platillo;
+import com.tcna.primeraweb.progra_4.service.CategoriaServices;
+import com.tcna.primeraweb.progra_4.service.PlatilloServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,8 +16,8 @@ import java.util.List;
 
 public class PlatilloController {
 
-    private PlatilloController platilloServices=new PlatilloController();
-
+    private PlatilloServices platilloServices=new PlatilloServices();
+    private CategoriaServices categoriaServices=new CategoriaServices();
 
 
     public PlatilloController() {
@@ -30,15 +33,15 @@ public class PlatilloController {
         return platilloServices.getAll();
     }
 
-    @GetMapping("/listar_porcategoria")
-    public List<Platillo> nombre_Categoria(String nom){
+    @GetMapping("/listarplatillo/{nom}")
+    public List<String> nombre_Categoria(@PathVariable("nom") String nom){
 
-        List<Platillo> platilloCategoria = new ArrayList<>();
+        List<String> platilloCategoria = new ArrayList<>();
 
         for (Platillo platillo : platilloServices.getAll()) {
 
-            if (platillo.getCategoria().getId().equals(nom)) {
-                platilloCategoria.add(platillo);
+            if (platillo.getCategoria().getNombre().equals(nom)) {
+                platilloCategoria.add(platillo.getNombre() +" "+platillo.getDescripcion() + " "+platillo.getPrecio());
             }
         }
 
@@ -46,6 +49,21 @@ public class PlatilloController {
     }
 
 
+
+    @GetMapping("/listar_por_categoria")
+    public List<String> categorias(){
+
+        List<String> categorias = new ArrayList<>();
+
+        for (Categoria platillo : categoriaServices.getAll()) {
+
+
+                categorias.add(platillo.getNombre());
+
+        }
+
+        return categorias;
+    }
 
 
 
