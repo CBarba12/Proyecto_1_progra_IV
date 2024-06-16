@@ -1,19 +1,12 @@
 package com.tcna.primeraweb.progra_4.logic;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "facturas_productos", schema = "proyecto_1")
 public class FacturasProductosEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id")
+
     private int id;
-    @Basic
-    @Column(name = "id_producto")
+
     private int idProducto;
-    @Basic
-    @Column(name = "id_factura")
+
     private int idFactura;
 
     public int getId() {

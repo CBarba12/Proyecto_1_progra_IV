@@ -1,18 +1,13 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
-import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +17,8 @@ public class ClienteController {
 
     @Autowired
     private ProveedorService proveedorService;
-    @Autowired
-    private ClienteService clienteService;
+    //@Autowired
+   // private ClienteService clienteService;
     @Autowired
     private ProductoService productoService;
     @Autowired
@@ -32,16 +27,6 @@ public class ClienteController {
 
     @GetMapping("/Listadeclientes") // Añade esta línea para mapear el método a la URL
     public String listarClientes(Model model, HttpSession session) {
-
-        String ID= (String) session.getAttribute("id_proveedor");
-        model.addAttribute("id_proveedor", ID); // Añade esta línea
-
-        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(ID);
-
-
-        if (clientesProveedor != null) {
-            model.addAttribute("clientesProveedor", clientesProveedor);
-        }
 
 
         return "listarClientes";
@@ -82,46 +67,6 @@ public class ClienteController {
     @PostMapping("/nuevo")
     public String guardarNuevoCliente(@ModelAttribute ClienteEntity cliente,HttpSession session,Model model){
 
-        String Provedor= (String) session.getAttribute("id_proveedor");
-        cliente.setProveedorId(Provedor);
-
-        if ("ninguna".equals(cliente.getTipoCliente())) {
-            /*redirectAttributes.addFlashAttribute("error", "Por favor, seleccione un tipo de proveedor válido (Físico o Jurídico)");*/
-            model.addAttribute("proveedor", cliente);
-            model.addAttribute("mensaje", "Seleccione un tipo de proveedor");
-            return "redirect:/ClienteController/nuevocliente";
-        }
-
-        if ("Físico".equals(cliente.getTipoCliente()) && cliente.getClienteId().length() != 9) {
-            model.addAttribute("error", "El número de identificación de un cliente físico debe tener exactamente 9 dígitos.");
-            return "redirect:/ClienteController/nuevocliente";
-        }
-
-        if ("Jurídico".equals(cliente.getTipoCliente()) && cliente.getClienteId().length() != 10) {
-            model.addAttribute("mensaj", "El número de identificación de un cliente jurídico debe tener exactamente 10 dígitos.");
-            return "redirect:/ClienteController/nuevocliente";
-        }
-
-        if (!cliente.getNombre().matches("[a-zA-Z ]+")) {
-            model.addAttribute("erro", "El nombre solo puede contener letras y espacios.");
-            return "redirect:/ClienteController/nuevocliente";
-        }
-
-        if(clienteService.obtenerClienteId(cliente.getClienteId())==null){
-            clienteService.crearCliente(cliente);
-        }else {
-            return "redirect:/ClienteController/nuevocliente";
-        }
-
-        List<ClienteEntity> clientesProveedor =clienteService. obtenerClientesPorProveedor(Provedor);
-
-
-
-        if (clientesProveedor != null) {
-            model.addAttribute("clientesProveedor", clientesProveedor);
-        }
-
-        model.addAttribute("mensaje", "Se registró exitosamente un cliente");
 
         return "listarClientes";
     }
@@ -131,24 +76,17 @@ public class ClienteController {
     public String mostrarFormularioEditarPersona(@PathVariable String id, @ModelAttribute ClienteEntity cliente,Model model){
 
 
-       ClienteEntity p= clienteService.obtenerClienteId(id);
+       //ClienteEntity p= clienteService.obtenerClienteId(id);
 
-
-        if (p != null) {
-
-            model.addAttribute("Cliente_editar", p);
-            model.addAttribute("editar_CLIENTE","/ClienteController/editar"+id);
-            return "FormularioEditarCliente";
-        }else {
             return "redirect:/ClienteController/listarClientes";
-        }
+
 
 
     }
     @PostMapping("/editar/{id}")
     public String actualizarProveedores(@PathVariable String id, @ModelAttribute  ClienteEntity cliente){
 
-        clienteService.actualizarCliente(id,cliente);
+
 
         return "redirect:/ClienteController/Listadeclientes";
     }

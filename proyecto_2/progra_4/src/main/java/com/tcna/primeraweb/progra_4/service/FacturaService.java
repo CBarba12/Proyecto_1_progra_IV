@@ -1,9 +1,5 @@
 package com.tcna.primeraweb.progra_4.service;
 
-import com.tcna.primeraweb.progra_4.data.ClienteRepository;
-import com.tcna.primeraweb.progra_4.data.FacturaRepository;
-import com.tcna.primeraweb.progra_4.data.ProductoRepository;
-import com.tcna.primeraweb.progra_4.data.ProveedorRepository;
 import com.tcna.primeraweb.progra_4.logic.FacturaEntity;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,7 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class FacturaService {
 
-    @Getter
+  /*  @Getter
     @Autowired
     private ProveedorRepository proveedorRepository;
     @Autowired
@@ -35,6 +31,6 @@ public class FacturaService {
         return facturaRepository.count();
     }
 
-
+*/
 
 }

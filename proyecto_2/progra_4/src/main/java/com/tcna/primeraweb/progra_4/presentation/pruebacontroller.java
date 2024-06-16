@@ -2,8 +2,6 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 import com.tcna.primeraweb.progra_4.logic.ProveedorDTO;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
-import com.tcna.primeraweb.progra_4.service.HaciendaStub;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +18,11 @@ public class pruebacontroller {
 
     @Autowired
     private ProveedorService proveedorService;
-    @Autowired
-    private ClienteService clienteService;
+
 
     @Autowired
     private com.tcna.primeraweb.progra_4.service.HaciendaStub HaciendaStub;
+
 
     @GetMapping("/listar")
     public List<ProveedorEntity> ver(){
@@ -33,6 +31,11 @@ public class pruebacontroller {
     }
 
 
+    @GetMapping("/gato")
+    public String gato(){
+
+        return "proveedores";
+    }
 
 
 

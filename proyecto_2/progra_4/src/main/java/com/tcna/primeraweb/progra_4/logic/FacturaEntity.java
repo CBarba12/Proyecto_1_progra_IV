@@ -1,33 +1,24 @@
 package com.tcna.primeraweb.progra_4.logic;
 
-import jakarta.persistence.*;
+
 
 import java.sql.Date;
 
-@Entity
-@Table(name = "factura", schema = "proyecto_1")
+
 public class FacturaEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "factura_id")
+
     private int facturaId;
-    @Basic
-    @Column(name = "fecha")
+
     private Date fecha;
-    @Basic
-    @Column(name = "total")
+
     private Double total;
-    @Basic
-    @Column(name = "cliente")
+
     private String cliente;
-    @Basic
-    @Column(name = "proveedor")
+
     private String proveedor;
-    @Basic
-    @Column(name = "id_producto")
+
     private int id_producto;
-    @Basic
-    @Column(name = "cantidad")
+
     private int cantidad;
 
 

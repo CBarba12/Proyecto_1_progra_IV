@@ -1,7 +1,7 @@
 package com.tcna.primeraweb.progra_4.logic;
 
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,26 +9,20 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "cliente", schema = "proyecto_1")
+
+
 public class ClienteEntity {
-    @Id
-    @Column(name = "cliente_id")
+
     private String clienteId;
-    @Basic
-    @Column(name = "nombre")
+
     private String nombre;
-    @Basic
-    @Column(name = "direccion")
+
     private String direccion;
-    @Basic
-    @Column(name = "tipo_cliente")
+
     private String tipoCliente;
-    @Basic
-    @Column(name = "correo_electronico")
+
     private String correoElectronico;
-    @Basic
-    @Column(name = "proveedor_id")
+
     private String proveedorId;
 
     public ClienteEntity() {

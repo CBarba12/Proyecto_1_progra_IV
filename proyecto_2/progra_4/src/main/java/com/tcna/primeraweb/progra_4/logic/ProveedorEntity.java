@@ -1,42 +1,31 @@
 package com.tcna.primeraweb.progra_4.logic;
 
-import jakarta.persistence.*;
+
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "proveedor", schema = "proyecto_1")
+
 public class ProveedorEntity {
 
-    @Id
-    @Column(name = "id_proveedor")
+
     @Size(min=3,max=20)
     private String idProveedor;
-    @Basic
-    @Column(name = "nombre")
+
     private String nombre;
-    @Basic
-    @Column(name = "correo_electronico")
+
     private String correoElectronico;
-    @Basic
-    @Column(name = "contrasena")
+
     private String contrasena;
-    @Basic
-    @Column(name = "estado")
+
     private String estado;
-    @Basic
-    @Column(name = "admin")
+
     private Byte admin;
-    @Basic
-    @Column(name = "telefono")
+
     private Integer telefono;
-    @Basic
-    @Column(name = "direccion")
+
     private String direccion;
-    @Basic
-    @Column(name = "tipo_proveedor")
+
     private String tipoProveedor;
-    @Basic
-    @Column(name = "actividad_comercial")
+
     private String actividadComercial;
 
     public ProveedorEntity(String idProveedor, String nombre, String correoElectronico, String contrasena, String estado, Byte admin, Integer telefono, String direccion, String tipoProveedor, String actividadComercial) {

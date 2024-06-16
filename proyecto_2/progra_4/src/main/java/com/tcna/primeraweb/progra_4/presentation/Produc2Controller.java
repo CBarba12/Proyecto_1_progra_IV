@@ -2,13 +2,9 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 
 import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
-import com.tcna.primeraweb.progra_4.logic.ProveedorDTO;
-import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +17,8 @@ public class Produc2Controller {
 
     @Autowired
     private ProveedorService proveedorService;
-    @Autowired
-    private ClienteService clienteService;
+    //@Autowired
+   // private ClienteService clienteService;
     @Autowired
     private ProductoService productoService;
     @Autowired

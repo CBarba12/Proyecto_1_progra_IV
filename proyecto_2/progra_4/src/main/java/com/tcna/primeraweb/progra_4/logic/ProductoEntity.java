@@ -1,31 +1,21 @@
 package com.tcna.primeraweb.progra_4.logic;
 
-import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "producto", schema = "proyecto_1")
 public class ProductoEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment strategy
-    @Column(name = "producto_id")
+
     private int productoId;
-    @Basic
-    @Column(name = "nombre")
+
     private String nombre;
-    @Basic
-    @Column(name = "descripcion")
+
     private String descripcion;
-    @Basic
-    @Column(name = "precio")
+
     private Double precio;
-    @Basic
-    @Column(name = "tipo_producto")
+
     private String tipoProducto;
-    @Basic
-    @Column(name = "proveedor_id")
+
     private String proveedorId;
 
 

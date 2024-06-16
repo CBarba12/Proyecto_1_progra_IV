@@ -2,8 +2,6 @@ package com.tcna.primeraweb.progra_4.presentation;
 
 
 import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
-import com.tcna.primeraweb.progra_4.logic.ProductoEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
 import com.tcna.primeraweb.progra_4.service.FacturaService;
 import com.tcna.primeraweb.progra_4.service.ProductoService;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
@@ -23,8 +21,8 @@ public class Client2Controller {
 
     @Autowired
     private ProveedorService proveedorService;
-    @Autowired
-    private ClienteService clienteService;
+    //@Autowired
+    //private ClienteService clienteService;
     @Autowired
     private ProductoService productoService;
     @Autowired
@@ -32,8 +30,8 @@ public class Client2Controller {
 
     @GetMapping("/listar-Cliente")
     public List<ClienteEntity> ver(){
-        List<ClienteEntity> cliente=  clienteService.ObtenerCliente();
-        return cliente;
+
+        return null;
     }
 
 

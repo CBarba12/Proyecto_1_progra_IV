@@ -1,9 +1,7 @@
 package com.tcna.primeraweb.progra_4.presentation;
 
 
-import com.tcna.primeraweb.progra_4.logic.ClienteEntity;
 import com.tcna.primeraweb.progra_4.logic.ProveedorEntity;
-import com.tcna.primeraweb.progra_4.service.ClienteService;
 import jakarta.servlet.http.HttpSession;
 import com.tcna.primeraweb.progra_4.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,8 @@ public class LoginController {
     @Autowired
     private ProveedorService proveedorService;
 
-    @Autowired
-    private ClienteService clienteService;
+   // @Autowired
+  //  private ClienteService clienteService;
 
     @PostMapping("/login")
     public String login(@RequestParam("numero_identificacion") String numeroIdentificacion,
